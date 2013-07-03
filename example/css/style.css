@@ -1,0 +1,48 @@
+html {
+  overflow: scroll;
+  background: gray;
+}
+
+hr {
+  clear: both;
+}
+
+.zoom.outer {
+  display: block;
+  width: 25%;
+  background: yellow;
+  border: 25px solid red;
+  float: left;
+}
+.zoom.outer img {
+  width: 100%;
+}
+.zoom-viewport.outer {
+  border: 15px solid green;
+}
+.zoom-viewport img {
+  width: 100%;
+}
+
+.zoom.inner {
+  display: block;
+  width: 25%;
+  background: yellow;
+  border: 25px solid blue;
+  float: left;
+}
+.zoom.inner > img {
+  width: 100%;
+}
+
+.zoom img,
+.zoom-viewport img
+{
+  display: block;
+}
+
+.lens-inner {
+  border: 2px solid white;
+  box-shadow: 2px 2px 2px black;
+  background-color: rgba(255,255,255,0.3);
+}

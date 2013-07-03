@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<script src="components/jquery/jquery.js"></script>
+<script src="components/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
+<script src="components/jquery-bridget/jquery.bridget.js"></script>
+<script src="../jquery.magnificent.js"></script>
+<script>
+$(function () {
+  var $outer = $('*[data-zoom="outer"]');
+
+  $outer.zoom({
+    zoomWidth: 800
+  });
+  $outer.zoom('destroy')
+  $outer.zoom({
+    zoomWidth: 1600
+  });
+
+  var $inner = $('*[data-zoom="inner"]');
+
+  $inner.zoom({
+    type: 'inner',
+    zoomWidth: 800
+  });
+  $inner.zoom('destroy')
+  $inner.zoom({
+    type: 'inner',
+    zoomWidth: 1600
+  })
+
+});
+</script>
+</head>
+<body>
+  
+  <div class="zoom outer" data-zoom="outer">
+    <div>
+      <img src="img/test_256x192.png" />
+    </div>
+  </div>
+
+  <div class="zoom inner" data-zoom="inner">
+    
+      <img src="img/test_256x192.png" />
+    
+  </div>
+
+  <br /><hr /><br />
+
+  <div class="outer" data-zoom-viewport="outer">
+    <div>
+      <img src="img/test_1024x768.png" />
+    </div>
+  </div>
+
+  <div class="inner" data-zoom-viewport="inner">
+    <div>
+      <img src="img/test_1024x768.png" />
+    </div>
+  </div>
+
+</body>
+</html>
