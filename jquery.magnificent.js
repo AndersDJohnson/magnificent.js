@@ -103,6 +103,12 @@
       $element = $element || $('<div class="' + self.options.cssPrefix + 'viewport"></div>');
       self.$element = $element;
 
+      self.actualFocus = null;
+      self.targetFocus = null;
+      self.speed = 8;
+      self.frameTime = 20;
+      self.animationLoopTimeout = null;
+
 
       self.init = function () {
         var self = this;
@@ -119,6 +125,19 @@
           innerCSS.width = self.options.zoomWidth(1.0);
         }
         self.$inner.css(innerCSS);
+
+        self.animationLoop = function () {
+          if (! self.actualFocus) {
+            self.actualFocus = self.targetFocus;
+          }
+          if (self.targetFocus) {
+            console.log('heyy');
+            self.actualFocus.top += (self.targetFocus.top - self.actualFocus.top) / self.speed;
+            self.actualFocus.left += (self.targetFocus.left - self.actualFocus.left) / self.speed;
+            self.$inner.css(self.actualFocus);
+          }
+          timeout = setTimeout(self.animationLoop, self.frameTime);
+        };
       };
 
       self.show = function () {
@@ -239,10 +258,11 @@
           left: -1 * left
         };
 
-        self.$inner.css(css);
+        self.targetFocus = css;
       };
 
       self.destroy = function () {
+        clearInterval(self.timeout);
         self.$element.remove();
       };
     }
@@ -525,8 +545,8 @@
       if (self.options.windowResize) {
         var throttled = self.options.windowResize;
         $(window).on('resize', $.throttle(throttled, function () {
-          $outer.magnificent('layout');
-          $outer.magnificent('focus');
+          self.$element.magnificent('layout');
+          self.$element.magnificent('focus');
         }));
       }
 
