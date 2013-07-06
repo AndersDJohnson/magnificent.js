@@ -7,36 +7,36 @@ hr {
   clear: both;
 }
 
-.zoom.outer {
+.magnificent.outer {
   display: block;
   width: 25%;
   background: yellow;
   border: 25px solid red;
   float: left;
 }
-.zoom.outer img {
+.magnificent.outer img {
   width: 100%;
 }
-.zoom-viewport.outer {
+.magnificent-viewport.outer {
   border: 15px solid green;
 }
-.zoom-viewport img {
+.magnificent-viewport img {
   width: 100%;
 }
 
-.zoom.inner {
+.magnificent.inner {
   display: block;
   width: 25%;
   background: yellow;
   border: 25px solid blue;
   float: left;
 }
-.zoom.inner > img {
+.magnificent.inner > img {
   width: 100%;
 }
 
-.zoom img,
-.zoom-viewport img
+.magnificent img,
+.magnificent-viewport img
 {
   display: block;
 }

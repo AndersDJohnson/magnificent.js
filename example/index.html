@@ -8,26 +8,26 @@
 <script src="../jquery.magnificent.js"></script>
 <script>
 $(function () {
-  var $outer = $('*[data-zoom="outer"]');
+  var $outer = $('*[data-magnificent="outer"]');
 
-  $outer.zoom({
+  $outer.magnificent({
     zoomWidth: 800
   });
-  $outer.zoom('destroy')
-  $outer.zoom({
-    zoomWidth: 1600
+  $outer.magnificent('destroy')
+  $outer.magnificent({
+    zoomWidth: 800
   });
 
-  var $inner = $('*[data-zoom="inner"]');
+  var $inner = $('*[data-magnificent="inner"]');
 
-  $inner.zoom({
+  $inner.magnificent({
     type: 'inner',
     zoomWidth: 800
   });
-  $inner.zoom('destroy')
-  $inner.zoom({
+  $inner.magnificent('destroy')
+  $inner.magnificent({
     type: 'inner',
-    zoomWidth: 1600
+    zoomWidth: 800
   })
 
 });
@@ -35,13 +35,13 @@ $(function () {
 </head>
 <body>
   
-  <div class="zoom outer" data-zoom="outer">
+  <div class="magnificent outer" data-magnificent="outer">
     <div>
       <img src="img/test_256x192.png" />
     </div>
   </div>
 
-  <div class="zoom inner" data-zoom="inner">
+  <div class="magnificent inner" data-magnificent="inner">
     
       <img src="img/test_256x192.png" />
     
@@ -49,13 +49,13 @@ $(function () {
 
   <br /><hr /><br />
 
-  <div class="outer" data-zoom-viewport="outer">
+  <div class="outer" data-magnificent-viewport="outer">
     <div>
       <img src="img/test_1024x768.png" />
     </div>
   </div>
 
-  <div class="inner" data-zoom-viewport="inner">
+  <div class="inner" data-magnificent-viewport="inner">
     <div>
       <img src="img/test_1024x768.png" />
     </div>
