@@ -1,0 +1,139 @@
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+.hide-text {
+  font: NaN a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+.input-block-level {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.bend-shadow:before,
+.bend-shadow:after {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width: 300px;
+  background: #777;
+  -webkit-box-shadow: 0 15px 10px #777777;
+  -moz-box-shadow: 0 15px 10px #777777;
+  box-shadow: 0 15px 10px #777777;
+  color: 0 15px 10px #777777;
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+.bend-shadow:after {
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
+}
+.polaroid {
+  background: white;
+  padding: 4px;
+  -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
+  color: 0 0 1px rgba(0, 0, 0, 0.25);
+}
+.polaroid:before,
+.polaroid:after {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width: 300px;
+  background: #777;
+  -webkit-box-shadow: 0 15px 10px #777777;
+  -moz-box-shadow: 0 15px 10px #777777;
+  box-shadow: 0 15px 10px #777777;
+  color: 0 15px 10px #777777;
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+.polaroid:after {
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
+}
+.magnificent img {
+  width: 100%;
+}
+.magnificent-viewport {
+  background: white;
+  -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
+  color: 0 0 1px rgba(0, 0, 0, 0.25);
+  z-index: 10;
+}
+.magnificent-viewport .inner-wrap {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+.magnificent-viewport img {
+  width: 100%;
+}
+.magnificent-viewport-mode-outer {
+  overflow: visible !important;
+}
+.magnificent-viewport-mode-outer .inner-wrap {
+  margin: 4px;
+  overflow: hidden;
+}
+.magnificent-viewport-mode-outer .polaroid {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.magnificent-lens-inner {
+  border: 1px solid white;
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-box-shadow: 0 0 5px #000000;
+  -moz-box-shadow: 0 0 5px #000000;
+  box-shadow: 0 0 5px #000000;
+  color: 0 0 5px #000000;
+}

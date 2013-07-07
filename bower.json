@@ -1,0 +1,17 @@
+{
+  "name": "jquery-magnificent",
+  "version": "0.1.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "jquery": "~1.9",
+    "jquery-throttle-debounce": "latest",
+    "jquery-bridget": "~1.0.0",
+    "bootstrap": "~2.3.2",
+    "lesshat": "~1.1.1",
+    "html5shiv": "~3.6.2"
+  }
+}
