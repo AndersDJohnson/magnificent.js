@@ -7,7 +7,7 @@
     "components"
   ],
   "dependencies": {
-    "jquery": "~2.0.2",
+    "jquery": "~1.9",
     "jquery-throttle-debounce": "latest",
     "jquery-bridget": "~1.0.0",
     "bootstrap": "~2.3.2",
