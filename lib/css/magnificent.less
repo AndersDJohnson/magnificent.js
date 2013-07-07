@@ -1,0 +1,82 @@
+@import "../../components/bootstrap/less/variables.less";
+@import "../../components/bootstrap/less/mixins.less";
+@import "../../components/lesshat/lesshat.less";
+
+.bend-shadow {
+  &:before, &:after {
+    z-index: -1;
+    position: absolute;
+    content: "";
+    bottom: 15px;
+    left: 10px;
+    width: 50%;
+    top: 80%;
+    max-width:300px;
+    background: #777;
+    .box-shadow(0 15px 10px #777);
+    .rotate(-3deg);
+  }
+
+  &:after {
+    .rotate(3deg);
+    right: 10px;
+    left: auto;
+  }
+}
+
+.polaroid {
+  background: white;
+  padding: 4px;
+  .box-shadow(0 0 1px rgba(0,0,0,0.25));
+  .bend-shadow();
+}
+
+.magnificent {
+  img {
+    width: 100%;
+  }
+}
+
+.magnificent-viewport {
+  background: white;
+  .box-shadow(0 0 1px rgba(0,0,0,0.25));
+  z-index: 10;
+
+  .inner-wrap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
+.magnificent-viewport-mode-outer {
+  overflow: visible !important;
+
+  .inner-wrap {
+    margin: 4px;
+    overflow: hidden;
+  }
+
+  .polaroid {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+
+
+.magnificent-lens-inner {
+  border: 1px solid white;
+  background-color: rgba(255,255,255,0.3);
+  .box-shadow(0 0 5px rgba(0,0,0,1));
+}

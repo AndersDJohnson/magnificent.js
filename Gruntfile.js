@@ -9,17 +9,20 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            cwd: 'examples',
-            src: '**/*.less',
+            cwd: '.',
+            src: [
+              'examples/**/*.less',
+              'lib/**/*.less'
+            ],
             ext: '.css',
-            dest: 'examples'
+            dest: '.'
           }
         ]
       }
     },
     watch: {
       less: {
-        files: 'examples/**/*.less',
+        files: '**/*.less',
         tasks: 'less:compile'
       }
     }

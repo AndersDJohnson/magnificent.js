@@ -55,16 +55,6 @@ body {
   position: absolute;
   left: 33%;
   margin-left: 12px;
-  -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  color: 0 4px 4px rgba(0, 0, 0, 0.25);
-}
-.demo#demo-outer .magnificent-viewport .inner-wrap {
-  margin: 4px;
-}
-.demo#demo-inner img {
-  width: 100%;
 }
 .description {
   float: right;
