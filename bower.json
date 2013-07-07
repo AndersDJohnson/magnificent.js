@@ -9,6 +9,8 @@
   "dependencies": {
     "jquery": "~2.0.2",
     "jquery-throttle-debounce": "latest",
-    "jquery-bridget": "~1.0.0"
+    "jquery-bridget": "~1.0.0",
+    "bootstrap": "~2.3.2",
+    "lesshat": "~1.1.1"
   }
 }

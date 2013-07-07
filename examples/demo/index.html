@@ -1,0 +1,275 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" href="../../components/bootstrap/docs/assets/css/bootstrap.css" type="text/css" />
+<link rel="stylesheet" href="../../components/bootstrap/docs/assets/css/bootstrap-responsive.css" type="text/css" />
+<link rel="stylesheet" href="../../vendor/bootstrap-prettify/bootstrap-prettify.css" type="text/css" />
+<link rel="stylesheet" href="css/magnificent.css" type="text/css" />
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="../../components/rainbow/themes/github.css" type="text/css" />
+<script src="../../components/jquery/jquery.js"></script>
+<script src="../../components/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
+<script src="../../components/jquery-bridget/jquery.bridget.js"></script>
+<!--
+<script src="../../components/rainbow/js/rainbow.min.js"></script>
+<script src="../../components/rainbow/js/language/generic.js"></script>
+<script src="../../components/rainbow/js/language/javascript.js"></script>
+-->
+<script src="../../vendor/google-code-prettify/src/prettify.js"></script>
+<script src="../../lib/jquery.magnificent.js"></script>
+<script>
+$(function () {
+  prettyPrint();
+});
+</script>
+</head>
+<body>
+
+  <a target="_blank" href="https://github.com/adjohnson916/jquery.magnificent"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
+  <div class="container">
+
+    <header>
+      <div class="hero-unit jumbotron masthead">
+        <h1>jquery.magnificent</h1>
+        <p class="lead">
+          An responsive zoom plugin for images & more!
+        </p>
+      </div>
+    </header>
+
+    <script>
+    $(function () {
+      $('.demo').each(function (index, item) {
+        var $item = $(item);
+        var $source = $item.find('script.source');
+        var text = $source.text();
+        var $code = $('<code>', {
+        });
+        text = jQuery.trim(text);
+        text = prettyPrintOne(text, 'js', true)
+        $code.html(text);
+        var $pre = $('<pre>', {
+        });
+        $pre.append($code);
+        $item.find('.description .inner').append($pre);
+      });
+    });
+    </script>
+    
+    <section>
+
+      <p>
+        Documentation will improve over time. Feel free to contribute!
+      </p>
+      <p>
+        Submit any questions to the issues on GitHub.
+      </p>
+
+      <div>
+        <pre class="prettyprint lang-html"i><code>
+&lt;div data-magnificent="SOME_KEY"&gt;
+  &lt;div class="inner"&gt;
+    &lt;img src="img/rieti-106848-500x334.jpg" /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div data-magnificent-viewport="SOME_KEY"&gt;
+  &lt;div class="inner"&gt;
+    &lt;img src="img/rieti-106848.jpg" /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+        </code></pre>
+      </div>
+
+      <div class="page-header">
+        <h2>Examples</h2>
+      </div>
+
+      <div id="demo-inner" class="demo">
+
+        <div class="magnificent-wrap">
+          <div class="magnificent" data-magnificent="demo-inner">
+            <div class="polaroid">
+              <div class="inner">
+                <img src="img/alley-21696-500x333.jpg" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="magnificent-viewport-wrap">
+          <div data-magnificent-viewport="demo-inner">
+            <div class="inner">
+              <img src="img/alley-21696-1000x666.jpg" />
+            </div>
+          </div>
+        </div>
+
+        <div class="description">
+          <div class="inner">
+            <p>
+              Simple example using default options and inner mode.
+            </p>
+          </div>
+        </div>
+
+<script class="source">
+$(function () {
+  $('#demo-inner [data-magnificent]').magnificent();
+});
+</script>
+
+      </div>
+
+      <div id="demo-outer" class="demo">
+
+        <div class="magnificent-wrap">
+          <div class="magnificent" data-magnificent="demo-outer">
+            <div class="polaroid">
+              <div class="inner">
+                <img src="img/rieti-106848-500x334.jpg" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="magnificent-viewport-wrap">
+          <div data-magnificent-viewport="demo-outer">
+            <div class="inner-wrap">
+              <div class="inner">
+                <img src="img/rieti-106848.jpg" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="description">
+          <div class="inner">
+            <p>
+              Using outer mode and a custom zoom level.
+            </p>
+          </div>
+        </div>
+
+<script class="source">
+$(function () {
+  $('#demo-outer [data-magnificent]').magnificent({
+    mode: 'outer',
+    zoomWidth: '4x'
+  });
+});
+</script>
+
+      </div>
+    </section>
+
+    <section>
+
+      <div class="page-header">
+        <h2>Methods</h2>
+      </div>
+
+      <p>
+        
+      </p>
+
+      <h3>.magnificent('instance')</h3>
+      <p>
+        Return the <code>Magnificent</code> instance of the first element.
+      </p>
+
+      <h3>.magnificent('focus', position)</h3>
+      <p>
+        Focus the viewport and lens on the given coordinates.
+      </p>
+      <p>
+        Pass an object with <code>top</code> and <code>left</code> properties as percentage values from <code>0</code> to <code>1</code>.
+      </p>
+
+      <h3>.magnificent('layout')</h3>
+      <p>
+        Tell the widget(s) to redraw. Used internally on events.
+      </p>
+
+      <h3>.magnificent('destroy')</h3>
+      <p>
+        Destroy the widget. Removes event listeners. Best attempt made to restore original state of DOM.
+      </p>
+
+    </section>
+
+    <section>
+
+      <div class="page-header">
+        <h2>Options</h2>
+      </div>
+
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>type</th>
+            <th>default</th>
+            <th>description</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td>mode</td>
+            <td>string</td>
+            <td><code>'inner'</code></td>
+            <td><p>
+              The mode to use: 
+              <dl>
+                <dt><code>'inner'</code></dt><dd>Viewport overlays unzoomed area.</dd>
+                <dt><code>'outer'</code></dt><dd>Viewport appears separately.</dd>
+              </dl>
+            </p></td>
+          </tr>
+
+          <tr>
+            <td>zoomWidth</td>
+            <td></td>
+            <td></td>
+            <td>See viewport.zoomWidth</td>
+          </tr>
+
+          <tr>
+            <td>viewport.zoomWidth</td>
+            <td>string | number | function</td>
+            <td>'3x'</td>
+            <td><p>
+              Determines the zoomed width. Height should be proportional.
+            </p><p>
+              If a number, should be the desired width in pixels.
+              If a string, should be either:
+              <ul>
+                <li>a float number followed by 'x' for a factor of the unzoomed area width</li>
+                <li>suitable as an argument to <code>$().width()</code></li>
+              </ul>
+              If a function, should return a suitable argument to <code>$().width()</code>.
+            </p></td>
+          </tr>
+
+          <tr>
+            <td>viewport.toggle</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td><p>
+              Whether to toggle visibility of the viewport on interaction, e.g. when the mouse enters and leaves the unzoomed area.
+            </p></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </section>
+
+    <br><br><br>
+    <br><br><br>
+
+  </div>
+</body>
+</html>

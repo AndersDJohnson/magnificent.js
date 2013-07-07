@@ -1,0 +1,54 @@
+@import "../../../components/bootstrap/less/variables.less";
+@import "../../../components/bootstrap/less/mixins.less";
+@import "../../../components/lesshat/lesshat.less";
+
+html {
+  overflow: scroll;
+}
+body {
+  background: #fff;
+}
+
+.demo {
+  padding: 1em;
+  .clearfix();
+  position: relative;
+
+  .magnificent-wrap {
+    display: block;
+    width: 33%;
+    float: left;
+    position: relative;
+  }
+
+  &#demo-outer {
+    .magnificent-viewport-wrap {
+      position: absolute;
+      left: 33%;
+      margin-left: 8px + 4px;
+      .box-shadow(0 4px 4px rgba(0,0,0,0.25))
+    }
+
+    .magnificent-viewport {
+      .inner-wrap {
+        margin: 4px;
+      }
+    }
+  }
+
+  &#demo-inner {
+    img {
+      width: 100%;
+    }
+  }
+
+}
+
+.description {
+  float: right;
+  width: 67%;
+
+  .inner {
+    padding: 0 1em;
+  }
+}
