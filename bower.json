@@ -4,7 +4,13 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "components"
+    "bower_components",
+    "Gruntfile.js",
+    "examples",
+    "vendor",
+    "index.html",
+    "rebase-master.sh",
+    "update-gh-pages.sh"
   ],
   "dependencies": {
     "jquery": "~1.9",
