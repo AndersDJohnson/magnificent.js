@@ -7,8 +7,6 @@ See: http://andrz.me/magnificent.js/examples/demo/index.html
 
 ## Usage
 
-Either:
-
 Either download or install via [Bower][bower]:
 
 `$ bower install jquery-magnificent`
