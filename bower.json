@@ -1,6 +1,6 @@
 {
   "name": "jquery-magnificent",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A jQuery plugin for responsive zoom of images & more!",
   "main": [
     "lib/js/magnificent.js",
