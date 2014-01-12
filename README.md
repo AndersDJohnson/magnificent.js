@@ -13,5 +13,7 @@ Either download, or install via [Bower][bower]:
 
 `$ bower install jquery-magnificent`
 
+Then see: See: http://andrz.me/magnificent.js/examples/demo/index.html
+
 
 [bower]: http://bower.io/ 
