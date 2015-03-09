@@ -3,3 +3,6 @@ bower_components
 libpeerconnection.log
 
 *.sublime-*
+
+.idea
+*.iml
