@@ -70,10 +70,12 @@
         }
       };
 
+
+
       var render = function () {
         var lens, full;
-        lens = model.lens;
-        full = model.full;
+        lens = model.lazyLens;
+        full = model.lazyFull;
         var css = toCSS(lens);
         $lens.css(css);
         var fullCSS = toCSS(full);
@@ -99,6 +101,46 @@
 
       mag.compute(model);
 
+      model.lazyFocus = {
+        x: model.focus.x,
+        y: model.focus.y
+      };
+      model.lazyLens = {
+        x: model.lens.x,
+        y: model.lens.y,
+        w: model.lens.w,
+        h: model.lens.h
+      };
+      model.lazyFull = {
+        x: model.full.x,
+        y: model.full.y,
+        w: model.full.w,
+        h: model.full.h
+      };
+
+      render();
+
+
+      var rate = 5;
+      var renderLoop = function () {
+        model.lazyFocus.x += (model.focus.x - model.lazyFocus.x) / rate;
+        model.lazyFocus.y += (model.focus.y - model.lazyFocus.y) / rate;
+        model.lazyFull.x += (model.full.x - model.lazyFull.x) / rate;
+        model.lazyFull.y += (model.full.y - model.lazyFull.y) / rate;
+        model.lazyFull.w += (model.full.w - model.lazyFull.w) / rate;
+        model.lazyFull.h += (model.full.h - model.lazyFull.h) / rate;
+        model.lazyLens.x += (model.lens.x - model.lazyLens.x) / rate;
+        model.lazyLens.y += (model.lens.y - model.lazyLens.y) / rate;
+        model.lazyLens.w += (model.lens.w - model.lazyLens.w) / rate;
+        model.lazyLens.h += (model.lens.h - model.lazyLens.h) / rate;
+
+        render();
+      };
+
+
+      var interval = setInterval(renderLoop, 50);
+
+
       $zone.drag(function( e, dd ){
         console.log('drag', dd);
         console.log('e', e);
@@ -110,7 +152,6 @@
         model.focus = focus;
 
         mag.compute(model);
-        render();
       });
 
       $zone.on('mousewheel', function (e) {
@@ -127,8 +168,9 @@
         model.lens.w += delta;
         model.lens.h += delta;
 
+        console.log(model.lens);
+
         mag.compute(model);
-        render();
       });
 
     });
