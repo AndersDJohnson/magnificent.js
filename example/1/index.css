@@ -2,10 +2,17 @@
   height: 200px;
   width: 400px;
   background: yellow;
+  float: right;
 }
 
 .mag-host {
   position: relative;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 
 .mag-noflow {
@@ -28,10 +35,13 @@
   left: 0;
   top: 0;
   z-index: 2;
+
+  box-shadow: 0 0 4px purple;
 }
 
 .mag-lens {
   position: absolute;
   z-index: 2;
+
   box-shadow: 0 0 4px red;
 }

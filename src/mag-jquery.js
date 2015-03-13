@@ -29,6 +29,13 @@
     }
   };
 
+  var ratioOffsetsFor = function ($target, x, y) {
+    return {
+      x: x / $target.width(),
+      y: y / $target.height()
+    }
+  };
+
   var cssPerc = function (frac) {
     return (frac * 100) + '%';
   };
@@ -54,8 +61,12 @@
         mode: 'overflow',
         // mode: 'lag',
         lens: {
-          w: 0.33,
-          h: 0.33
+          w: 1,
+          h: 1
+        },
+        focus: {
+          x: 0.5,
+          y: 0.5
         }
       };
 
@@ -86,11 +97,83 @@
       $full.appendTo($noflow);
 
 
-      $zone.on('mousemove', function (e) {
-        model.focus = ratioOffsets(e);
-        mag.compute(model);
-        render();
-      });
+      mag.compute(model);
+
+      if (options.move === 'drag') {
+        $zone.drag(function( e, dd ){
+          console.log('drag', dd);
+          console.log('e', e);
+
+          var offset = $zone.offset();
+          var focus = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
+          console.log('focus', focus);
+
+          model.focus = focus;
+
+          mag.compute(model);
+          render();
+        });
+      }
+      // else if (options.move === 'follow') {
+
+      //   var vx = 0;
+      //   var vy = 0;
+
+      //   $zone.drag(function( e, dd ){
+      //     console.log('drag', dd);
+      //     console.log('e', e);
+
+      //     var offset = $zone.offset();
+      //     var focus = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
+      //     console.log('focus', focus);
+
+      //     vx += 0.01 * (focus.x - 0.5);
+      //     vy += 0.01 * (focus.y - 0.5);
+
+      //     mag.compute(model);
+      //     render();
+      //   });
+
+      //   var interval;
+      //   $zone.drag('start', function( e, dd ){
+      //     console.log('dragstart', dd);
+      //     console.log('e', e);
+
+      //     var offset = $zone.offset();
+      //     var focus = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
+      //     console.log('focus', focus);
+
+      //     vx += 0.01 * (focus.x - 0.5);
+      //     vy += 0.01 * (focus.y - 0.5);
+
+      //     interval = setInterval(function () {
+      //       console.log('interval');
+
+      //       console.log('vx,vy', [vx, vy]);
+
+      //       model.focus.x += vx;
+      //       model.focus.y += vy;
+      //       model.focus.x = mag.minMax(model.focus.x, 0, 1);
+      //       model.focus.y = mag.minMax(model.focus.y, 0, 1);
+
+      //       mag.compute(model);
+      //       render();
+      //     }, 100);
+      //   });
+
+      //   $zone.drag('end', function( e, dd ){
+      //     console.log('dragend', dd);
+      //     console.log('e', e);
+
+      //     clearInterval(interval);
+      //   });
+      // }
+
+      // $zone.on('mousemove', function (e) {
+      //   model.focus = ratioOffsets(e);
+      //   mag.compute(model);
+      //   render();
+      // });
 
       $zone.on('mousewheel', function (e) {
         e.preventDefault();
