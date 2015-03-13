@@ -151,6 +151,7 @@
   mag.constrainLens = constrainLens;
   mag.constrainLensWH = constrainLensWH;
   mag.constrainLensXY = constrainLensXY;
+  mag.minMax = minMax;
 
   return mag;
 }));
