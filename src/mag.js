@@ -82,22 +82,16 @@
 
     lens = constrainLens(lens);
 
-    var ratio = {
-      w: 1 / lens.w,
-      h: 1 / lens.h
-    };
-
     model.full = {
-      w: ratio.w,
-      h: ratio.h,
-      x: -1 * lens.x * ratio.w,
-      y: -1 * lens.y * ratio.h
+      w: model.zoom,
+      h: model.zoom,
+      x: (1 - model.zoom) * focus.x / 2,
+      y: (1 - model.zoom) * focus.y / 2
+      // x: -1 * (model.zoom * focus.x) / 2,
+      // y: -1 * (model.zoom * focus.y) / 2
     };
 
     model.lens = lens;
-
-    model.ratio = ratio;
-
   };
 
 

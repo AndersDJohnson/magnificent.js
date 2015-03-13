@@ -59,15 +59,11 @@
 
       var model = {
         mode: 'overflow',
-        // mode: 'lag',
-        lens: {
-          w: 1,
-          h: 1
-        },
         focus: {
           x: 0.5,
           y: 0.5
-        }
+        },
+        zoom: 1
       };
 
 
@@ -117,6 +113,7 @@
         w: model.full.w,
         h: model.full.h
       };
+      model.lazyZoom = model.zoom;
 
       render();
 
@@ -129,10 +126,11 @@
         model.lazyFull.y += (model.full.y - model.lazyFull.y) / rate;
         model.lazyFull.w += (model.full.w - model.lazyFull.w) / rate;
         model.lazyFull.h += (model.full.h - model.lazyFull.h) / rate;
-        model.lazyLens.x += (model.lens.x - model.lazyLens.x) / rate;
-        model.lazyLens.y += (model.lens.y - model.lazyLens.y) / rate;
-        model.lazyLens.w += (model.lens.w - model.lazyLens.w) / rate;
-        model.lazyLens.h += (model.lens.h - model.lazyLens.h) / rate;
+        // model.lazyLens.x += (model.lens.x - model.lazyLens.x) / rate;
+        // model.lazyLens.y += (model.lens.y - model.lazyLens.y) / rate;
+        // model.lazyLens.w += (model.lens.w - model.lazyLens.w) / rate;
+        // model.lazyLens.h += (model.lens.h - model.lazyLens.h) / rate;
+        model.lazyZoom += (model.zoom - model.lazyZoom) / rate;
 
         render();
       };
@@ -140,16 +138,38 @@
 
       var interval = setInterval(renderLoop, 50);
 
+      var ratios = {
+        x: model.focus.x,
+        y: model.focus.y
+      };
+
+      var dragging = false;
+
+      var dragInterval = setInterval(function () {
+        // console.log('focus', model.focus);
+        if (! dragging) return;
+
+        var rate =  0.1 * (1 / model.zoom);
+        model.focus.x += (ratios.x - 0.5) * rate;
+        model.focus.y += (ratios.y - 0.5) * rate;
+
+        mag.compute(model);
+      }, 50);
+
+      $zone.drag('start', function () {
+        dragging = true;
+      });
+
+      $zone.drag('end', function () {
+        dragging = false;
+      });
 
       $zone.drag(function( e, dd ){
         console.log('drag', dd);
         console.log('e', e);
 
         var offset = $zone.offset();
-        var focus = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
-        console.log('focus', focus);
-
-        model.focus = focus;
+        ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
 
         mag.compute(model);
       });
@@ -157,20 +177,15 @@
       $zone.on('mousewheel', function (e) {
         e.preventDefault();
 
-        var delta = e.deltaY * -0.1;
+        var delta = e.deltaY * 0.2;
 
-        // var lens = mag.constrainWH({
-        //   w: model.lens.w + delta,
-        //   h: model.lens.h + delta
-        // });
-        // model.lens.w = lens.w;
-        // model.lens.h = lens.h;
-        model.lens.w += delta;
-        model.lens.h += delta;
-
-        console.log(model.lens);
+        model.zoom += delta;
 
         mag.compute(model);
+
+        console.log('full', model.full);
+        console.log('focus', model.focus);
+        console.log('zoom', model.zoom);
       });
 
     });
