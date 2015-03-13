@@ -35,10 +35,10 @@
 
   var toCSS = function (pt) {
     var css = {};
-    if (pt.x) css.left = cssPerc(pt.x);
-    if (pt.y) css.top = cssPerc(pt.y);
-    if (pt.w) css.width = cssPerc(pt.w);
-    if (pt.h) css.height = cssPerc(pt.h);
+    if (pt.x !== undefined) css.left = cssPerc(pt.x);
+    if (pt.y !== undefined) css.top = cssPerc(pt.y);
+    if (pt.w !== undefined) css.width = cssPerc(pt.w);
+    if (pt.h !== undefined) css.height = cssPerc(pt.h);
     return css;
   };
 
@@ -63,13 +63,9 @@
         var lens, full;
         lens = model.lens;
         full = model.full;
-        console.log('lens', lens);
-        lens = model.mode === 'lag' ? mag.constrain(lens) : mag.constrainWH(lens) ;
-        console.log('lensC', lens);
         var css = toCSS(lens);
         $lens.css(css);
         var fullCSS = toCSS(full);
-        console.log('full', fullCSS);
         $full.css(fullCSS);
       };
 
@@ -99,14 +95,16 @@
       $zone.on('mousewheel', function (e) {
         e.preventDefault();
 
-        var delta = e.deltaY * 0.1;
+        var delta = e.deltaY * -0.1;
 
-        var lens = mag.constrainWH({
-          w: model.lens.w + delta,
-          h: model.lens.h + delta
-        });
-        model.lens.w = lens.w;
-        model.lens.h = lens.h;
+        // var lens = mag.constrainWH({
+        //   w: model.lens.w + delta,
+        //   h: model.lens.h + delta
+        // });
+        // model.lens.w = lens.w;
+        // model.lens.h = lens.h;
+        model.lens.w += delta;
+        model.lens.h += delta;
 
         mag.compute(model);
         render();
