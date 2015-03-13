@@ -52,6 +52,7 @@
     model.focus = fillXY(model.focus);
     model.lens = fillXY(fillWH(model.lens));
     model.full = fillXY(fillWH(model.full));
+    model.boundedLens = fillXY(fillWH(model.boundedLens));
     return model;
   };
 
@@ -79,12 +80,16 @@
     lens.x = (dw * focus.x) - offset.x;
     lens.y = (dh * focus.y) - offset.y;
 
+    lens = constrainLens(lens);
+
     model.full = {
       w: 1 / lens.w,
       h: 1 / lens.h,
       x: (-1 * lens.x) / lens.w,
       y: (-1 * lens.y) / lens.h,
     };
+
+    model.lens = lens;
   };
 
 
@@ -92,31 +97,38 @@
     return val < min ? min : ( val > max ? max : val );
   };
 
-  var minMax1 = function (val) {
-    return minMax(val, 0.01, 1);
+  var minMax1 = function (val, min) {
+    return minMax(val, min, 1);
   };
 
 
-  var constrainWH = function (r) {
+  var constrainLensWH = function (r) {
     return {
-      w: minMax1(r.w),
-      h: minMax1(r.h),
+      w: minMax1(r.w, 0.1),
+      h: minMax1(r.h, 0.1),
       x: r.x,
       y: r.y
     };
   };
 
-  var constrainXY = function (r) {
+  var constrainLensXY = function (r) {
     return {
-      x: minMax1(r.x),
-      y: minMax1(r.y),
+      x: minMax(r.x, 0),
+      y: minMax(r.y, 0),
       w: r.w,
       h: r.h
     };
   };
 
-  var constrain = function (r) {
-    return constrainXY(constrainWH(r));
+  var constrainLens = function (r) {
+    var c = constrainLensXY(constrainLensWH(r));
+    if (((c.w + c.x) > 1)) {
+      c.x = Math.max(0, 1 - c.w);
+    }
+    if (((c.h + c.y) > 1)) {
+      c.y = Math.max(0, 1 - c.h);
+    }
+    return c;
   };
 
 
@@ -136,9 +148,9 @@
 
   mag.compute = compute;
   mag.project = project;
-  mag.constrain = constrain;
-  mag.constrainWH = constrainWH;
-  mag.constrainXY = constrainXY;
+  mag.constrainLens = constrainLens;
+  mag.constrainLensWH = constrainLensWH;
+  mag.constrainLensXY = constrainLensXY;
 
   return mag;
 }));
