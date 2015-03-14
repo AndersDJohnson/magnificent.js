@@ -130,19 +130,26 @@
       var baseDragRate = 0.2;
       var zoomRate = 0.5;
 
+      var approach = function (rate, dest, src, props, srcProps) {
+        srcProps = srcProps ? srcProps : props;
+        if (! $.isArray(props)) {
+          props = [props];
+          srcProps = [srcProps];
+        }
+        for (var i = 0, m = props.length; i < m; ++i) {
+          var prop = props[i];
+          var srcProp = srcProps[i];
+          var diff = src[srcProp] - dest[prop];
+          dest[prop] += diff * rate;
+        }
+      };
 
       var renderLoop = function () {
-        model.lazyFocus.x += (model.focus.x - model.lazyFocus.x) * lazyRate;
-        model.lazyFocus.y += (model.focus.y - model.lazyFocus.y) * lazyRate;
-        model.lazyFull.x += (model.full.x - model.lazyFull.x) * lazyRate;
-        model.lazyFull.y += (model.full.y - model.lazyFull.y) * lazyRate;
-        model.lazyFull.w += (model.full.w - model.lazyFull.w) * lazyRate;
-        model.lazyFull.h += (model.full.h - model.lazyFull.h) * lazyRate;
-        // model.lazyLens.x += (model.lens.x - model.lazyLens.x) / lazyRate;
-        // model.lazyLens.y += (model.lens.y - model.lazyLens.y) / lazyRate;
-        // model.lazyLens.w += (model.lens.w - model.lazyLens.w) / lazyRate;
-        // model.lazyLens.h += (model.lens.h - model.lazyLens.h) / lazyRate;
-        model.lazyZoom += (model.zoom - model.lazyZoom) * lazyRate;
+        approach(lazyRate, model.lazyFocus, model.focus, 'x');
+        approach(lazyRate, model.lazyFocus, model.focus, 'y');
+        approach(lazyRate, model.lazyFull, model.full, ['x', 'y', 'w', 'h']);
+        //approach(lazyRate, model.lazyLens, model.lens, ['x', 'y', 'w', 'h']);
+        approach(lazyRate, model, model, 'lazyZoom', 'zoom');
 
         render();
       };
