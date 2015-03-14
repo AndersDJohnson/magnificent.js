@@ -64,24 +64,13 @@
     focus = model.focus;
     full = model.full;
     zoom = model.zoom;
-    if (model.mode === 'lag') {
-      dw = 1 - lens.w;
-      dh = 1 - lens.h;
-      offset = {
-        x: 0,
-        y: 0
-      };
-    }
-    else {
-      dw = 1;
-      dh = 1;
-      offset = {
-        x: lens.w / 2,
-        y: lens.h / 2
-      };
-    }
-    lens.x = (dw * focus.x) - offset.x;
-    lens.y = (dh * focus.y) - offset.y;
+
+    dw = 1 / zoom;
+    dh = 1 / zoom;
+    lens.x = focus.x - (dw / 2);
+    lens.y = focus.y - (dh / 2);
+    lens.w = dw;
+    lens.h = dh;
 
     lens = constrainLens(lens);
 
