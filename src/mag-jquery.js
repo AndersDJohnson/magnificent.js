@@ -56,8 +56,9 @@
       var $el = $(this);
 
       options = $.extend({
-        //move: 'follow'
-        move: 'drag'
+        //position: 'mirror',
+        //positionEvent: 'move'
+        ////positionEvent: 'drag'
       }, options);
 
       var model = {
@@ -127,7 +128,7 @@
 
       var lazyRate = 1;
       var frameSpeed = 100;
-      var baseDragRate = 0.2;
+      var dragRate = 0.2;
       var zoomRate = 0.5;
 
       var approach = function (rate, dest, src, props, srcProps) {
@@ -154,75 +155,90 @@
         render();
       };
 
-      var ratios = {
-        x: model.focus.x,
-        y: model.focus.y
-      };
 
-      if (options.move === 'drag') {
-        lazyRate = 0.5;
-        frameSpeed = 20;
-        var dragging = false;
 
-        var dragInterval = setInterval(function () {
-          // console.log('focus', model.focus);
-          if (! dragging) return;
+      if (options.position === 'mirror') {
+        if (options.positionEvent === 'move') {
+          lazyRate = 0.2;
+          frameSpeed = 20;
 
-          var focus = model.focus;
+          $zone.on('mousemove', function(e){
+            console.log('e', e);
 
-          var dragRate =  baseDragRate * (1 / model.zoom);
-          focus.x += (ratios.x - 0.5) * dragRate;
-          focus.y += (ratios.y - 0.5) * dragRate;
+            var ratios = ratioOffsets(e);
+            ratios = {
+              x: mag.minMax(ratios.x, 0, 1),
+              y: mag.minMax(ratios.y, 0, 1)
+            };
+            console.log('ratios', ratios);
+            model.focus.x = ratios.x;
+            model.focus.y = ratios.y;
 
-          console.log('focus', focus);
-
-          focus = {
-            x: mag.minMax(focus.x, 0, 1),
-            y: mag.minMax(focus.y, 0, 1)
-          };
-
-          model.focus = focus;
-
-          mag.compute(model);
-        }, 50);
-
-        $zone.drag('start', function () {
-          dragging = true;
-        });
-
-        $zone.drag('end', function () {
-          dragging = false;
-        });
-
-        $zone.drag(function( e, dd ){
-          console.log('drag', dd);
-          console.log('e', e);
-
-          var offset = $zone.offset();
-          ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
-        });
+            mag.compute(model);
+          });
+        }
+        else if (options.positionEvent === 'hold') {
+          // TODO: implement
+        }
+        else {
+          throw new Error("Invalid 'positionEvent' option.");
+        }
       }
-      //else if (options.move === 'follow') {
-      //  rate = 5;
-      //
-      //  $zone.on('mousemove', function(e){
-      //    console.log('e', e);
-      //
-      //    ratios = ratioOffsets(e);
-      //    ratios = {
-      //      x: mag.minMax(ratios.x, 0, 1),
-      //      y: mag.minMax(ratios.y, 0, 1)
-      //    };
-      //    console.log('ratios', ratios);
-      //    model.focus.x = ratios.x;
-      //    model.focus.y = ratios.y;
-      //
-      //    mag.compute(model);
-      //  });
-      //}
-      //else {
-      //  throw new Error("No 'move' option specified.");
-      //}
+      else if (options.position === 'joystick') {
+        if (options.positionEvent === 'move') {
+          // TODO: implement
+        }
+        else if (options.positionEvent === 'hold') {
+          lazyRate = 0.5;
+          frameSpeed = 20;
+
+          var dragging = false;
+
+          var dragInterval = setInterval(function () {
+            // console.log('focus', model.focus);
+            if (! dragging) return;
+
+            var focus = model.focus;
+
+            //var adjustedDragRate =  dragRate * model.zoom;
+            var adjustedDragRate =  dragRate;
+            focus.x += (ratios.x - 0.5) * adjustedDragRate;
+            focus.y += (ratios.y - 0.5) * adjustedDragRate;
+
+            focus = {
+              x: mag.minMax(focus.x, 0, 1),
+              y: mag.minMax(focus.y, 0, 1)
+            };
+
+            model.focus.x = focus.x;
+            model.focus.y = focus.y;
+
+            mag.compute(model);
+          }, 50);
+
+          $zone.drag('start', function () {
+            dragging = true;
+          });
+
+          $zone.drag('end', function () {
+            dragging = false;
+          });
+
+          $zone.drag(function( e, dd ){
+            console.log('drag', dd);
+            console.log('e', e);
+
+            var offset = $zone.offset();
+            ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
+          });
+        }
+        else {
+          throw new Error("Invalid 'positionEvent' option.");
+        }
+      }
+      else {
+        throw new Error("Invalid 'position' option.");
+      }
 
 
       $zone.on('mousewheel', function (e) {
