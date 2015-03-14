@@ -55,7 +55,10 @@
 
       var $el = $(this);
 
-      options = $.extend({}, options);
+      options = $.extend({
+        //move: 'follow'
+        move: 'drag'
+      }, options);
 
       var model = {
         mode: 'overflow',
@@ -63,7 +66,11 @@
           x: 0.5,
           y: 0.5
         },
-        zoom: 1
+        zoom: 1,
+        lens: {
+          w: 0,
+          h: 0
+        }
       };
 
 
@@ -118,75 +125,118 @@
       render();
 
 
-      var rate = 5;
+      var lazyRate = 1;
+      var frameSpeed = 100;
+      var baseDragRate = 0.2;
+      var zoomRate = 0.5;
+
+
       var renderLoop = function () {
-        model.lazyFocus.x += (model.focus.x - model.lazyFocus.x) / rate;
-        model.lazyFocus.y += (model.focus.y - model.lazyFocus.y) / rate;
-        model.lazyFull.x += (model.full.x - model.lazyFull.x) / rate;
-        model.lazyFull.y += (model.full.y - model.lazyFull.y) / rate;
-        model.lazyFull.w += (model.full.w - model.lazyFull.w) / rate;
-        model.lazyFull.h += (model.full.h - model.lazyFull.h) / rate;
-        // model.lazyLens.x += (model.lens.x - model.lazyLens.x) / rate;
-        // model.lazyLens.y += (model.lens.y - model.lazyLens.y) / rate;
-        // model.lazyLens.w += (model.lens.w - model.lazyLens.w) / rate;
-        // model.lazyLens.h += (model.lens.h - model.lazyLens.h) / rate;
-        model.lazyZoom += (model.zoom - model.lazyZoom) / rate;
+        model.lazyFocus.x += (model.focus.x - model.lazyFocus.x) * lazyRate;
+        model.lazyFocus.y += (model.focus.y - model.lazyFocus.y) * lazyRate;
+        model.lazyFull.x += (model.full.x - model.lazyFull.x) * lazyRate;
+        model.lazyFull.y += (model.full.y - model.lazyFull.y) * lazyRate;
+        model.lazyFull.w += (model.full.w - model.lazyFull.w) * lazyRate;
+        model.lazyFull.h += (model.full.h - model.lazyFull.h) * lazyRate;
+        // model.lazyLens.x += (model.lens.x - model.lazyLens.x) / lazyRate;
+        // model.lazyLens.y += (model.lens.y - model.lazyLens.y) / lazyRate;
+        // model.lazyLens.w += (model.lens.w - model.lazyLens.w) / lazyRate;
+        // model.lazyLens.h += (model.lens.h - model.lazyLens.h) / lazyRate;
+        model.lazyZoom += (model.zoom - model.lazyZoom) * lazyRate;
 
         render();
       };
-
-
-      var interval = setInterval(renderLoop, 50);
 
       var ratios = {
         x: model.focus.x,
         y: model.focus.y
       };
 
-      var dragging = false;
+      if (options.move === 'drag') {
+        lazyRate = 0.5;
+        frameSpeed = 20;
+        var dragging = false;
 
-      var dragInterval = setInterval(function () {
-        // console.log('focus', model.focus);
-        if (! dragging) return;
+        var dragInterval = setInterval(function () {
+          // console.log('focus', model.focus);
+          if (! dragging) return;
 
-        var rate =  0.1 * (1 / model.zoom);
-        model.focus.x += (ratios.x - 0.5) * rate;
-        model.focus.y += (ratios.y - 0.5) * rate;
+          var focus = model.focus;
 
-        mag.compute(model);
-      }, 50);
+          var dragRate =  baseDragRate * (1 / model.zoom);
+          focus.x += (ratios.x - 0.5) * dragRate;
+          focus.y += (ratios.y - 0.5) * dragRate;
 
-      $zone.drag('start', function () {
-        dragging = true;
-      });
+          console.log('focus', focus);
 
-      $zone.drag('end', function () {
-        dragging = false;
-      });
+          focus = {
+            x: mag.minMax(focus.x, 0, 1),
+            y: mag.minMax(focus.y, 0, 1)
+          };
 
-      $zone.drag(function( e, dd ){
-        console.log('drag', dd);
-        console.log('e', e);
+          model.focus = focus;
 
-        var offset = $zone.offset();
-        ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
+          mag.compute(model);
+        }, 50);
 
-        mag.compute(model);
-      });
+        $zone.drag('start', function () {
+          dragging = true;
+        });
+
+        $zone.drag('end', function () {
+          dragging = false;
+        });
+
+        $zone.drag(function( e, dd ){
+          console.log('drag', dd);
+          console.log('e', e);
+
+          var offset = $zone.offset();
+          ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
+        });
+      }
+      //else if (options.move === 'follow') {
+      //  rate = 5;
+      //
+      //  $zone.on('mousemove', function(e){
+      //    console.log('e', e);
+      //
+      //    ratios = ratioOffsets(e);
+      //    ratios = {
+      //      x: mag.minMax(ratios.x, 0, 1),
+      //      y: mag.minMax(ratios.y, 0, 1)
+      //    };
+      //    console.log('ratios', ratios);
+      //    model.focus.x = ratios.x;
+      //    model.focus.y = ratios.y;
+      //
+      //    mag.compute(model);
+      //  });
+      //}
+      //else {
+      //  throw new Error("No 'move' option specified.");
+      //}
+
 
       $zone.on('mousewheel', function (e) {
         e.preventDefault();
 
-        var delta = e.deltaY * 0.2;
+        var delta = e.deltaY * zoomRate;
 
-        model.zoom += delta;
+        var zoom = model.zoom;
+        zoom += delta;
+        zoom = mag.minMax(zoom, 1, 10);
+
+        model.zoom = zoom;
 
         mag.compute(model);
 
         console.log('full', model.full);
         console.log('focus', model.focus);
         console.log('zoom', model.zoom);
-      });
+      })
+
+      var interval = setInterval(renderLoop, frameSpeed);
 
     });
   };

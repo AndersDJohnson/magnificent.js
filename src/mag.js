@@ -53,17 +53,20 @@
     model.lens = fillXY(fillWH(model.lens));
     model.full = fillXY(fillWH(model.full));
     model.boundedLens = fillXY(fillWH(model.boundedLens));
+    model.zoom = model.zoom || 1;
     return model;
   };
 
   var compute = function (model) {
-    var lens, focus, dw, dh, offset;
+    var lens, focus, full, zoom, dw, dh, offset;
     model = fillModel(model);
     lens = model.lens;
     focus = model.focus;
+    full = model.full;
+    zoom = model.zoom;
     if (model.mode === 'lag') {
-      dw = 1 - model.lens.w;
-      dh = 1 - model.lens.h;
+      dw = 1 - lens.w;
+      dh = 1 - lens.h;
       offset = {
         x: 0,
         y: 0
@@ -74,7 +77,7 @@
       dh = 1;
       offset = {
         x: lens.w / 2,
-        y: lens.h / 2,
+        y: lens.h / 2
       };
     }
     lens.x = (dw * focus.x) - offset.x;
@@ -82,16 +85,22 @@
 
     lens = constrainLens(lens);
 
-    model.full = {
-      w: model.zoom,
-      h: model.zoom,
-      x: (1 - model.zoom) * focus.x / 2,
-      y: (1 - model.zoom) * focus.y / 2
+    full = {
+      w: zoom,
+      h: zoom,
+      //x: (1 - zoom) * focus.x / 2,
+      //y: (1 - zoom) * focus.y / 2
       // x: -1 * (model.zoom * focus.x) / 2,
       // y: -1 * (model.zoom * focus.y) / 2
+      x: 0.5 - focus.x * zoom,
+      y: 0.5 - focus.y * zoom
     };
 
+    console.log('full', full);
     model.lens = lens;
+    model.focus = focus;
+    model.full = full;
+    model.zoom = zoom;
   };
 
 
