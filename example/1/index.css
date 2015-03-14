@@ -1,7 +1,6 @@
 #host {
   height: 200px;
   width: 400px;
-  background: yellow;
   float: right;
 }
 
@@ -13,6 +12,8 @@
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
+
+  background: black;
 }
 
 .mag-noflow {
