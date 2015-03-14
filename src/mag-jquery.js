@@ -66,11 +66,7 @@
           x: 0.5,
           y: 0.5
         },
-        zoom: 1,
-        lens: {
-          w: 0,
-          h: 0
-        }
+        zoom: 1
       };
 
 
@@ -125,24 +121,35 @@
       render();
 
 
-      var lazyRate = 1;
-      var frameSpeed = 100;
+      var lazyRate = 0.5;
+      var frameSpeed = 20;
       var baseDragRate = 0.2;
       var zoomRate = 0.5;
 
 
+      var approximate = function (thresh, source, dest, prop, destProp) {
+        destProp = destProp ? destProp : prop;
+        var diff = source[prop] - dest[destProp];
+        //if (Math.abs(diff) > thresh) {
+        if (true) {
+          dest[destProp] += diff * lazyRate;
+        }
+        else {
+          console.log('blocked');
+        }
+      };
+
+      var approximates = function (thresh, source, dest, props) {
+        $.each(props, function (i, prop) {
+          approximate(thresh, source, dest, prop);
+        });
+      };
+
       var renderLoop = function () {
-        model.lazyFocus.x += (model.focus.x - model.lazyFocus.x) * lazyRate;
-        model.lazyFocus.y += (model.focus.y - model.lazyFocus.y) * lazyRate;
-        model.lazyFull.x += (model.full.x - model.lazyFull.x) * lazyRate;
-        model.lazyFull.y += (model.full.y - model.lazyFull.y) * lazyRate;
-        model.lazyFull.w += (model.full.w - model.lazyFull.w) * lazyRate;
-        model.lazyFull.h += (model.full.h - model.lazyFull.h) * lazyRate;
-        // model.lazyLens.x += (model.lens.x - model.lazyLens.x) / lazyRate;
-        // model.lazyLens.y += (model.lens.y - model.lazyLens.y) / lazyRate;
-        // model.lazyLens.w += (model.lens.w - model.lazyLens.w) / lazyRate;
-        // model.lazyLens.h += (model.lens.h - model.lazyLens.h) / lazyRate;
-        model.lazyZoom += (model.zoom - model.lazyZoom) * lazyRate;
+        approximate(0, model, model, 'lazyZoom', 'zoom');
+        approximates(0, model.focus, model.lazyFocus, ['x', 'y']);
+        approximates(0, model.full, model.lazyFull, ['x', 'y', 'w', 'h']);
+        approximates(0, model.lens, model.lazyLens, ['x', 'y', 'w', 'h']);
 
         render();
       };
@@ -153,8 +160,6 @@
       };
 
       if (options.move === 'drag') {
-        lazyRate = 0.5;
-        frameSpeed = 20;
         var dragging = false;
 
         var dragInterval = setInterval(function () {
@@ -189,52 +194,40 @@
 
         $zone.drag(function( e, dd ){
           console.log('drag', dd);
-          console.log('e', e);
 
           var offset = $zone.offset();
           ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
         });
       }
-      //else if (options.move === 'follow') {
-      //  rate = 5;
-      //
-      //  $zone.on('mousemove', function(e){
-      //    console.log('e', e);
-      //
-      //    ratios = ratioOffsets(e);
-      //    ratios = {
-      //      x: mag.minMax(ratios.x, 0, 1),
-      //      y: mag.minMax(ratios.y, 0, 1)
-      //    };
-      //    console.log('ratios', ratios);
-      //    model.focus.x = ratios.x;
-      //    model.focus.y = ratios.y;
-      //
-      //    mag.compute(model);
-      //  });
-      //}
-      //else {
-      //  throw new Error("No 'move' option specified.");
-      //}
-
 
       $zone.on('mousewheel', function (e) {
         e.preventDefault();
 
+        var zoom = model.zoom;
+
+        console.log('zoom pre', zoom);
+
         var delta = e.deltaY * zoomRate;
 
-        var zoom = model.zoom;
+        console.log('delta', delta);
+
         zoom += delta;
+
+        console.log('zoom deltad', zoom);
+
         zoom = mag.minMax(zoom, 1, 10);
+
+        console.log('zoom constrain', zoom);
 
         model.zoom = zoom;
 
         mag.compute(model);
 
+        console.log('zoom post compute', model.zoom);
+
         console.log('full', model.full);
         console.log('focus', model.focus);
-        console.log('zoom', model.zoom);
-      })
+      });
 
       var interval = setInterval(renderLoop, frameSpeed);
 
