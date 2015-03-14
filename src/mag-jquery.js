@@ -148,7 +148,7 @@
         approach(lazyRate, model.lazyFocus, model.focus, 'x');
         approach(lazyRate, model.lazyFocus, model.focus, 'y');
         approach(lazyRate, model.lazyFull, model.full, ['x', 'y', 'w', 'h']);
-        //approach(lazyRate, model.lazyLens, model.lens, ['x', 'y', 'w', 'h']);
+        approach(lazyRate, model.lazyLens, model.lens, ['x', 'y', 'w', 'h']);
         approach(lazyRate, model, model, 'lazyZoom', 'zoom');
 
         render();
