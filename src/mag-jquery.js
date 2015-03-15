@@ -55,6 +55,7 @@
       var $el = $(this);
 
       options = $.extend({
+        mode: 'inner',
         position: 'mirror',
         positionEvent: 'move',
         constrainLens: true,
@@ -98,17 +99,37 @@
       }
 
       var $lens = $('<div class="mag-lens"></div>');
-      $lens.appendTo($el);
+      $el.append($lens);
 
-      var $noflow = $('<div class="mag-noflow"></div>');
-      $noflow.appendTo($el);
+      var $noflow = $('<div class="mag-noflow mag-zoomed-container" mag-theme="' + options.theme + '"></div>');
+      $el.append($noflow);
 
       var $zone = $('<div class="mag-zone"></div>');
-      $zone.appendTo($noflow);
+      $noflow.append($zone);
+
+
+      var $zoomedContainer;
+      if (options.mode === 'inner') {
+        $zoomedContainer = $noflow;
+      }
+      else if (options.mode === 'outer') {
+        if (! options.zoomedContainer) {
+          throw new Error("Required 'zoomedContainer' option.");
+        }
+        $zoomedContainer = $(options.zoomedContainer);
+        $zoomedContainer.addClass('mag-zoomed-container');
+        $zoomedContainer.attr('mag-theme', options.theme);
+
+        $noflow.append(options.content);
+      }
+      else {
+        throw new Error("Invalid 'mode' option.");
+      }
+
 
       var $full = $('<div class="mag-full"></div>');
       $full.html(options.content);
-      $full.appendTo($noflow);
+      $zoomedContainer.append($full);
 
 
       mag.compute(model, options);
