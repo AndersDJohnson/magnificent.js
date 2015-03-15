@@ -33,6 +33,8 @@
 
   var Mag = function (options) {
     options = options || {};
+    options.zoomMin = options.zoomMin || 1;
+    options.zoomMax = options.zoomMax || 10;
     options.constrainLens = ! (options.constrainLens === false);
     options.constrainZoomed = ! (options.constrainZoomed === false);
 
@@ -73,7 +75,7 @@
     zoomed = model.zoomed;
     zoom = model.zoom;
 
-    zoom = this.minMax(zoom, 1, 10);
+    zoom = this.minMax(zoom, options.zoomMin, options.zoomMax);
 
     focus.x = this.minMax(focus.x, 0, 1);
     focus.y = this.minMax(focus.y, 0, 1);

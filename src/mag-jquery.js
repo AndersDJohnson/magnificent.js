@@ -64,7 +64,9 @@
         constrainZoomed: false,
         theme: 'default',
         initialShow: 'thumb',
-        transclude: true
+        transclude: true,
+        zoomMin: 1,
+        zoomMax: 10
       }, options);
 
       if (options.mode === 'outer' && options.showLens == null) {
@@ -89,6 +91,8 @@
       }
 
       var mag = new Mag({
+        zoomMin: options.zoomMin,
+        zoomMax: options.zoomMax,
         constrainLens: options.constrainLens,
         constrainZoomed: options.constrainZoomed
       });
