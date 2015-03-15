@@ -57,8 +57,11 @@
     return model;
   };
 
-  var compute = function (model) {
+  var compute = function (model, options) {
     var lens, focus, full, zoom, dw, dh;
+    options = options || {
+      constrainLens: true
+    };
     model = fillModel(model);
     lens = model.lens;
     focus = model.focus;
@@ -72,7 +75,9 @@
     lens.w = dw;
     lens.h = dh;
 
-    lens = constrainLens(lens);
+    if (options.constrainLens) {
+      lens = constrainLens(lens);
+    }
 
     full.w = zoom;
     full.h = zoom;
