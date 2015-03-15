@@ -23,7 +23,8 @@ $host = $('#host2');
 $host.mag({
   content: '<img src="img/alley/1000x600.jpg" />',
   position: 'mirror',
-  positionEvent: 'hold'
+  positionEvent: 'hold',
+  toggle: false
 });
 
 $host = $('#host3');

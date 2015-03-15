@@ -56,6 +56,15 @@
 
       var $lens;
 
+      var defaultToggle = function (enter) {
+        if (enter) {
+          this.$zoomedContainer.fadeIn();
+        }
+        else {
+          this.$zoomedContainer.fadeOut();
+        }
+      };
+
       options = $.extend({
         mode: 'inner',
         position: 'mirror',
@@ -66,7 +75,8 @@
         initialShow: 'thumb',
         transclude: true,
         zoomMin: 1,
-        zoomMax: 10
+        zoomMax: 10,
+        toggle: defaultToggle
       }, options);
 
       if (options.mode === 'outer' && options.showLens == null) {
@@ -179,23 +189,37 @@
       $zoomedContainer.append($zoomed);
 
 
-      if (options.initialShow === 'thumb') {
-        $zoomedContainer.hide();
-      }
-      else if (options.initialShow === 'zoomed') {
-        //
-      }
-      else {
-        throw new Error("Invalid 'initialShow' option.");
-      }
+      this.$el = $el;
+      this.$zone = $zone;
+      this.$noflow = $noflow;
+      this.$thumb = $thumb;
+      this.$zoomed = $zoomed;
+      this.$zoomedContainer = $zoomedContainer;
 
 
-      $el.on('mouseenter', function () {
-        $zoomedContainer.show();
-      });
-      $el.on('mouseleave', function () {
-        $zoomedContainer.hide();
-      });
+      if (options.toggle) {
+        if (options.initialShow === 'thumb') {
+          $zoomedContainer.hide();
+        }
+        else if (options.initialShow === 'zoomed') {
+          //
+        }
+        else {
+          throw new Error("Invalid 'initialShow' option.");
+        }
+
+        $el.on('mouseenter', function () {
+          if ($.isFunction(options.toggle)) {
+            options.toggle.call(this, true);
+          }
+        });
+
+        $el.on('mouseleave', function () {
+          if ($.isFunction(options.toggle)) {
+            options.toggle.call(this, false);
+          }
+        });
+      }
 
 
       mag.compute(model);
