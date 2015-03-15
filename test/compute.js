@@ -5,7 +5,8 @@ describe('compute', function () {
 
   it('should', function () {
     var model = {
-      lens: {w:0, h:0}
+      focus: {x:0, y:0},
+      zoom: 1
     };
     mag.compute(model);
     assert.equal(model.lens.x, 0);
@@ -16,7 +17,8 @@ describe('compute', function () {
 
   it('should', function () {
     var model = {
-      lens: {w:0.5, h:0.5}
+      focus: {x:0, y:0},
+      zoom: 2
     };
     mag.compute(model);
     assert.equal(model.lens.x, 0);
@@ -29,7 +31,7 @@ describe('compute', function () {
 
   it('should', function () {
     var model = {
-      lens: {w:1, h:1}
+      zoom: 1
     };
     mag.compute(model);
     assert.equal(model.lens.x, 0);

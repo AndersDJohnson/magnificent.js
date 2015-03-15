@@ -58,7 +58,8 @@
         //position: 'mirror',
         //positionEvent: 'move'
         ////positionEvent: 'drag'
-        constrainLens: true
+        constrainLens: true,
+        constrainZoomed: false
       }, options);
 
       var model = {

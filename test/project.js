@@ -11,7 +11,7 @@ describe('project', function () {
 
   it('should', function () {
     var model = {
-      lens: {w:0, h:0}
+      focus: {x:0, y:0}
     };
     mag.compute(model);
     var proj = mag.project(model, frame);
@@ -23,7 +23,7 @@ describe('project', function () {
 
   it('should', function () {
     var model = {
-      lens: {w:0.5, h:0.5}
+      focus: {x:0.5, y:0.5}
     };
     mag.compute(model);
     var proj = mag.project(model, frame);
@@ -35,7 +35,7 @@ describe('project', function () {
 
   it('should', function () {
     var model = {
-      lens: {w:1, h:1}
+      focus: {x:1, y:1}
     };
     mag.compute(model);
     var proj = mag.project(model, frame);
@@ -46,7 +46,7 @@ describe('project', function () {
   });
   it('should', function () {
     var model = {
-      lens: {w:0.5, h:0.5},
+      focus: {x:0.5, y:0.5},
       focus: {x:0.5, y:0.5}
     };
     mag.compute(model);
@@ -59,7 +59,7 @@ describe('project', function () {
 
   it('should', function () {
     var model = {
-      lens: {w:0.25, h:0.25},
+      focus: {x:0.25, y:0.25},
       focus: {x:0.5, y:0.5}
     };
     mag.compute(model);
@@ -72,7 +72,7 @@ describe('project', function () {
 
   it('should', function () {
     var model = {
-      lens: {w:0.5, h:0.5},
+      focus: {x:0.5, y:0.5},
       focus: {x:0, y:0}
     };
     mag.compute(model);
@@ -85,7 +85,7 @@ describe('project', function () {
 
   it('should', function () {
     var model = {
-      lens: {w:0.5, h:0.5},
+      focus: {x:0.5, y:0.5},
       focus: {x:1, y:1}
     };
     mag.compute(model);
@@ -98,7 +98,7 @@ describe('project', function () {
 
   it('should', function () {
     var model = {
-      lens: {w:0.25, h:0.25},
+      focus: {x:0.25, y:0.25},
       focus: {x:1, y:1}
     };
     mag.compute(model);
