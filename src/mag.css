@@ -1,0 +1,37 @@
+
+.mag-host {
+    position: relative;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.mag-noflow {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+}
+
+.mag-full {
+    position: absolute;
+}
+
+.mag-zone {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 2;
+}
+
+.mag-lens {
+    position: absolute;
+    z-index: 2;
+}

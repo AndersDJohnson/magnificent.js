@@ -1,0 +1,12 @@
+
+[mag-theme="default"].mag-host {
+    background: black;
+}
+
+[mag-theme="default"] .mag-lens {
+    box-shadow: 0 0 4px white;
+}
+
+[mag-theme="default"] {
+    cursor: crosshair;
+}

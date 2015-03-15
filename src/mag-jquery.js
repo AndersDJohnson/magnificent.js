@@ -58,8 +58,13 @@
         position: 'mirror',
         positionEvent: 'move',
         constrainLens: true,
-        constrainZoomed: false
+        constrainZoomed: false,
+        theme: 'default'
       }, options);
+
+      if (! options.content) {
+        options.content = $el.html();
+      }
 
       var model = {
         mode: 'overflow',
@@ -74,8 +79,6 @@
         }
       };
 
-
-
       var render = function () {
         var lens, full;
         lens = model.lazyLens;
@@ -87,12 +90,12 @@
       };
 
 
-      if (! options.content) {
-        options.content = $el.html();
-        $el.empty();
-      }
-
+      $el.empty();
       $el.addClass('mag-host');
+
+      if (options.theme) {
+        $el.attr('mag-theme', 'default');
+      }
 
       var $lens = $('<div class="mag-lens"></div>');
       $lens.appendTo($el);
