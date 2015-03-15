@@ -101,21 +101,6 @@
         options.contentThumb = options.content;
       }
 
-      var mag = new Mag({
-        zoomMin: options.zoomMin,
-        zoomMax: options.zoomMax,
-        constrainLens: options.constrainLens,
-        constrainZoomed: options.constrainZoomed
-      });
-
-      var magLazy = new Mag({
-        zoomMin: options.zoomMin,
-        zoomMax: options.zoomMax,
-        constrainLens: options.constrainLens,
-        constrainZoomed: options.constrainZoomed
-      });
-
-
       var model = {
         focus: {
           x: 0.5,
@@ -127,8 +112,14 @@
           h: 0
         }
       };
-      mag.compute(model);
 
+      var mag = new Mag({
+        zoomMin: options.zoomMin,
+        zoomMax: options.zoomMax,
+        constrainLens: options.constrainLens,
+        constrainZoomed: options.constrainZoomed,
+        model: model
+      });
 
       var modelLazy = {
         focus: {
@@ -141,6 +132,17 @@
           h: 0
         }
       };
+
+      var magLazy = new Mag({
+        zoomMin: options.zoomMin,
+        zoomMax: options.zoomMax,
+        constrainLens: options.constrainLens,
+        constrainZoomed: options.constrainZoomed,
+        model: modelLazy
+      });
+
+
+      mag.compute(model);
       magLazy.compute(modelLazy);
 
 
