@@ -63,11 +63,21 @@
         constrainLens: true,
         constrainZoomed: false,
         theme: 'default',
-        initialShow: 'thumb'
+        initialShow: 'thumb',
+        transclude: true
       }, options);
 
       if (options.mode === 'outer' && options.showLens == null) {
         options.showLens = true;
+      }
+
+      if (options.transclude) {
+        if (! options.content) {
+          options.content = $el.find('[mag-zoomed], [data-mag-zoomed]').html();
+        }
+        if (! options.contentThumb) {
+          options.contentThumb = $el.find('[mag-thumb], [data-mag-thumb]').html();
+        }
       }
 
       if (! options.content) {

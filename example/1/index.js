@@ -10,6 +10,12 @@ $host.mag({
   contentThumb: '<img src="img/alley/500x300.jpg" />'
 });
 
+$host = $('#host-thumb-html');
+$host.mag();
+
+$host = $('#host-thumb-html-both');
+$host.mag();
+
 $host = $('#host2');
 $host.mag({
   content: '<img src="img/alley/1000x600.jpg" />',
