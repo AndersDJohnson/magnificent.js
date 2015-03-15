@@ -164,8 +164,6 @@
         $zoomedContainer.addClass('mag-zoomed-container');
         $zoomedContainer.addClass('mag-zoomed-bg');
         $zoomedContainer.attr('mag-theme', options.theme);
-
-        //$host.append(options.content);
       }
       else {
         throw new Error("Invalid 'mode' option.");
@@ -173,7 +171,7 @@
 
       var $thumb = $('<div class="mag-thumb"></div>');
       $thumb.html(options.contentThumb);
-      $host.append($thumb);
+      $el.append($thumb);
 
 
       var $zoomed = $('<div class="mag-zoomed"></div>');
