@@ -74,6 +74,10 @@
         options.content = $el.html();
       }
 
+      if (! options.contentThumb) {
+        options.contentThumb = options.content;
+      }
+
       var model = {
         mode: 'overflow',
         focus: {
@@ -145,7 +149,7 @@
       }
 
       var $thumb = $('<div class="mag-thumb"></div>');
-      $thumb.html(options.content);
+      $thumb.html(options.contentThumb);
       $host.append($thumb);
 
 
