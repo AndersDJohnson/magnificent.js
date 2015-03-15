@@ -1,9 +1,5 @@
 
-[mag-theme="default"].mag-host {
-    /*background: black;*/
-}
-
-[mag-theme="default"].mag-zoomed-container {
+[mag-theme="default"].mag-zoomed-bg {
     background: black;
 }
 

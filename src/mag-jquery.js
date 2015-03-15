@@ -54,14 +54,21 @@
 
       var $el = $(this);
 
+      var $lens;
+
       options = $.extend({
         mode: 'inner',
         position: 'mirror',
         positionEvent: 'move',
         constrainLens: true,
         constrainZoomed: false,
-        theme: 'default'
+        theme: 'default',
+        initialShow: 'thumb'
       }, options);
+
+      if (options.mode === 'outer' && options.showLens == null) {
+        options.showLens = true;
+      }
 
       if (! options.content) {
         options.content = $el.html();
@@ -82,10 +89,12 @@
 
       var render = function () {
         var lens, full;
-        lens = model.lazyLens;
+        if ($lens) {
+          lens = model.lazyLens;
+          var lensCSS = toCSS(lens);
+          $lens.css(lensCSS);
+        }
         full = model.lazyFull;
-        var css = toCSS(lens);
-        $lens.css(css);
         var fullCSS = toCSS(full);
         $full.css(fullCSS);
       };
@@ -94,14 +103,21 @@
       $el.empty();
       $el.addClass('mag-host');
 
+
+      if (options.mode) {
+        $el.attr('mag-mode', options.mode);
+      }
+
       if (options.theme) {
         $el.attr('mag-theme', 'default');
       }
 
-      var $lens = $('<div class="mag-lens"></div>');
-      $el.append($lens);
+      if (options.showLens) {
+        $lens = $('<div class="mag-lens"></div>');
+        $el.append($lens);
+      }
 
-      var $noflow = $('<div class="mag-noflow mag-zoomed-container" mag-theme="' + options.theme + '"></div>');
+      var $noflow = $('<div class="mag-noflow" mag-theme="' + options.theme + '"></div>');
       $el.append($noflow);
 
       var $zone = $('<div class="mag-zone"></div>');
@@ -111,6 +127,7 @@
       var $zoomedContainer;
       if (options.mode === 'inner') {
         $zoomedContainer = $noflow;
+        $noflow.addClass('mag-zoomed-bg');
       }
       else if (options.mode === 'outer') {
         if (! options.zoomedContainer) {
@@ -118,18 +135,44 @@
         }
         $zoomedContainer = $(options.zoomedContainer);
         $zoomedContainer.addClass('mag-zoomed-container');
+        $zoomedContainer.addClass('mag-zoomed-bg');
         $zoomedContainer.attr('mag-theme', options.theme);
 
-        $noflow.append(options.content);
+        //$host.append(options.content);
       }
       else {
         throw new Error("Invalid 'mode' option.");
       }
 
+      var $thumb = $('<div class="mag-thumb"></div>');
+      $thumb.html(options.content);
+      $host.append($thumb);
+
 
       var $full = $('<div class="mag-full"></div>');
       $full.html(options.content);
       $zoomedContainer.append($full);
+
+
+      if (options.initialShow === 'thumb') {
+        $zoomedContainer.hide();
+      }
+      else if (options.initialShow === 'zoomed') {
+        //
+      }
+      else {
+        throw new Error("Invalid 'initialShow' option.");
+      }
+
+
+      $el.on('mouseenter', function () {
+        console.log('mouseenter');
+        $zoomedContainer.show();
+      });
+      $el.on('mouseleave', function () {
+        console.log('mouseleave');
+        $zoomedContainer.hide();
+      });
 
 
       mag.compute(model, options);
