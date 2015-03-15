@@ -247,7 +247,7 @@
 
 
       var lazyRate = 1;
-      var frameIntervalTime = 100;
+      var renderLoopIntervalTime = 100;
       var dragRate = 0.2;
       var zoomRate = options.zoomRate;
 
@@ -286,7 +286,7 @@
       if (options.position === 'mirror') {
         if (options.positionEvent === 'move') {
           lazyRate = 0.2;
-          frameIntervalTime = 20;
+          renderLoopIntervalTime = 20;
 
           $zone.on('mousemove', function(e){
             var ratios = ratioOffsets(e);
@@ -295,7 +295,7 @@
         }
         else if (options.positionEvent === 'hold') {
           lazyRate = 0.2;
-          frameIntervalTime = 20;
+          renderLoopIntervalTime = 20;
 
           $zone.drag('start', function () {
             dragging = true;
@@ -332,7 +332,7 @@
         if (options.positionEvent === 'move') {
           dragging = true;
           lazyRate = 0.5;
-          frameIntervalTime = 20;
+          renderLoopIntervalTime = 20;
 
           $zone.on('mousemove', function(e){
             ratios = ratioOffsets(e);
@@ -340,7 +340,7 @@
         }
         else if (options.positionEvent === 'hold') {
           lazyRate = 0.5;
-          frameIntervalTime = 20;
+          renderLoopIntervalTime = 20;
 
           $zone.drag('start', function () {
             dragging = true;
@@ -391,7 +391,7 @@
         mag.compute(model);
       });
 
-      var renderLoopInterval = setInterval(renderLoop, frameIntervalTime);
+      var renderLoopInterval = setInterval(renderLoop, renderLoopIntervalTime);
 
     });
   };
