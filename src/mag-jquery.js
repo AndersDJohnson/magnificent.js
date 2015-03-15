@@ -87,6 +87,11 @@
       };
 
 
+      if (! options.content) {
+        options.content = $el.html();
+        $el.empty();
+      }
+
       $el.addClass('mag-host');
 
       var $lens = $('<div class="mag-lens"></div>');
