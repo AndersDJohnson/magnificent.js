@@ -76,6 +76,7 @@
         transclude: true,
         zoomMin: 1,
         zoomMax: 10,
+        zoomRate: 0.2,
         toggle: defaultToggle
       }, options);
 
@@ -248,7 +249,7 @@
       var lazyRate = 1;
       var frameIntervalTime = 100;
       var dragRate = 0.2;
-      var zoomRate = 0.5;
+      var zoomRate = options.zoomRate;
 
       var approach = function (rate, dest, src, props, srcProps) {
         srcProps = srcProps ? srcProps : props;
@@ -382,10 +383,10 @@
       $zone.on('mousewheel', function (e) {
         e.preventDefault();
 
-        var delta = e.deltaY * zoomRate;
-
         var zoom = model.zoom;
-        zoom += delta;
+        var delta = e.deltaY;
+        delta = delta > 0 ? delta + zoomRate : Math.abs(delta) - zoomRate;
+        zoom *= delta;
         model.zoom = zoom;
         mag.compute(model);
       });
