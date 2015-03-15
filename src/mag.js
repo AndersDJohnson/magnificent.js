@@ -31,8 +31,12 @@
   //   }
   // };
 
-  var Mag = function () {
+  var Mag = function (options) {
+    options = options || {};
+    options.constrainLens = ! (options.constrainLens === false);
+    options.constrainZoomed = ! (options.constrainZoomed === false);
 
+    this.options = options;
   };
 
   Mag.prototype.fillXY = function (r) {
@@ -60,16 +64,19 @@
     return model;
   };
 
-  Mag.prototype.compute = function (model, options) {
+  Mag.prototype.compute = function (model) {
     var lens, focus, zoomed, zoom, dw, dh;
-    options = options || {
-      constrainLens: true
-    };
+    var options = this.options;
     model = this.fillModel(model);
     lens = model.lens;
     focus = model.focus;
     zoomed = model.zoomed;
     zoom = model.zoom;
+
+    zoom = this.minMax(zoom, 1, 10);
+
+    focus.x = this.minMax(focus.x, 0, 1);
+    focus.y = this.minMax(focus.y, 0, 1);
 
     dw = 1 / zoom;
     dh = 1 / zoom;

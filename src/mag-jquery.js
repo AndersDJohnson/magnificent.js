@@ -78,7 +78,10 @@
         options.contentThumb = options.content;
       }
 
-      var mag = new Mag();
+      var mag = new Mag({
+        constrainLens: options.constrainLens,
+        constrainZoomed: options.constrainZoomed
+      });
 
       var model = {
         mode: 'overflow',
@@ -183,7 +186,7 @@
       });
 
 
-      mag.compute(model, options);
+      mag.compute(model);
 
       model.lazyFocus = {
         x: model.focus.x,
@@ -237,14 +240,9 @@
 
 
       var adjustForMirror = function (focus) {
-        focus = {
-          x: mag.minMax(focus.x, 0, 1),
-          y: mag.minMax(focus.y, 0, 1)
-        };
         model.focus.x = focus.x;
         model.focus.y = focus.y;
-
-        mag.compute(model, options);
+        mag.compute(model);
       };
 
 
@@ -333,20 +331,10 @@
 
           var focus = model.focus;
 
-          //var adjustedDragRate =  dragRate * model.zoom;
-          var adjustedDragRate =  dragRate;
+          var adjustedDragRate = dragRate;
           focus.x += (ratios.x - 0.5) * adjustedDragRate;
           focus.y += (ratios.y - 0.5) * adjustedDragRate;
-
-          focus = {
-            x: mag.minMax(focus.x, 0, 1),
-            y: mag.minMax(focus.y, 0, 1)
-          };
-
-          model.focus.x = focus.x;
-          model.focus.y = focus.y;
-
-          mag.compute(model, options);
+          mag.compute(model);
         }, joystickIntervalTime);
 
       }
@@ -362,11 +350,8 @@
 
         var zoom = model.zoom;
         zoom += delta;
-        zoom = mag.minMax(zoom, 1, 10);
-
         model.zoom = zoom;
-
-        mag.compute(model, options);
+        mag.compute(model);
       });
 
       var renderLoopInterval = setInterval(renderLoop, frameIntervalTime);
