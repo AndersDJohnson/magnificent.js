@@ -41,10 +41,10 @@ $host.mag({
   positionEvent: 'hold'
 });
 
-$host = $('#host5');
+$host = $('#host-outer-host');
 $host.mag({
-  content: '<img src="img/alley/1000x600.jpg" />',
-  contentThumb: '<img src="img/alley/500x300.jpg" />',
+  content: '<img src="img/rieti/full.jpg" />',
+  contentThumb: '<img src="img/rieti/500x334.jpg" />',
   mode: 'outer',
-  zoomedContainer: $('#host5-zoomed')
+  zoomedContainer: $('#host-outer-zoomed')
 });

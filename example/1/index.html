@@ -21,11 +21,50 @@
     <div class="container">
       <main>
 
-        <div id="host-thumb" class="example host"></div>
+        <div class="row mag-eg-row">
+          <div class="col-md-6">
+            <div id="host-thumb" class="mag-eg-el host"></div>
+          </div>
+          <div class="col-md-6">
+            <div class="mag-eg-doc">
+              <pre><code>
+&lt;div id="mag-1"&gt;&lt;/div&gt;
 
-        <div id="host5-container" class="example host-outer clearfix">
-          <div id="host5" class="host"></div>
-          <div id="host5-zoomed"></div>
+&lt;script&gt;
+  $('#mag-1').mag();
+&lt;/script&gt;
+              </code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mag-eg-row">
+          <div class="col-md-6">
+            <div id="host-outer" class="host-outer">
+              <div id="host-outer-host" class="mag-eg-el host"></div>
+              <div id="host-outer-zoomed"></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mag-eg-doc">
+              <pre><code>
+&lt;div id="mag-2"&gt;
+  &lt;div mag-zoomed&gt;
+    &lt;img src="img/alley/1000x600.jpg" /&gt;
+  &lt;/div&gt;
+  &lt;div mag-thumb&gt;
+    &lt;img src="img/alley/500x300.jpg" /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  $('#mag-2').mag({
+    mode: 'outer'
+  });
+&lt;/script&gt;
+              </code></pre>
+            </div>
+          </div>
         </div>
 
         <div id="host-thumb-html" class="example host">
@@ -59,6 +98,10 @@
     <script src="../../src/mag.js"></script>
     <script src="../../src/mag-jquery.js"></script>
     <script src="index.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 
   </body>
 </html>
