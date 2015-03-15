@@ -11,7 +11,10 @@ $host.mag({
 });
 
 $host = $('#host-thumb-html');
-$host.mag();
+$host.mag({
+  zoomMin: 0.5,
+  zoomMax: 4
+});
 
 $host = $('#host-thumb-html-both');
 $host.mag();
