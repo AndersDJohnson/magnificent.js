@@ -1,5 +1,5 @@
-body {
-    padding: 40px;
+.example {
+    margin: 20px;
 }
 
 .host {
@@ -11,7 +11,7 @@ body {
     position: relative;
 }
 
-.host-zoomed > * {
+.host-outer > * {
     position: relative;
     float: left;
     height: 225px;

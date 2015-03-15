@@ -1,40 +1,64 @@
-<link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.css" />
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../src/mag.css" />
+    <link rel="stylesheet" href="../../src/theme/default.css" />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
 
-<link rel="stylesheet" href="../../src/mag.css" />
-<link rel="stylesheet" href="../../src/theme/default.css" />
-<link rel="stylesheet" href="index.css" />
+    <a target="_blank" href="https://github.com/adjohnson916/magnificent.js"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
 
-<main>
-  <div id="host" class="host">
-    <img src="img/alley/1000x600.jpg" />
-  </div>
-  <div id="host-thumb" class="host"></div>
-  <div id="host-thumb-html" class="host">
-    <div mag-zoomed>
-      <img src="img/alley/1000x600.jpg" />
+    <div class="container-fluid">
+      <div class="jumbotron">
+        <h1>Magnificent</h1>
+        <p>A jQuery plugin for responsive zoom of images & more!</p>
+        <small>Version 3.x</small>
+      </div>
     </div>
-  </div>
-  <div id="host-thumb-html-both" class="host">
-    <div mag-zoomed>
-      <img src="img/alley/1000x600.jpg" />
-    </div>
-    <div mag-thumb>
-      <img src="img/alley/500x300.jpg" />
-    </div>
-  </div>
-  <div id="host2" class="host"></div>
-  <div id="host3" class="host"></div>
-  <div id="host4" class="host"></div>
 
-  <div id="host5-zoom" class="host-zoomed clearfix">
-    <div id="host5" class="host"></div>
-    <div id="host5-zoomed"></div>
-  </div>
-</main>
+    <div class="container">
+      <main>
 
-<script src="../../bower_components/jquery/dist/jquery.js"></script>
-<script src="../../bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
-<script src="../../bower_components/jquery.threedubmedia/event.drag/jquery.event.drag.js"></script>
-<script src="../../src/mag.js"></script>
-<script src="../../src/mag-jquery.js"></script>
-<script src="index.js"></script>
+        <div id="host-thumb" class="example host"></div>
+
+        <div id="host5-container" class="example host-outer clearfix">
+          <div id="host5" class="host"></div>
+          <div id="host5-zoomed"></div>
+        </div>
+
+        <div id="host-thumb-html" class="example host">
+          <div mag-zoomed>
+            <img src="img/alley/1000x600.jpg" />
+          </div>
+        </div>
+
+        <div id="host-thumb-html-both" class="example host">
+          <div mag-zoomed>
+            <img src="img/alley/1000x600.jpg" />
+          </div>
+          <div mag-thumb>
+            <img src="img/alley/500x300.jpg" />
+          </div>
+        </div>
+
+        <div id="host" class="example host">
+          <img src="img/alley/1000x600.jpg" />
+        </div>
+
+        <div id="host2" class="example host"></div>
+        <div id="host3" class="example host"></div>
+        <div id="host4" class="example host"></div>
+      </main>
+    </div>
+
+    <script src="../../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../../bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
+    <script src="../../bower_components/jquery.threedubmedia/event.drag/jquery.event.drag.js"></script>
+    <script src="../../src/mag.js"></script>
+    <script src="../../src/mag-jquery.js"></script>
+    <script src="index.js"></script>
+
+  </body>
+</html>
