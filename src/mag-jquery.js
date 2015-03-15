@@ -58,6 +58,7 @@
         //position: 'mirror',
         //positionEvent: 'move'
         ////positionEvent: 'drag'
+        constrainLens: true
       }, options);
 
       var model = {
@@ -102,7 +103,7 @@
       $full.appendTo($noflow);
 
 
-      mag.compute(model);
+      mag.compute(model, options);
 
       model.lazyFocus = {
         x: model.focus.x,
@@ -163,7 +164,7 @@
         model.focus.x = focus.x;
         model.focus.y = focus.y;
 
-        mag.compute(model);
+        mag.compute(model, options);
       };
 
 
@@ -253,7 +254,7 @@
           model.focus.x = focus.x;
           model.focus.y = focus.y;
 
-          mag.compute(model);
+          mag.compute(model, options);
         }, joystickIntervalTime);
 
       }
@@ -273,7 +274,7 @@
 
         model.zoom = zoom;
 
-        mag.compute(model);
+        mag.compute(model, options);
       });
 
       var renderLoopInterval = setInterval(renderLoop, frameIntervalTime);
