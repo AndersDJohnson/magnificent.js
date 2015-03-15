@@ -7,9 +7,9 @@
   } else if (typeof exports === 'object') {
     module.exports = factory(require('./mag'), require('jquery'));
   } else {
-    root[name] = factory(mag, $);
+    root[name] = factory(Mag, $);
   }
-}(this, function (mag, $) {
+}(this, function (Mag, $) {
 
   var normalizeOffsets = function (e) {
     var offset = $(e.target).offset();
@@ -77,6 +77,8 @@
       if (! options.contentThumb) {
         options.contentThumb = options.content;
       }
+
+      var mag = new Mag();
 
       var model = {
         mode: 'overflow',

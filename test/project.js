@@ -1,5 +1,7 @@
-var mag = require('..');
+var Mag = require('..');
 var assert = require('assert');
+
+var mag = new Mag();
 
 describe('project', function () {
 
