@@ -58,7 +58,7 @@
   };
 
   var compute = function (model) {
-    var lens, focus, full, zoom, dw, dh, offset;
+    var lens, focus, full, zoom, dw, dh;
     model = fillModel(model);
     lens = model.lens;
     focus = model.focus;
@@ -74,18 +74,11 @@
 
     lens = constrainLens(lens);
 
-    full = {
-      w: zoom,
-      h: zoom,
-      //x: (1 - zoom) * focus.x / 2,
-      //y: (1 - zoom) * focus.y / 2
-      // x: -1 * (model.zoom * focus.x) / 2,
-      // y: -1 * (model.zoom * focus.y) / 2
-      x: 0.5 - focus.x * zoom,
-      y: 0.5 - focus.y * zoom
-    };
+    full.w = zoom;
+    full.h = zoom;
+    full.x = 0.5 - focus.x * zoom;
+    full.y = 0.5 - focus.y * zoom;
 
-    console.log('full', full);
     model.lens = lens;
     model.focus = focus;
     model.full = full;

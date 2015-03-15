@@ -17,7 +17,6 @@
       x: e.pageX - offset.left,
       y: e.pageY - offset.top
     };
-    return e;
   };
 
   var ratioOffsets = function (e) {
@@ -226,8 +225,6 @@
           });
 
           $zone.drag(function( e, dd ){
-            console.log('drag', dd);
-            console.log('e', e);
 
             var offset = $zone.offset();
             ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
@@ -239,7 +236,6 @@
 
 
         var joystickInterval = setInterval(function () {
-          // console.log('focus', model.focus);
           if (! dragging) return;
 
           var focus = model.focus;
@@ -278,11 +274,7 @@
         model.zoom = zoom;
 
         mag.compute(model);
-
-        console.log('full', model.full);
-        console.log('focus', model.focus);
-        console.log('zoom', model.zoom);
-      })
+      });
 
       var renderLoopInterval = setInterval(renderLoop, frameIntervalTime);
 
