@@ -88,15 +88,15 @@
       };
 
       var render = function () {
-        var lens, full;
+        var lens, zoomed;
         if ($lens) {
           lens = model.lazyLens;
           var lensCSS = toCSS(lens);
           $lens.css(lensCSS);
         }
-        full = model.lazyFull;
-        var fullCSS = toCSS(full);
-        $full.css(fullCSS);
+        zoomed = model.lazyZoomed;
+        var zoomedCSS = toCSS(zoomed);
+        $zoomed.css(zoomedCSS);
       };
 
 
@@ -149,9 +149,9 @@
       $host.append($thumb);
 
 
-      var $full = $('<div class="mag-full"></div>');
-      $full.html(options.content);
-      $zoomedContainer.append($full);
+      var $zoomed = $('<div class="mag-zoomed"></div>');
+      $zoomed.html(options.content);
+      $zoomedContainer.append($zoomed);
 
 
       if (options.initialShow === 'thumb') {
@@ -187,11 +187,11 @@
         w: model.lens.w,
         h: model.lens.h
       };
-      model.lazyFull = {
-        x: model.full.x,
-        y: model.full.y,
-        w: model.full.w,
-        h: model.full.h
+      model.lazyZoomed = {
+        x: model.zoomed.x,
+        y: model.zoomed.y,
+        w: model.zoomed.w,
+        h: model.zoomed.h
       };
       model.lazyZoom = model.zoom;
 
@@ -220,7 +220,7 @@
       var renderLoop = function () {
         approach(lazyRate, model.lazyFocus, model.focus, 'x');
         approach(lazyRate, model.lazyFocus, model.focus, 'y');
-        approach(lazyRate, model.lazyFull, model.full, ['x', 'y', 'w', 'h']);
+        approach(lazyRate, model.lazyZoomed, model.zoomed, ['x', 'y', 'w', 'h']);
         approach(lazyRate, model.lazyLens, model.lens, ['x', 'y', 'w', 'h']);
         approach(lazyRate, model, model, 'lazyZoom', 'zoom');
 

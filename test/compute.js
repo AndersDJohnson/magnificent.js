@@ -11,8 +11,8 @@ describe('compute', function () {
     mag.compute(model);
     assert.equal(model.lens.x, 0);
     assert.equal(model.lens.y, 0);
-    assert.equal(model.full.x, 0);
-    assert.equal(model.full.y, 0);
+    assert.equal(model.zoomed.x, 0);
+    assert.equal(model.zoomed.y, 0);
   });
 
   it('should', function () {
@@ -23,10 +23,10 @@ describe('compute', function () {
     mag.compute(model);
     assert.equal(model.lens.x, 0);
     assert.equal(model.lens.y, 0);
-    assert.equal(model.full.w, 2);
-    assert.equal(model.full.h, 2);
-    assert.equal(model.full.x, 0);
-    assert.equal(model.full.y, 0);
+    assert.equal(model.zoomed.w, 2);
+    assert.equal(model.zoomed.h, 2);
+    assert.equal(model.zoomed.x, 0);
+    assert.equal(model.zoomed.y, 0);
   });
 
   it('should', function () {
@@ -45,10 +45,10 @@ describe('compute', function () {
     mag.compute(model);
     assert.equal(model.lens.x, 0.25);
     assert.equal(model.lens.y, 0.25);
-    assert.equal(model.full.w, 2);
-    assert.equal(model.full.h, 2);
-    assert.equal(model.full.x, -0.25);
-    assert.equal(model.full.y, -0.25);
+    assert.equal(model.zoomed.w, 2);
+    assert.equal(model.zoomed.h, 2);
+    assert.equal(model.zoomed.x, -0.25);
+    assert.equal(model.zoomed.y, -0.25);
   });
 
   it('should', function () {
