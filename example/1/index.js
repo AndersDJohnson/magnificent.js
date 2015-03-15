@@ -1,6 +1,4 @@
 
-console.log('ok');
-
 var $host;
 var $main;
 
