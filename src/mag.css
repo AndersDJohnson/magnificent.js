@@ -10,7 +10,11 @@
 }
 
 .mag-zoomed-container {
-    position: relative;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
     overflow: hidden;
 }
 
@@ -20,6 +24,8 @@
     width: 100%;
     left: 0;
     top: 0;
+    z-index: 2;
+    overflow: hidden;
 }
 
 .mag-full {
@@ -33,6 +39,14 @@
     left: 0;
     top: 0;
     z-index: 2;
+}
+
+.mag-thumb {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
 }
 
 .mag-lens {
