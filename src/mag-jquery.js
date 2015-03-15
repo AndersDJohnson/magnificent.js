@@ -108,8 +108,15 @@
         constrainZoomed: options.constrainZoomed
       });
 
+      var magLazy = new Mag({
+        zoomMin: options.zoomMin,
+        zoomMax: options.zoomMax,
+        constrainLens: options.constrainLens,
+        constrainZoomed: options.constrainZoomed
+      });
+
+
       var model = {
-        mode: 'overflow',
         focus: {
           x: 0.5,
           y: 0.5
@@ -120,15 +127,31 @@
           h: 0
         }
       };
+      mag.compute(model);
+
+
+      var modelLazy = {
+        focus: {
+          x: 0.5,
+          y: 0.5
+        },
+        zoom: 2,
+        lens: {
+          w: 0,
+          h: 0
+        }
+      };
+      magLazy.compute(modelLazy);
+
 
       var render = function () {
         var lens, zoomed;
         if ($lens) {
-          lens = model.lazyLens;
+          lens = modelLazy.lens;
           var lensCSS = toCSS(lens);
           $lens.css(lensCSS);
         }
-        zoomed = model.lazyZoomed;
+        zoomed = modelLazy.zoomed;
         var zoomedCSS = toCSS(zoomed);
         $zoomed.css(zoomedCSS);
       };
@@ -223,31 +246,11 @@
       }
 
 
-      mag.compute(model);
-
-      model.lazyFocus = {
-        x: model.focus.x,
-        y: model.focus.y
-      };
-      model.lazyLens = {
-        x: model.lens.x,
-        y: model.lens.y,
-        w: model.lens.w,
-        h: model.lens.h
-      };
-      model.lazyZoomed = {
-        x: model.zoomed.x,
-        y: model.zoomed.y,
-        w: model.zoomed.w,
-        h: model.zoomed.h
-      };
-      model.lazyZoom = model.zoom;
-
       render();
 
 
-      var lazyRate = 1;
-      var renderLoopIntervalTime = 100;
+      var lazyRate = 0.5;
+      var renderLoopIntervalTime = 20;
       var dragRate = 0.2;
       var zoomRate = options.zoomRate;
 
@@ -266,11 +269,11 @@
       };
 
       var renderLoop = function () {
-        approach(lazyRate, model.lazyFocus, model.focus, 'x');
-        approach(lazyRate, model.lazyFocus, model.focus, 'y');
-        approach(lazyRate, model.lazyZoomed, model.zoomed, ['x', 'y', 'w', 'h']);
-        approach(lazyRate, model.lazyLens, model.lens, ['x', 'y', 'w', 'h']);
-        approach(lazyRate, model, model, 'lazyZoom', 'zoom');
+        approach(lazyRate, modelLazy.focus, model.focus, 'x');
+        approach(lazyRate, modelLazy.focus, model.focus, 'y');
+        approach(lazyRate, modelLazy, model, 'zoom');
+
+        magLazy.compute(modelLazy);
 
         render();
       };
@@ -286,7 +289,6 @@
       if (options.position === 'mirror') {
         if (options.positionEvent === 'move') {
           lazyRate = 0.2;
-          renderLoopIntervalTime = 20;
 
           $zone.on('mousemove', function(e){
             var ratios = ratioOffsets(e);
@@ -295,7 +297,6 @@
         }
         else if (options.positionEvent === 'hold') {
           lazyRate = 0.2;
-          renderLoopIntervalTime = 20;
 
           $zone.drag('start', function () {
             dragging = true;
@@ -332,7 +333,6 @@
         if (options.positionEvent === 'move') {
           dragging = true;
           lazyRate = 0.5;
-          renderLoopIntervalTime = 20;
 
           $zone.on('mousemove', function(e){
             ratios = ratioOffsets(e);
@@ -340,7 +340,6 @@
         }
         else if (options.positionEvent === 'hold') {
           lazyRate = 0.5;
-          renderLoopIntervalTime = 20;
 
           $zone.drag('start', function () {
             dragging = true;
