@@ -166,11 +166,9 @@
 
 
       $el.on('mouseenter', function () {
-        console.log('mouseenter');
         $zoomedContainer.show();
       });
       $el.on('mouseleave', function () {
-        console.log('mouseleave');
         $zoomedContainer.hide();
       });
 
