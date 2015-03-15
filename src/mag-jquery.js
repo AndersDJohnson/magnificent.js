@@ -127,7 +127,7 @@
 
 
       var lazyRate = 1;
-      var frameSpeed = 100;
+      var frameIntervalTime = 100;
       var dragRate = 0.2;
       var zoomRate = 0.5;
 
@@ -156,65 +156,66 @@
       };
 
 
+      var adjustForMirror = function (focus) {
+        focus = {
+          x: mag.minMax(focus.x, 0, 1),
+          y: mag.minMax(focus.y, 0, 1)
+        };
+        model.focus.x = focus.x;
+        model.focus.y = focus.y;
+
+        mag.compute(model);
+      };
+
 
       if (options.position === 'mirror') {
         if (options.positionEvent === 'move') {
           lazyRate = 0.2;
-          frameSpeed = 20;
+          frameIntervalTime = 20;
 
           $zone.on('mousemove', function(e){
-            console.log('e', e);
-
             var ratios = ratioOffsets(e);
-            ratios = {
-              x: mag.minMax(ratios.x, 0, 1),
-              y: mag.minMax(ratios.y, 0, 1)
-            };
-            console.log('ratios', ratios);
-            model.focus.x = ratios.x;
-            model.focus.y = ratios.y;
-
-            mag.compute(model);
+            adjustForMirror(ratios);
           });
         }
         else if (options.positionEvent === 'hold') {
-          // TODO: implement
+          lazyRate = 0.2;
+          frameIntervalTime = 20;
+
+          $zone.drag(function( e, dd ){
+            var offset = $zone.offset();
+            var ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
+            adjustForMirror(ratios);
+          });
         }
         else {
           throw new Error("Invalid 'positionEvent' option.");
         }
       }
       else if (options.position === 'joystick') {
+
+        var joystickIntervalTime = 50;
+
+        var dragging = false;
+
+        var ratios = {
+          x: model.focus.x,
+          y: model.focus.y
+        };
+
+
         if (options.positionEvent === 'move') {
-          // TODO: implement
+          dragging = true;
+          lazyRate = 0.5;
+          frameIntervalTime = 20;
+
+          $zone.on('mousemove', function(e){
+            ratios = ratioOffsets(e);
+          });
         }
         else if (options.positionEvent === 'hold') {
           lazyRate = 0.5;
-          frameSpeed = 20;
-
-          var dragging = false;
-
-          var dragInterval = setInterval(function () {
-            // console.log('focus', model.focus);
-            if (! dragging) return;
-
-            var focus = model.focus;
-
-            //var adjustedDragRate =  dragRate * model.zoom;
-            var adjustedDragRate =  dragRate;
-            focus.x += (ratios.x - 0.5) * adjustedDragRate;
-            focus.y += (ratios.y - 0.5) * adjustedDragRate;
-
-            focus = {
-              x: mag.minMax(focus.x, 0, 1),
-              y: mag.minMax(focus.y, 0, 1)
-            };
-
-            model.focus.x = focus.x;
-            model.focus.y = focus.y;
-
-            mag.compute(model);
-          }, 50);
+          frameIntervalTime = 20;
 
           $zone.drag('start', function () {
             dragging = true;
@@ -235,6 +236,30 @@
         else {
           throw new Error("Invalid 'positionEvent' option.");
         }
+
+
+        var joystickInterval = setInterval(function () {
+          // console.log('focus', model.focus);
+          if (! dragging) return;
+
+          var focus = model.focus;
+
+          //var adjustedDragRate =  dragRate * model.zoom;
+          var adjustedDragRate =  dragRate;
+          focus.x += (ratios.x - 0.5) * adjustedDragRate;
+          focus.y += (ratios.y - 0.5) * adjustedDragRate;
+
+          focus = {
+            x: mag.minMax(focus.x, 0, 1),
+            y: mag.minMax(focus.y, 0, 1)
+          };
+
+          model.focus.x = focus.x;
+          model.focus.y = focus.y;
+
+          mag.compute(model);
+        }, joystickIntervalTime);
+
       }
       else {
         throw new Error("Invalid 'position' option.");
@@ -259,7 +284,7 @@
         console.log('zoom', model.zoom);
       })
 
-      var interval = setInterval(renderLoop, frameSpeed);
+      var renderLoopInterval = setInterval(renderLoop, frameIntervalTime);
 
     });
   };
