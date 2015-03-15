@@ -251,12 +251,12 @@
       render();
 
 
-      var lazyRate = 0.5;
+      var lazyRate = 0.25;
       var renderLoopIntervalTime = 20;
       var dragRate = 0.2;
       var zoomRate = options.zoomRate;
 
-      var approach = function (rate, dest, src, props, srcProps) {
+      var approach = function (thresh, rate, dest, src, props, srcProps) {
         srcProps = srcProps ? srcProps : props;
         if (! $.isArray(props)) {
           props = [props];
@@ -266,14 +266,19 @@
           var prop = props[i];
           var srcProp = srcProps[i];
           var diff = src[srcProp] - dest[prop];
-          dest[prop] += diff * rate;
+          if (Math.abs(diff) > thresh) {
+            dest[prop] += diff * rate;
+          }
+          else {
+            dest[prop] += diff;
+          }
         }
       };
 
       var renderLoop = function () {
-        approach(lazyRate, modelLazy.focus, model.focus, 'x');
-        approach(lazyRate, modelLazy.focus, model.focus, 'y');
-        approach(lazyRate, modelLazy, model, 'zoom');
+        approach(0.01, lazyRate, modelLazy.focus, model.focus, 'x');
+        approach(0.01, lazyRate, modelLazy.focus, model.focus, 'y');
+        approach(0.05, lazyRate, modelLazy, model, 'zoom');
 
         magLazy.compute(modelLazy);
 
