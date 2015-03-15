@@ -55,9 +55,8 @@
       var $el = $(this);
 
       options = $.extend({
-        //position: 'mirror',
-        //positionEvent: 'move'
-        ////positionEvent: 'drag'
+        position: 'mirror',
+        positionEvent: 'move',
         constrainLens: true,
         constrainZoomed: false
       }, options);
