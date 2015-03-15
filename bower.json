@@ -10,5 +10,8 @@
     "jquery": "~2.1.3",
     "jquery-mousewheel": "~3.1.12",
     "jquery.threedubmedia": "threedubmedia/jquery.threedubmedia"
+  },
+  "devDependencies": {
+    "bootstrap": "~3.3.2"
   }
 }
