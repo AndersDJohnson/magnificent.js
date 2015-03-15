@@ -33,12 +33,16 @@
 
   var Mag = function (options) {
     options = options || {};
+    options.model = options.model || {};
     options.zoomMin = options.zoomMin || 1;
     options.zoomMax = options.zoomMax || 10;
     options.constrainLens = ! (options.constrainLens === false);
     options.constrainZoomed = ! (options.constrainZoomed === false);
 
+    this.model = options.model;
     this.options = options;
+
+    this.fillModel();
   };
 
   Mag.prototype.fillXY = function (r) {
@@ -55,21 +59,20 @@
     return r;
   };
 
-  Mag.prototype.fillModel = function (model) {
-    model = model || {};
+  Mag.prototype.fillModel = function () {
+    var model = this.model;
     model.mode = model.mode || 'lag';
     model.focus = this.fillXY(model.focus);
     model.lens = this.fillXY(this.fillWH(model.lens));
     model.zoomed = this.fillXY(this.fillWH(model.zoomed));
     model.boundedLens = this.fillXY(this.fillWH(model.boundedLens));
     model.zoom = model.zoom || 1;
-    return model;
   };
 
-  Mag.prototype.compute = function (model) {
+  Mag.prototype.compute = function () {
     var lens, focus, zoomed, zoom, dw, dh;
     var options = this.options;
-    model = this.fillModel(model);
+    var model = this.model;
     lens = model.lens;
     focus = model.focus;
     zoomed = model.zoomed;
@@ -147,8 +150,8 @@
   };
 
 
-  Mag.prototype.project = function (model, frame) {
-    model = this.fillModel(model);
+  Mag.prototype.project = function (frame) {
+    var model = this.model;
     var lens = model.lens;
     return {
       x: lens.x * frame.w,
