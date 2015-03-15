@@ -33,6 +33,8 @@ $host.mag({
 
 $host = $('#host5');
 $host.mag({
+  content: '<img src="img/alley/1000x600.jpg" />',
+  contentThumb: '<img src="img/alley/500x300.jpg" />',
   mode: 'outer',
   zoomedContainer: $('#host5-zoomed')
 });
