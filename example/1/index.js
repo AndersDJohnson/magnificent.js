@@ -24,3 +24,9 @@ $host.mag({
   position: 'joystick',
   positionEvent: 'hold'
 });
+
+$host = $('#host5');
+$host.mag({
+  mode: 'outer',
+  zoomedContainer: $('#host5-zoomed')
+});

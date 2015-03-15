@@ -9,13 +9,17 @@
     user-select: none;
 }
 
+.mag-zoomed-container {
+    position: relative;
+    overflow: hidden;
+}
+
 .mag-noflow {
     position: absolute;
     height: 100%;
     width: 100%;
     left: 0;
     top: 0;
-    overflow: hidden;
 }
 
 .mag-full {

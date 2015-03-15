@@ -1,5 +1,10 @@
 .host {
   height: 200px;
   width: 400px;
-  float: right;
+}
+
+.host-zoomed {
+    position: relative;
+    height: 200px;
+    width: 400px;
 }
