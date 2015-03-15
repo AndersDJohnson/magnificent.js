@@ -84,6 +84,11 @@
     full.x = 0.5 - focus.x * zoom;
     full.y = 0.5 - focus.y * zoom;
 
+    if (options.constrainZoomed) {
+      full.x = minMax(full.x, 1 - zoom, 0);
+      full.y = minMax(full.y, 1 - zoom, 0);
+    }
+
     model.lens = lens;
     model.focus = focus;
     model.full = full;
