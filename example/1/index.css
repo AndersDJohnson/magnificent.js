@@ -1,4 +1,10 @@
-.example {
+
+.mag-eg-row {
+}
+.mag-eg-el {
+    margin: 20px;
+}
+.mag-eg-doc {
     margin: 20px;
 }
 
@@ -16,4 +22,16 @@
     float: left;
     height: 225px;
     width: 375px;
+}
+
+
+#host-outer {
+    position: relative;
+    z-index: 800;
+    float: left;
+}
+#host-outer-zoomed {
+    position: absolute;
+    left: 100%;
+    margin: 20px 0;
 }
