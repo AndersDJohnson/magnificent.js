@@ -116,6 +116,10 @@
         $el.attr('mag-theme', 'default');
       }
 
+      if (options.positionEvent) {
+        $el.attr('mag-position-event', options.positionEvent);
+      }
+
       if (options.showLens) {
         $lens = $('<div class="mag-lens"></div>');
         $el.append($lens);
@@ -256,6 +260,16 @@
           lazyRate = 0.2;
           frameIntervalTime = 20;
 
+          $zone.drag('start', function () {
+            dragging = true;
+            $el.addClass('mag--dragging');
+          });
+
+          $zone.drag('end', function () {
+            dragging = false;
+            $el.removeClass('mag--dragging');
+          });
+
           $zone.drag(function( e, dd ){
             var offset = $zone.offset();
             var ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
@@ -293,10 +307,12 @@
 
           $zone.drag('start', function () {
             dragging = true;
+            $el.addClass('mag--dragging');
           });
 
           $zone.drag('end', function () {
             dragging = false;
+            $el.removeClass('mag--dragging');
           });
 
           $zone.drag(function( e, dd ){

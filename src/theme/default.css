@@ -4,9 +4,27 @@
 }
 
 [mag-theme="default"] .mag-lens {
-    box-shadow: 0 0 4px white;
+    box-shadow: 0 0 4px black;
+    border: 1px solid white;
+    background: rgba(255, 255, 255, 0.25);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-[mag-theme="default"] {
+[mag-theme="default"][mag-position-event="move"] {
     cursor: crosshair;
+}
+
+[mag-theme="default"][mag-position-event="hold"] {
+    cursor: move;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: grab;
+}
+
+[mag-theme="default"][mag-position-event="hold"].mag--dragging {
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+    cursor: grabbing;
 }
