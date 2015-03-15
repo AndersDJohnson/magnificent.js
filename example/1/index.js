@@ -7,9 +7,7 @@ $main = $('main');
 $host = $('<div id="host" class="host">');
 $main.append($host);
 $host.mag({
-  content: '<img src="img/alley/1000x666.jpg" style="width: 100%; height: 100%;"/>',
-  position: 'mirror',
-  positionEvent: 'move'
+  content: '<img src="img/alley/1000x666.jpg" style="width: 100%; height: 100%;"/>'
 });
 
 $host = $('<div id="host2" class="host">');
