@@ -1,8 +1,8 @@
 {
-  "name": "mag3",
-  "version": "1.0.0",
+  "name": "magnificent",
+  "version": "2.0.0-beta",
   "description": "",
-  "main": "index.js",
+  "main": "src/mag.js",
   "scripts": {
     "test": "mocha test"
   },
