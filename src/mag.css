@@ -10,12 +10,17 @@
 }
 
 .mag-zoomed-container {
-    position: absolute;
+    /*position: absolute;*/
+    position: relative;
     height: 100%;
     width: 100%;
     left: 0;
     top: 0;
     overflow: hidden;
+}
+
+.mag-zoomed-container > * {
+    position: absolute;
 }
 
 .mag-noflow {
@@ -28,8 +33,13 @@
     overflow: hidden;
 }
 
-.mag-zoomed {
+.mag-noflow > * {
     position: absolute;
+}
+
+.mag-zoomed {
+    /* under .mag-noflow > * */
+    /*position: absolute;*/
 }
 
 .mag-zoomed img {

@@ -1,50 +1,14 @@
 
 var $host;
 
-$host = $('#host');
-$host.mag();
-
-$host = $('#host-thumb');
+$host = $('[mag-thumb="inner"]');
 $host.mag({
-  content: '<img src="img/alley/1000x600.jpg" />',
-  contentThumb: '<img src="img/alley/500x300.jpg" />'
+  //zoomedContainer: $('[mag-zoom="inner"]')
 });
 
-$host = $('#host-thumb-html');
+$host = $('[mag-thumb="outer"]');
 $host.mag({
-  zoomMin: 0.5,
-  zoomMax: 4
-});
-
-$host = $('#host-thumb-html-both');
-$host.mag();
-
-$host = $('#host2');
-$host.mag({
-  content: '<img src="img/alley/1000x600.jpg" />',
-  position: 'mirror',
-  positionEvent: 'hold',
-  toggle: false
-});
-
-$host = $('#host3');
-$host.mag({
-  content: '<img src="img/alley/1000x600.jpg" />',
-  position: 'joystick',
-  positionEvent: 'move'
-});
-
-$host = $('#host4');
-$host.mag({
-  content: '<img src="img/alley/1000x600.jpg" />',
-  position: 'joystick',
-  positionEvent: 'hold'
-});
-
-$host = $('#host-outer-host');
-$host.mag({
-  content: '<img src="img/rieti/full.jpg" />',
-  contentThumb: '<img src="img/rieti/500x334.jpg" />',
-  mode: 'outer',
-  zoomedContainer: $('#host-outer-zoomed')
+  mode: 'outer'//,
+  //zoomedContainer: $('[mag-zoom="outer"]')//,
+  //toggle: false
 });

@@ -73,33 +73,11 @@
         constrainZoomed: false,
         theme: 'default',
         initialShow: 'thumb',
-        transclude: true,
         zoomMin: 1,
         zoomMax: 10,
         zoomRate: 0.2,
         toggle: defaultToggle
       }, options);
-
-      if (options.mode === 'outer' && options.showLens == null) {
-        options.showLens = true;
-      }
-
-      if (options.transclude) {
-        if (! options.content) {
-          options.content = $el.find('[mag-zoomed], [data-mag-zoomed]').html();
-        }
-        if (! options.contentThumb) {
-          options.contentThumb = $el.find('[mag-thumb], [data-mag-thumb]').html();
-        }
-      }
-
-      if (! options.content) {
-        options.content = $el.html();
-      }
-
-      if (! options.contentThumb) {
-        options.contentThumb = options.content;
-      }
 
       var model = {
         focus: {
@@ -163,6 +141,38 @@
       $el.addClass('mag-host');
 
 
+      var $zoomed;
+      var $zoomedContainer;
+
+      if (! options.zoomedContainer) {
+        var id = $el.attr('mag-thumb');
+        options.zoomedContainer = $('[mag-zoom="' + id + '"]');
+      }
+
+      if (options.zoomedContainer) {
+        $zoomedContainer = $(options.zoomedContainer);
+        if (! options.content) {
+          options.content = $zoomedContainer.html();
+        }
+        $zoomedContainer.empty();
+
+        if (options.mode === 'inner') {
+          $zoomedContainer.remove();
+        }
+      }
+
+      if (options.mode === 'outer' && options.showLens == null) {
+        options.showLens = true;
+      }
+
+      if (! options.content) {
+        options.content = $el.html();
+      }
+
+      if (! options.contentThumb) {
+        options.contentThumb = options.content;
+      }
+
       if (options.mode) {
         $el.attr('mag-mode', options.mode);
       }
@@ -187,7 +197,6 @@
       $noflow.append($zone);
 
 
-      var $zoomedContainer;
       if (options.mode === 'inner') {
         $zoomedContainer = $noflow;
         $noflow.addClass('mag-zoomed-bg');
@@ -210,7 +219,7 @@
       $el.append($thumb);
 
 
-      var $zoomed = $('<div class="mag-zoomed"></div>');
+      $zoomed = $('<div class="mag-zoomed"></div>');
       $zoomed.html(options.content);
       $zoomedContainer.append($zoomed);
 

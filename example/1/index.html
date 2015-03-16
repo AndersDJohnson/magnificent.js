@@ -23,16 +23,27 @@
 
         <div class="row mag-eg-row">
           <div class="col-md-6">
-            <div id="host-thumb" class="mag-eg-el host"></div>
+            <div mag-thumb="inner" class="mag-eg-el">
+              <img src="img/alley/500x300.jpg" />
+            </div>
+            <div mag-zoom="inner" class="mag-eg-el">
+              <img src="img/alley/1000x600.jpg" />
+            </div>
           </div>
           <div class="col-md-6">
             <div class="mag-eg-doc">
+              <h3>Inner</h3>
               <pre><code>
-&lt;div id="mag-1"&gt;&lt;/div&gt;
-
-&lt;script&gt;
-  $('#mag-1').mag();
-&lt;/script&gt;
+&lt;div mag-thumb=&quot;inner&quot;&gt;
+  &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
+&lt;/div&gt;
+&lt;div mag-zoom=&quot;inner&quot;&gt;
+  &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
+&lt;/div&gt;
+              </code></pre>
+              <pre><code>
+$host = $('[mag-thumb=&quot;inner&quot;]');
+$host.mag();
               </code></pre>
             </div>
           </div>
@@ -40,55 +51,40 @@
 
         <div class="row mag-eg-row">
           <div class="col-md-6">
-            <div id="host-outer" class="host-outer">
-              <div id="host-outer-host" class="mag-eg-el host"></div>
-              <div id="host-outer-zoomed"></div>
+            <div class="clearfix">
+              <div class="outer-wrap">
+                <div mag-thumb="outer" class="mag-eg-el">
+                  <img src="img/rieti/500x334.jpg" />
+                </div>
+                <div mag-zoom="outer" class="mag-eg-el" style="float: right;">
+                  <img src="img/rieti/full.jpg" />
+                </div>
+              </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="mag-eg-doc">
+              <h3>Outer</h3>
               <pre><code>
-&lt;div id="mag-2"&gt;
-  &lt;div mag-zoomed&gt;
-    &lt;img src="img/alley/1000x600.jpg" /&gt;
+&lt;div class=&quot;outer-wrap&quot;&gt;
+  &lt;div mag-thumb=&quot;outer&quot;&gt;
+    &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
   &lt;/div&gt;
-  &lt;div mag-thumb&gt;
-    &lt;img src="img/alley/500x300.jpg" /&gt;
+  &lt;div mag-zoom=&quot;outer&quot;&gt;
+    &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-
-&lt;script&gt;
-  $('#mag-2').mag({
-    mode: 'outer'
-  });
-&lt;/script&gt;
+              </code></pre>
+              <pre><code>
+$host = $('[mag-thumb=&quot;outer&quot;]');
+$host.mag({
+  mode: 'outer'
+});
               </code></pre>
             </div>
           </div>
         </div>
 
-        <div id="host-thumb-html" class="example host">
-          <div mag-zoomed>
-            <img src="img/alley/1000x600.jpg" />
-          </div>
-        </div>
-
-        <div id="host-thumb-html-both" class="example host">
-          <div mag-zoomed>
-            <img src="img/alley/1000x600.jpg" />
-          </div>
-          <div mag-thumb>
-            <img src="img/alley/500x300.jpg" />
-          </div>
-        </div>
-
-        <div id="host" class="example host">
-          <img src="img/alley/1000x600.jpg" />
-        </div>
-
-        <div id="host2" class="example host"></div>
-        <div id="host3" class="example host"></div>
-        <div id="host4" class="example host"></div>
       </main>
     </div>
 

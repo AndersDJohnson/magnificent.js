@@ -3,35 +3,19 @@
 }
 .mag-eg-el {
     margin: 20px;
+    height: 225px;
+    width: 375px;
 }
 .mag-eg-doc {
     margin: 20px;
 }
 
-.host {
-    height: 225px;
-    width: 375px;
-}
-
-.host-zoom {
-    position: relative;
-}
-
-.host-outer > * {
+.outer-wrap {
     position: relative;
     float: left;
-    height: 225px;
-    width: 375px;
 }
-
-
-#host-outer {
-    position: relative;
-    z-index: 800;
-    float: left;
-}
-#host-outer-zoomed {
+[mag-zoom="outer"] {
     position: absolute;
+    z-index: 10;
     left: 100%;
-    margin: 20px 0;
 }
