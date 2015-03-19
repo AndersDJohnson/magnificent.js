@@ -1,10 +1,20 @@
 
+.proportion {
+    position: relative;
+}
+
+.proportion .filler {
+    width: 100%;
+    padding-top: 60%;
+}
+
+
 .mag-eg-row {
 }
 .mag-eg-el {
-    margin: 20px;
-    height: 225px;
-    width: 375px;
+    height: 100%;
+    width: 100%;
+    position: absolute;
 }
 .mag-eg-doc {
     margin: 20px;
