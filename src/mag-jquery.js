@@ -52,16 +52,18 @@
 
     return this.each(function() {
 
+      var that = this;
+
       var $el = $(this);
 
       var $lens;
 
       var defaultToggle = function (enter) {
         if (enter) {
-          this.$zoomedContainer.fadeIn();
+          that.$zoomedContainer.fadeIn();
         }
         else {
-          this.$zoomedContainer.fadeOut();
+          that.$zoomedContainer.fadeOut();
         }
       };
 
