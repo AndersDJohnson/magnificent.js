@@ -1,1 +1,1 @@
-module.exports = require('./src/mag');
+module.exports = require('./src/js/mag');
