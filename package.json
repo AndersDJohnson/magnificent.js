@@ -2,7 +2,7 @@
   "name": "magnificent",
   "version": "2.0.0-beta",
   "description": "",
-  "main": "src/mag.js",
+  "main": "src/js/mag.js",
   "scripts": {
     "test": "grunt test"
   },
