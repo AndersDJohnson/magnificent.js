@@ -10,7 +10,7 @@ Demo: http://andrz.me/magnificent.js/examples/demo/index.html
 
 ## Usage
 
-Include `src/mag.js`, `src/mag-jquery.js` and `src/mag.css` in your page.
+Include `src/js/mag.js`, `src/js/mag-jquery.js` and `src/css/mag.css` in your page.
 
 Either download, or install via [Bower][bower]:
 
