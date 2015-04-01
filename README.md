@@ -19,4 +19,9 @@ Either download, or install via [Bower][bower]:
 Then see examples: http://andrz.me/magnificent.js/examples/demo/index.html
 
 
+## v1.x
+
+See https://github.com/adjohnson916/magnificent.js/tree/v1.x.
+
+
 [bower]: http://bower.io/ 
