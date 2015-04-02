@@ -139,12 +139,19 @@
       };
 
 
+
+      var $zoomedChildren;
+      var $thumbChildren;
+      var $zoomed;
+      var $zoomedContainer;
+
+
+      $thumbChildren = $el.children();
+
+
       $el.empty();
       $el.addClass('mag-host');
 
-
-      var $zoomed;
-      var $zoomedContainer;
 
       if (! options.zoomedContainer) {
         var id = $el.attr('mag-thumb');
@@ -153,9 +160,7 @@
 
       if (options.zoomedContainer) {
         $zoomedContainer = $(options.zoomedContainer);
-        if (! options.content) {
-          options.content = $zoomedContainer.html();
-        }
+        $zoomedChildren = $zoomedContainer.children();
         $zoomedContainer.empty();
 
         if (options.mode === 'inner') {
@@ -167,12 +172,8 @@
         options.showLens = true;
       }
 
-      if (! options.content) {
-        options.content = $el.html();
-      }
-
-      if (! options.contentThumb) {
-        options.contentThumb = options.content;
+      if (! $zoomedChildren || ! $zoomedChildren.length) {
+        $zoomedChildren = $thumbChildren.clone();
       }
 
       if (options.mode) {
@@ -217,12 +218,12 @@
       }
 
       var $thumb = $('<div class="mag-thumb"></div>');
-      $thumb.html(options.contentThumb);
+      $thumb.html($thumbChildren);
       $el.append($thumb);
 
 
       $zoomed = $('<div class="mag-zoomed"></div>');
-      $zoomed.html(options.content);
+      $zoomed.html($zoomedChildren);
       $zoomedContainer.append($zoomed);
 
 
