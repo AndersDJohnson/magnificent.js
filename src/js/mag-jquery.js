@@ -87,11 +87,38 @@
   };
 
 
+
+
+  Magnificent.prototype.compute = function () {
+    var that = this;
+    that.mag.compute();
+    that.$el.trigger('compute', that);
+  };
+
+
+  Magnificent.prototype.render = function () {
+    var that = this;
+    var lens, zoomed;
+    var $lens = this.$lens;
+    var $zoomed = this.$zoomed;
+    if ($lens) {
+      lens = this.modelLazy.lens;
+      var lensCSS = toCSS(lens);
+      $lens.css(lensCSS);
+    }
+    zoomed = this.modelLazy.zoomed;
+    var zoomedCSS = toCSS(zoomed);
+    $zoomed.css(zoomedCSS);
+
+    this.$el.trigger('render', that);
+  };
+
+
   Magnificent.prototype._init = function () {
 
     var that = this;
 
-    var $el = this.element;
+    var $el = this.$el = this.element;
 
     var options = this.options;
 
@@ -99,7 +126,7 @@
       this.toggle = options.toggle;
     }
 
-    var $lens;
+    var $lens = this.$lens;
 
     var model = this.model = {
       focus: {
@@ -113,7 +140,7 @@
       }
     };
 
-    var mag = new Mag({
+    var mag = this.mag = new Mag({
       zoomMin: options.zoomMin,
       zoomMax: options.zoomMax,
       constrainLens: options.constrainLens,
@@ -133,7 +160,7 @@
       }
     };
 
-    var magLazy = new Mag({
+    var magLazy = this.magLazy = new Mag({
       zoomMin: options.zoomMin,
       zoomMax: options.zoomMax,
       constrainLens: options.constrainLens,
@@ -144,28 +171,6 @@
 
     mag.compute();
     magLazy.compute();
-
-
-    this.compute = function () {
-      mag.compute();
-
-      $el.trigger('compute', that);
-    };
-
-
-    var render = function () {
-      var lens, zoomed;
-      if ($lens) {
-        lens = modelLazy.lens;
-        var lensCSS = toCSS(lens);
-        $lens.css(lensCSS);
-      }
-      zoomed = modelLazy.zoomed;
-      var zoomedCSS = toCSS(zoomed);
-      $zoomed.css(zoomedCSS);
-
-      $el.trigger('render', that);
-    };
 
 
 
@@ -222,7 +227,7 @@
     }
 
     if (options.showLens) {
-      $lens = $('<div class="mag-lens"></div>');
+      this.$lens = $('<div class="mag-lens"></div>');
       $el.append($lens);
     }
 
@@ -255,7 +260,7 @@
     $el.append($thumb);
 
 
-    $zoomed = $('<div class="mag-zoomed"></div>');
+    $zoomed = this.$zoomed = $('<div class="mag-zoomed"></div>');
     $zoomed.html($zoomedChildren);
     $zoomedContainer.append($zoomed);
 
@@ -289,7 +294,7 @@
     }
 
 
-    render();
+    that.render();
 
 
     var lazyRate = 0.25;
@@ -321,9 +326,9 @@
       approach(0.01, lazyRate, modelLazy.focus, model.focus, 'y');
       approach(0.05, lazyRate, modelLazy, model, 'zoom');
 
-      magLazy.compute();
+      that.magLazy.compute();
 
-      render();
+      that.render();
     };
 
 
