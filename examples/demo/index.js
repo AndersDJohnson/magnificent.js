@@ -19,7 +19,7 @@ $host.mag({
   toggle: false
 });
 var $hud = $('<div></div>')
-$host.parent().after($hud);
+$host.closest('.col').append($hud);
 
 $host.on('compute', function (e, instance) {
 	var m = instance.model
