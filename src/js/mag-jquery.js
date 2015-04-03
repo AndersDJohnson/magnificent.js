@@ -52,7 +52,7 @@
   var Magnificent = function (element, options) {
     this.element = $( element );
     this.options = $.extend( true, {}, this.options, options );
-    this.init();
+    this._init();
   };
 
 
@@ -71,7 +71,6 @@
   };
 
 
-
   /**
    * Default toggle implementation.
    *
@@ -88,7 +87,7 @@
   };
 
 
-  Magnificent.prototype.init = function () {
+  Magnificent.prototype._init = function () {
 
     var that = this;
 
