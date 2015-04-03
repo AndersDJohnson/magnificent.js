@@ -142,13 +142,14 @@
     });
 
 
-    mag.compute(model);
-    magLazy.compute(modelLazy);
+    mag.compute();
+    magLazy.compute();
 
 
-    var compute = function () {
-      mag.compute(model);
+    this.compute = function () {
+      mag.compute();
 
+      console.log('compute', model);
       $el.trigger('compute', that);
     };
 
@@ -321,7 +322,7 @@
       approach(0.01, lazyRate, modelLazy.focus, model.focus, 'y');
       approach(0.05, lazyRate, modelLazy, model, 'zoom');
 
-      magLazy.compute(modelLazy);
+      magLazy.compute();
 
       render();
     };
@@ -330,7 +331,7 @@
     var adjustForMirror = function (focus) {
       model.focus.x = focus.x;
       model.focus.y = focus.y;
-      compute(model);
+      that.compute();
     };
 
 
@@ -399,7 +400,7 @@
         focus.x = startFocus.x + ratios.x;
         focus.y = startFocus.y + ratios.y;
 
-        compute(model);
+        that.compute();
       });
 
     }
@@ -455,7 +456,7 @@
         var adjustedDragRate = dragRate;
         focus.x += (ratios.x - 0.5) * adjustedDragRate;
         focus.y += (ratios.y - 0.5) * adjustedDragRate;
-        compute(model);
+        that.compute();
       }, joystickIntervalTime);
 
     }
@@ -472,12 +473,22 @@
       delta = delta > 0 ? delta + zoomRate : Math.abs(delta) - zoomRate;
       zoom *= delta;
       model.zoom = zoom;
-      compute(model);
+      that.compute();
     });
 
     var renderLoopInterval = setInterval(renderLoop, renderLoopIntervalTime);
 
 
+  };
+
+
+  Magnificent.prototype.zoom = function (factor) {
+    console.log('zoom factor', factor);
+    console.log('curr zoom', this.model.zoom);
+    // this.model.zoom *= 1 + factor;
+    this.model.zoom = 6;
+    console.log('post zoom', this.model.zoom);
+    this.compute();
   };
 
 
