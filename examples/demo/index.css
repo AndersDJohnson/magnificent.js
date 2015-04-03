@@ -1,7 +1,6 @@
 
 .proportion {
     position: relative;
-    margin-bottom: 15px;
 }
 
 .proportion .filler {
@@ -12,6 +11,10 @@
 
 .mag-eg-row {
     margin-bottom: 15px;
+}
+.mag-eg-el-wrap {
+  margin-bottom: 15px;
+  width: 100%;
 }
 .mag-eg-el {
     height: 100%;
