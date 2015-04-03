@@ -149,7 +149,6 @@
     this.compute = function () {
       mag.compute();
 
-      console.log('compute', model);
       $el.trigger('compute', that);
     };
 
@@ -483,11 +482,8 @@
 
 
   Magnificent.prototype.zoom = function (factor) {
-    console.log('zoom factor', factor);
-    console.log('curr zoom', this.model.zoom);
     // this.model.zoom *= 1 + factor;
     this.model.zoom = 6;
-    console.log('post zoom', this.model.zoom);
     this.compute();
   };
 
