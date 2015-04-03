@@ -23,6 +23,9 @@ module.exports = function (grunt) {
 
     watch: {
       test: {
+        options: {
+          atBegin: true
+        },
         files: ['src/**/*', 'test/**/*'],
         tasks: 'test'
       }

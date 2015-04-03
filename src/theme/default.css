@@ -16,6 +16,7 @@
     cursor: crosshair;
 }
 
+[mag-theme="default"][mag-position="drag"],
 [mag-theme="default"][mag-position-event="hold"] {
     cursor: move;
     cursor: -webkit-grab;
@@ -23,6 +24,7 @@
     cursor: grab;
 }
 
+[mag-theme="default"][mag-position="drag"].mag--dragging,
 [mag-theme="default"][mag-position-event="hold"].mag--dragging {
     cursor: -webkit-grabbing;
     cursor: -moz-grabbing;

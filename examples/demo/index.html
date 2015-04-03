@@ -24,18 +24,20 @@
       <main>
 
         <div class="row mag-eg-row">
-          <div class="col-md-6">
-            <div class="proportion">
-              <div mag-thumb="inner" class="mag-eg-el">
-                <img src="img/alley/500x300.jpg" />
+          <div class="col col-md-6">
+            <div class="mag-eg-el-wrap img-thumbnail">
+              <div class="proportion">
+                <div mag-thumb="inner" class="mag-eg-el">
+                  <img src="img/alley/500x300.jpg" />
+                </div>
+                <div mag-zoom="inner" class="mag-eg-el">
+                  <img src="img/alley/1000x600.jpg" />
+                </div>
+                <div class="filler"></div>
               </div>
-              <div mag-zoom="inner" class="mag-eg-el">
-                <img src="img/alley/1000x600.jpg" />
-              </div>
-              <div class="filler"></div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col col-md-6">
             <div class="mag-eg-doc">
               <h3>Inner</h3>
               <pre><code>
@@ -55,18 +57,25 @@ $host.mag();
         </div>
 
         <div class="row mag-eg-row">
-          <div class="col-md-6">
-            <div class="proportion">
-              <div mag-thumb="outer" class="mag-eg-el">
-                <img src="img/rieti/500x334.jpg" />
+          <div class="col col-md-6">
+            <div class="mag-eg-el-wrap img-thumbnail">
+              <div class="proportion">
+                <div mag-thumb="outer" class="mag-eg-el">
+                  <img src="img/rieti/500x334.jpg" />
+                </div>
+                <div class="filler"></div>
               </div>
-              <div mag-zoom="outer" class="mag-eg-el" style="float: right;">
-                <img src="img/rieti/full.jpg" />
+            </div>
+            <div class="mag-eg-el-wrap img-thumbnail">
+              <div class="proportion">
+                <div mag-zoom="outer" class="mag-eg-el" style="float: right;">
+                  <img src="img/rieti/full.jpg" />
+                </div>
+                <div class="filler"></div>
               </div>
-              <div class="filler"></div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col col-md-6">
             <div class="mag-eg-doc">
               <h3>Outer</h3>
               <pre><code>
@@ -89,10 +98,47 @@ $host.mag({
           </div>
         </div>
 
+        <div class="row mag-eg-row">
+          <div class="col col-md-6">
+            <div class="mag-eg-el-wrap img-thumbnail">
+              <div class="proportion">
+                <div mag-thumb="drag" class="mag-eg-el">
+                  <img src="img/rieti/500x334.jpg" />
+                </div>
+                <div mag-zoom="drag" class="mag-eg-el">
+                  <img src="img/rieti/full.jpg" />
+                </div>
+                <div class="filler"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col col-md-6">
+            <div class="mag-eg-doc">
+              <h3>Drag</h3>
+              <pre><code>
+&lt;div mag-thumb=&quot;drag&quot;&gt;
+  &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
+&lt;/div&gt;
+&lt;div mag-zoom=&quot;drag&quot;&gt;
+  &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
+&lt;/div&gt;
+              </code></pre>
+              <pre><code>
+$host = $('[mag-thumb=&quot;drag&quot;]');
+$host.mag({
+  position: 'drag',
+  toggle: false
+});
+              </code></pre>
+            </div>
+          </div>
+        </div>
+
       </main>
     </div>
 
     <script src="../../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../../bower_components/jquery-bridget/jquery.bridget.js"></script>
     <script src="../../bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
     <script src="../../bower_components/jquery.threedubmedia/event.drag/jquery.event.drag.js"></script>
     <script src="../../src/js/mag.js"></script>

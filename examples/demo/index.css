@@ -10,11 +10,17 @@
 
 
 .mag-eg-row {
+    margin-bottom: 15px;
+}
+.mag-eg-el-wrap {
+  margin-bottom: 15px;
+  width: 100%;
 }
 .mag-eg-el {
     height: 100%;
     width: 100%;
     position: absolute;
+    margin-bottom: 15px;
 }
 .mag-eg-doc {
     margin: 20px;
@@ -24,8 +30,10 @@
     position: relative;
     float: left;
 }
+/*
 [mag-zoom="outer"] {
     position: absolute;
     z-index: 10;
     left: 100%;
 }
+*/
