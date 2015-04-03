@@ -57,8 +57,34 @@
 
 
   Magnificent.prototype.options = {
-    greeting: 'hello',
-    recipient: 'world'
+    mode: 'inner',
+    position: 'mirror',
+    positionEvent: 'move',
+    constrainLens: true,
+    constrainZoomed: false,
+    theme: 'default',
+    initialShow: 'thumb',
+    zoomMin: 1,
+    zoomMax: 10,
+    zoomRate: 0.2,
+    toggle: true
+  };
+
+
+
+  /**
+   * Default toggle implementation.
+   *
+   * @param  {[type]} enter [description]
+   * @return {[type]}       [description]
+   */
+  Magnificent.prototype.toggle = function (enter) {
+    if (enter) {
+      this.$zoomedContainer.fadeIn();
+    }
+    else {
+      this.$zoomedContainer.fadeOut();
+    }
   };
 
 
@@ -70,34 +96,13 @@
 
     var options = this.options;
 
+    if ($.isFunction(options.toggle)) {
+      this.toggle = options.toggle;
+    }
+
     var $lens;
 
-    var instance = {};
-
-    var defaultToggle = function (enter) {
-      if (enter) {
-        that.$zoomedContainer.fadeIn();
-      }
-      else {
-        that.$zoomedContainer.fadeOut();
-      }
-    };
-
-    options = $.extend({
-      mode: 'inner',
-      position: 'mirror',
-      positionEvent: 'move',
-      constrainLens: true,
-      constrainZoomed: false,
-      theme: 'default',
-      initialShow: 'thumb',
-      zoomMin: 1,
-      zoomMax: 10,
-      zoomRate: 0.2,
-      toggle: defaultToggle
-    }, options);
-
-    var model = instance.model = {
+    var model = this.model = {
       focus: {
         x: 0.5,
         y: 0.5
@@ -117,7 +122,7 @@
       model: model
     });
 
-    var modelLazy = instance.modelLazy = {
+    var modelLazy = this.modelLazy = {
       focus: {
         x: 0.5,
         y: 0.5
@@ -145,7 +150,7 @@
     var compute = function () {
       mag.compute(model);
 
-      $el.trigger('compute', instance);
+      $el.trigger('compute', that);
     };
 
 
@@ -160,7 +165,7 @@
       var zoomedCSS = toCSS(zoomed);
       $zoomed.css(zoomedCSS);
 
-      $el.trigger('render', instance);
+      $el.trigger('render', that);
     };
 
 
@@ -276,15 +281,11 @@
       }
 
       $el.on('mouseenter', function () {
-        if ($.isFunction(options.toggle)) {
-          options.toggle.call(this, true);
-        }
+        that.toggle.call(that, true);
       });
 
       $el.on('mouseleave', function () {
-        if ($.isFunction(options.toggle)) {
-          options.toggle.call(this, false);
-        }
+        that.toggle.call(that, false);
       });
     }
 

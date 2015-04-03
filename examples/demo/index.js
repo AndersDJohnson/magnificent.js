@@ -21,7 +21,8 @@ $host.mag({
 var $hud = $('<div></div>')
 $host.closest('.col').append($hud);
 
-$host.on('compute', function (e, instance) {
-	var m = instance.model
+$host.on('compute', function (e) {
+	var mag = $(this).data('mag');
+	var m = mag.model;
 	$hud.html('zoom: ' + m.zoom + ', focus: x: ' + m.focus.x + ' y: ' + m.focus.y);
 });
