@@ -1,10 +1,30 @@
 
 var $host;
+var $controls;
+var $hud;
 
 $host = $('[mag-thumb="inner"]');
 $host.mag({
   //zoomedContainer: $('[mag-zoom="inner"]')
+  toggle: false
 });
+
+$controls = $(
+	'<div>' +
+		'<button class="mag-eg-ctrl-zoom-out">-</button>' +
+		'<button class="mag-eg-ctrl-zoom-in">+</button>' +
+	'</div>'
+);
+$controls.find('.mag-eg-ctrl-zoom-out').on('click', function () {
+	$host.mag('zoom', -0.5);
+});
+$controls.find('.mag-eg-ctrl-zoom-in').on('click', function () {
+	$host.mag('zoom', 0.5);
+});
+$host.closest('.col').append($controls);
+
+window.m = $host.data('mag').model;
+
 
 $host = $('[mag-thumb="outer"]');
 $host.mag({
@@ -18,7 +38,7 @@ $host.mag({
   position: 'drag',
   toggle: false
 });
-var $hud = $('<div></div>')
+$hud = $('<div></div>')
 $host.closest('.col').append($hud);
 
 $host.on('compute', function (e) {
