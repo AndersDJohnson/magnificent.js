@@ -99,6 +99,10 @@
     zoomed.x = 0.5 - focus.x * zoom;
     zoomed.y = 0.5 - focus.y * zoom;
 
+    // the following is better equation for constrained zoom
+    // zoomed.x = focus.x * (1 - zoom);
+    // zoomed.y = focus.y * (1 - zoom);
+
     if (options.constrainZoomed) {
       zoomed.x = this.minMax(zoomed.x, 1 - zoom, 0);
       zoomed.y = this.minMax(zoomed.y, 1 - zoom, 0);
