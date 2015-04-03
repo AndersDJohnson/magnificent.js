@@ -89,6 +89,39 @@ $host.mag({
           </div>
         </div>
 
+        <div class="row mag-eg-row">
+          <div class="col-md-6">
+            <div class="proportion">
+              <div mag-thumb="drag" class="mag-eg-el">
+                <img src="img/rieti/500x334.jpg" />
+              </div>
+              <div mag-zoom="drag" class="mag-eg-el">
+                <img src="img/rieti/full.jpg" />
+              </div>
+              <div class="filler"></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mag-eg-doc">
+              <h3>Drag</h3>
+              <pre><code>
+&lt;div mag-thumb=&quot;drag&quot;&gt;
+  &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
+&lt;/div&gt;
+&lt;div mag-zoom=&quot;drag&quot;&gt;
+  &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
+&lt;/div&gt;
+              </code></pre>
+              <pre><code>
+$host = $('[mag-thumb=&quot;drag&quot;]');
+$host.mag({
+  position: 'drag'
+});
+              </code></pre>
+            </div>
+          </div>
+        </div>
+
       </main>
     </div>
 

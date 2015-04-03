@@ -58,6 +58,8 @@
 
       var $lens;
 
+      var instance = {};
+
       var defaultToggle = function (enter) {
         if (enter) {
           that.$zoomedContainer.fadeIn();
@@ -81,7 +83,7 @@
         toggle: defaultToggle
       }, options);
 
-      var model = {
+      var model = instance.model = {
         focus: {
           x: 0.5,
           y: 0.5
@@ -101,7 +103,7 @@
         model: model
       });
 
-      var modelLazy = {
+      var modelLazy = instance.modelLazy = {
         focus: {
           x: 0.5,
           y: 0.5
@@ -126,6 +128,13 @@
       magLazy.compute(modelLazy);
 
 
+      var compute = function () {
+        mag.compute(model);
+
+        $el.trigger('compute', instance);
+      };
+
+
       var render = function () {
         var lens, zoomed;
         if ($lens) {
@@ -136,6 +145,8 @@
         zoomed = modelLazy.zoomed;
         var zoomedCSS = toCSS(zoomed);
         $zoomed.css(zoomedCSS);
+
+        $el.trigger('render', instance);
       };
 
 
@@ -301,7 +312,7 @@
       var adjustForMirror = function (focus) {
         model.focus.x = focus.x;
         model.focus.y = focus.y;
-        mag.compute(model);
+        compute(model);
       };
 
 
@@ -336,6 +347,43 @@
         else {
           throw new Error("Invalid 'positionEvent' option.");
         }
+      }
+      else if (options.position === 'drag') {
+
+        var startFocus = null;
+
+        $zone.drag('start', function () {
+          dragging = true;
+          $el.addClass('mag--dragging');
+          startFocus = {
+            x: model.focus.x,
+            y: model.focus.y
+          };
+        });
+
+        $zone.drag('end', function () {
+          dragging = false;
+          $el.removeClass('mag--dragging');
+          startFocus = null;
+        });
+
+        $zone.drag(function( e, dd ) {
+          var offset = $zone.offset();
+          ratios = ratioOffsetsFor($zone, dd.originalX - dd.offsetX, dd.originalY - dd.offsetY);
+
+          ratios = {
+            x: ratios.x / model.zoom,
+            y: ratios.y / model.zoom
+          };
+
+          var focus = model.focus;
+
+          focus.x = startFocus.x + ratios.x;
+          focus.y = startFocus.y + ratios.y;
+
+          compute(model);
+        });
+
       }
       else if (options.position === 'joystick') {
 
@@ -389,7 +437,7 @@
           var adjustedDragRate = dragRate;
           focus.x += (ratios.x - 0.5) * adjustedDragRate;
           focus.y += (ratios.y - 0.5) * adjustedDragRate;
-          mag.compute(model);
+          compute(model);
         }, joystickIntervalTime);
 
       }
@@ -406,7 +454,7 @@
         delta = delta > 0 ? delta + zoomRate : Math.abs(delta) - zoomRate;
         zoom *= delta;
         model.zoom = zoom;
-        mag.compute(model);
+        compute(model);
       });
 
       var renderLoopInterval = setInterval(renderLoop, renderLoopIntervalTime);

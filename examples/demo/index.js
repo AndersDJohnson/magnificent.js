@@ -12,3 +12,16 @@ $host.mag({
   //zoomedContainer: $('[mag-zoom="outer"]')//,
   //toggle: false
 });
+
+$host = $('[mag-thumb="drag"]');
+$host.mag({
+  position: 'drag',
+  toggle: false
+});
+var $hud = $('<div></div>')
+$host.parent().after($hud);
+
+$host.on('compute', function (e, instance) {
+	var m = instance.model
+	$hud.html('zoom: ' + m.zoom + ', focus: x: ' + m.focus.x + ' y: ' + m.focus.y);
+});
