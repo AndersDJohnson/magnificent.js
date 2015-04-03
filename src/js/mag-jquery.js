@@ -227,7 +227,7 @@
     }
 
     if (options.showLens) {
-      this.$lens = $('<div class="mag-lens"></div>');
+      $lens = this.$lens = $('<div class="mag-lens"></div>');
       $el.append($lens);
     }
 
