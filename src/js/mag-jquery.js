@@ -195,6 +195,10 @@
         $el.attr('mag-theme', 'default');
       }
 
+      if (options.position) {
+        $el.attr('mag-position', options.position);
+      }
+
       if (options.positionEvent) {
         $el.attr('mag-position-event', options.positionEvent);
       }
