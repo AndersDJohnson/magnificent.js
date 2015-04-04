@@ -194,6 +194,14 @@ $host.mag({
                 <div class="filler"></div>
               </div>
             </div>
+            <div mag-ctrl="controls">
+              <button class="mag-eg-ctrl-zoom-out" mag-ctrl-zoom-by="-0.5">-</button>
+              <button class="mag-eg-ctrl-zoom-in" mag-ctrl-zoom-by="0.5">+</button>
+              <button class="mag-eg-ctrl-move-up" mag-ctrl-move-by-y="-0.5">^</button>
+              <button class="mag-eg-ctrl-move-down" mag-ctrl-move-by-y="0.5">v</button>
+              <button class="mag-eg-ctrl-move-left" mag-ctrl-move-by-x="-0.5">&lt;</button>
+              <button class="mag-eg-ctrl-move-right" mag-ctrl-move-by-x="0.5">&gt;</button>
+            </div>
           </div>
           <div class="col col-md-6">
             <div class="mag-eg-doc">
@@ -224,6 +232,7 @@ $host.mag();
     <script src="../../bower_components/jquery.threedubmedia/event.drag/jquery.event.drag.js"></script>
     <script src="../../src/js/mag.js"></script>
     <script src="../../src/js/mag-jquery.js"></script>
+    <script src="../../src/js/mag-control.js"></script>
     <script src="index.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css" />
