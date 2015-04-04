@@ -15,7 +15,7 @@ Include `src/js/mag.js`, `src/js/mag-jquery.js`, `src/css/mag.css`, and `src/the
 
 Either download, or install via [Bower][bower]:
 
-`$ bower install --save jquery-magnificent`
+`$ bower install --save jquery-magnificent#2`
 
 Then see examples in [demo].
 
