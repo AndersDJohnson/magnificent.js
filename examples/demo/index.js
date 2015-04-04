@@ -16,9 +16,7 @@
 
 	$host = $('[mag-thumb="outer"]');
 	$host.mag({
-	  mode: 'outer'//,
-	  //zoomedContainer: $('[mag-zoom="outer"]')//,
-	  //toggle: false
+	  mode: 'outer'
 	});
 })();
 
