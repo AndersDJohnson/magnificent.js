@@ -37,3 +37,15 @@
     left: 100%;
 }
 */
+
+.mag-eg-hud {
+    position: absolute;
+    z-index: 10;
+    right: 0;
+    bottom: 0;
+    text-align: right;
+    padding: 0.5em;
+    color: white;
+    background: black;
+    background: rgba(0,0,0,0.5);
+}
