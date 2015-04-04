@@ -234,9 +234,6 @@
     var $noflow = $('<div class="mag-noflow" mag-theme="' + options.theme + '"></div>');
     $el.append($noflow);
 
-    var $zone = $('<div class="mag-zone"></div>');
-    $noflow.append($zone);
-
 
     if (options.mode === 'inner') {
       $zoomedContainer = $noflow;
@@ -263,6 +260,10 @@
     $zoomed = this.$zoomed = $('<div class="mag-zoomed"></div>');
     $zoomed.html($zoomedChildren);
     $zoomedContainer.append($zoomed);
+
+
+    var $zone = $('<div class="mag-zone"></div>');
+    $el.append($zone);
 
 
     this.$el = $el;
