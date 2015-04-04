@@ -571,6 +571,34 @@
   };
 
 
+  Magnificent.prototype.moveBy = function (shift) {
+    if (shift.x != null) {
+      if (! shift.absolute) {
+        shift.x /= this.model.zoom;
+      }
+      this.model.focus.x += shift.x;
+    }
+    if (shift.y != null) {
+      if (! shift.absolute) {
+        shift.y /= this.model.zoom;
+      }
+      this.model.focus.y += shift.y;
+    }
+    this.compute();
+  };
+
+
+  Magnificent.prototype.moveTo = function (coords) {
+    if (coords.x != null) {
+      this.model.focus.x = coords.x;
+    }
+    if (coords.y != null) {
+      this.model.focus.y = coords.y;
+    }
+    this.compute();
+  };
+
+
   $.bridget('mag', Magnificent);
 
 
