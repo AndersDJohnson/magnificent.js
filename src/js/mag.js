@@ -1,3 +1,7 @@
+/**
+ * mag
+ */
+
 (function (root, factory) {
   var name = 'Mag';
   if (typeof define === 'function' && define.amd) {
@@ -11,26 +15,38 @@
   }
 }(this, function () {
 
-  // var model = {
-  //   zoom: 1,
-  //   focus: {
-  //     x: 0,
-  //     y: 0
-  //   },
-  //   lens: {
-  //     x: 0,
-  //     y: 0,
-  //     w: 0.5,
-  //     h: 0.5
-  //   },
-  //   zoomed: {
-  //     x: 0,
-  //     y: 0,
-  //     w: 0.5,
-  //     h: 0.5
-  //   }
-  // };
 
+  /**
+   * @typedef {Object} MagModelFocus
+   * @property {number} x - X position, from [0,1].
+   * @property {number} y - Y position, from [0,1].
+   */
+
+  /**
+   * @typedef {Object} MagModel
+   * @property {number} zoom - Zoom level, from (0,∞).
+   * @property {MagModelFocus} focus - Focus object.
+   */
+
+  /**
+   * @typedef {Object} MagOptions
+   * @property {MagModel} model - A model.
+   * @property {number} zoomMin - Minimum zoom level allowed, from (0,∞).
+   * @property {number} zoomMax - Maximum zoom level allowed, from (0,∞).
+   * @property {boolean} constrainLens - Whether lens position is constrained.
+   * @property {boolean} constrainZoomed - Whether zoomed position is constrained.
+   */
+
+
+  /**
+   * Mag constructor.
+   * 
+   * @alias module:mag
+   * 
+   * @class
+   * 
+   * @param {MagOptions} options - Options.
+   */
   var Mag = function (options) {
     options = options || {};
     options.model = options.model || {};
@@ -44,6 +60,7 @@
 
     this.fillModel();
   };
+
 
   Mag.prototype.fillXY = function (r) {
     r = r || {};
@@ -69,6 +86,9 @@
     model.zoom = model.zoom || 1;
   };
 
+  /**
+   * Update computed model state, especially lens and zoomed.
+   */
   Mag.prototype.compute = function () {
     var lens, focus, zoomed, zoom, dw, dh;
     var options = this.options;
