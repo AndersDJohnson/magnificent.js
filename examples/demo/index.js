@@ -67,34 +67,12 @@
 		position: false
 	});
 
-	$controls = $(
-		'<div>' +
-			'<button class="mag-eg-ctrl-zoom-out">-</button>' +
-			'<button class="mag-eg-ctrl-zoom-in">+</button>' +
-			'<button class="mag-eg-ctrl-move-up">^</button>' +
-			'<button class="mag-eg-ctrl-move-down">v</button>' +
-			'<button class="mag-eg-ctrl-move-left">&lt;</button>' +
-			'<button class="mag-eg-ctrl-move-right">&gt;</button>' +
-		'</div>'
-	);
-	$controls.find('.mag-eg-ctrl-zoom-out').on('click', function () {
-		$host.mag('zoomBy', -0.5);
+	$controls = $('[mag-ctrl="controls"]');
+
+	$controls.magCtrl({
+		mag: $host
 	});
-	$controls.find('.mag-eg-ctrl-zoom-in').on('click', function () {
-		$host.mag('zoomBy', 0.5);
-	});
-	$controls.find('.mag-eg-ctrl-move-up').on('click', function () {
-		$host.mag('moveBy', {y: -0.2});
-	});
-	$controls.find('.mag-eg-ctrl-move-down').on('click', function () {
-		$host.mag('moveBy', {y: 0.2});
-	});
-	$controls.find('.mag-eg-ctrl-move-left').on('click', function () {
-		$host.mag('moveBy', {x: -0.2});
-	});
-	$controls.find('.mag-eg-ctrl-move-right').on('click', function () {
-		$host.mag('moveBy', {x: 0.2});
-	});
+
 	$host.closest('.col').append($controls);
 
 })();
