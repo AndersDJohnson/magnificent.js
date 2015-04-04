@@ -17,7 +17,7 @@ You should include `lib/js/magnificent.js` and `lib/css/magnificent.css` in your
 
 Either download, or install via [Bower][bower]:
 
-`$ bower install jquery-magnificent`
+`$ bower install jquery-magnificent#1`
 
 Then see examples at: https://rawgit.com/adjohnson916/magnificent.js/v1.x-gh-pages/examples/demo/index.html
 
