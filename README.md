@@ -2,7 +2,7 @@
 
 A jQuery plugin for responsive zoom of images & more!
 
-Check out the *[demo]*!
+Check out the **[demo]**!
 
 
 ## New in v2
