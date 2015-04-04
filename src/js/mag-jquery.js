@@ -11,6 +11,10 @@
   }
 }(this, function (Mag, $) {
 
+
+  $(':root').addClass('mag-js');
+
+
   var normalizeOffsets = function (e) {
     var offset = $(e.target).offset();
     return {
