@@ -44,9 +44,11 @@
 	  toggle: false
 	});
 
-	$hud = $('<div class="mag-eg-hud"></div>');
-	// $host.closest('.col').append($hud);
-	$host.parent().append($hud);
+	$hudLeft = $('<div class="mag-eg-hud mag-eg-hud-left"></div>');
+	$hudLeft.appendTo($host.parent());
+
+	$hudRight = $('<div class="mag-eg-hud mag-eg-hud-right"></div>');
+	$hudRight.appendTo($host.parent());
 
 	var toPerc = function (p) {
 		return (p * 100).toFixed(1) + '%';
@@ -55,8 +57,10 @@
 	$host.on('compute', function (e) {
 		var mag = $(this).data('mag');
 		var m = mag.model;
-		$hud.html(
-			'<div>' + m.zoom.toFixed(1) + 'x</div>' +
+		$hudLeft.html(
+			'<div>' + m.zoom.toFixed(1) + 'x</div>'
+		);
+		$hudRight.html(
 			'<div>(' + toPerc(m.focus.x) + ', ' + toPerc(m.focus.y) + ')</div>'
 		);
 	});
