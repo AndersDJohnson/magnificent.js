@@ -29,6 +29,16 @@ module.exports = function (grunt) {
         files: ['src/**/*', 'test/**/*'],
         tasks: 'test'
       }
+    },
+
+    jsdoc : {
+      dist : {
+        src: ['src/**/*.js', 'test/**/*.js'],
+        options: {
+          destination: 'doc',
+          configure: 'jsdoc.json'
+        }
+      }
     }
 
   });
