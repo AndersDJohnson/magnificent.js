@@ -2,7 +2,7 @@
 
 A jQuery plugin for responsive zoom of images & more!
 
-Demo: http://andrz.me/magnificent.js/examples/demo/index.html
+Demo: http://andrz.me/magnificent.js/examples/demo/
 
 ## New in v2
 
