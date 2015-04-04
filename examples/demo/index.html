@@ -40,18 +40,18 @@
           <div class="col col-md-6">
             <div class="mag-eg-doc">
               <h3>Inner</h3>
-              <pre><code>
-&lt;div mag-thumb=&quot;inner&quot;&gt;
+              <pre><code><!--
+-->&lt;div mag-thumb=&quot;inner&quot;&gt;
   &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
 &lt;/div&gt;
 &lt;div mag-zoom=&quot;inner&quot;&gt;
   &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
-&lt;/div&gt;
-              </code></pre>
-              <pre><code>
-$host = $('[mag-thumb=&quot;inner&quot;]');
-$host.mag();
-              </code></pre>
+&lt;/div&gt;<!--
+              --></code></pre>
+              <pre><code><!--
+-->$host = $('[mag-thumb=&quot;inner&quot;]');
+$host.mag();<!--
+              --></code></pre>
             </div>
           </div>
         </div>
@@ -78,18 +78,18 @@ $host.mag();
           <div class="col col-md-6">
             <div class="mag-eg-doc">
               <h3>Outer</h3>
-              <pre><code>
-&lt;div class=&quot;outer-wrap&quot;&gt;
+              <pre><code><!--
+-->&lt;div class=&quot;outer-wrap&quot;&gt;
   &lt;div mag-thumb=&quot;outer&quot;&gt;
     &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
   &lt;/div&gt;
   &lt;div mag-zoom=&quot;outer&quot;&gt;
     &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
   &lt;/div&gt;
-&lt;/div&gt;
-              </code></pre>
-              <pre><code>
-$host = $('[mag-thumb=&quot;outer&quot;]');
+&lt;/div&gt;<!--
+              --></code></pre>
+              <pre><code><!--
+-->$host = $('[mag-thumb=&quot;outer&quot;]');
 $host.mag({
   mode: 'outer'
 });
@@ -122,24 +122,24 @@ $host.mag({
           <div class="col col-md-6">
             <div class="mag-eg-doc">
               <h3>Outer Drag</h3>
-              <pre><code>
-&lt;div class=&quot;outer-wrap&quot;&gt;
+              <pre><code><!--
+-->&lt;div class=&quot;outer-wrap&quot;&gt;
   &lt;div mag-thumb=&quot;outer&quot;&gt;
     &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
   &lt;/div&gt;
   &lt;div mag-zoom=&quot;outer&quot;&gt;
     &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
   &lt;/div&gt;
-&lt;/div&gt;
-              </code></pre>
-              <pre><code>
-$host = $('[mag-thumb=&quot;outer&quot;]');
+&lt;/div&gt;<!--
+              --></code></pre>
+              <pre><code><!--
+-->$host = $('[mag-thumb=&quot;outer&quot;]');
 $host.mag({
   mode: 'outer',
   position: 'drag',
   toggle: false
-});
-              </code></pre>
+});<!--
+              --></code></pre>
             </div>
           </div>
         </div>
@@ -161,21 +161,21 @@ $host.mag({
           <div class="col col-md-6">
             <div class="mag-eg-doc">
               <h3>Drag</h3>
-              <pre><code>
-&lt;div mag-thumb=&quot;drag&quot;&gt;
+              <pre><code><!--
+-->&lt;div mag-thumb=&quot;drag&quot;&gt;
   &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
 &lt;/div&gt;
 &lt;div mag-zoom=&quot;drag&quot;&gt;
   &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
-&lt;/div&gt;
-              </code></pre>
-              <pre><code>
-$host = $('[mag-thumb=&quot;drag&quot;]');
+&lt;/div&gt;<!--
+              --></code></pre>
+              <pre><code><!--
+-->$host = $('[mag-thumb=&quot;drag&quot;]');
 $host.mag({
   position: 'drag',
   toggle: false
-});
-              </code></pre>
+});<!--
+              --></code></pre>
             </div>
           </div>
         </div>
@@ -206,18 +206,25 @@ $host.mag({
           <div class="col col-md-6">
             <div class="mag-eg-doc">
               <h3><a href="#controls">Controls</a></h3>
-              <pre><code>
+              <pre><code><!--
+-->&lt;script src="src/js/mag-control.js"&gt;&lt;/script&gt;
+
 &lt;div mag-thumb=&quot;controls&quot;&gt;
   &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
 &lt;/div&gt;
 &lt;div mag-zoom=&quot;controls&quot;&gt;
   &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
-&lt;/div&gt;
-              </code></pre>
-              <pre><code>
-$host = $('[mag-thumb=&quot;controls&quot;]');
+&lt;/div&gt;<!--
+              --></code></pre>
+              <pre><code><!--
+-->$host = $('[mag-thumb=&quot;controls&quot;]');
 $host.mag();
-              </code></pre>
+
+$controls = $('[mag-ctrl="controls"]');
+$controls.magCtrl({
+  mag: $host
+});<!--
+            --></code></pre>
             </div>
           </div>
         </div>
