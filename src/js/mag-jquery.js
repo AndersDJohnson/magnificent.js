@@ -227,6 +227,9 @@
     if (options.position) {
       $el.attr('mag-position', options.position);
     }
+    else if (options.position === false) {
+      options.positionEvent = false;
+    }
 
     if (options.positionEvent) {
       $el.attr('mag-position-event', options.positionEvent);
@@ -474,21 +477,27 @@
       }, joystickIntervalTime);
 
     }
+    else if (options.position === false) {
+      // assume manual programmatic positioning
+    }
     else {
       throw new Error("Invalid 'position' option.");
     }
 
 
-    $zone.on('mousewheel', function (e) {
-      e.preventDefault();
+    if (options.position) {
+      $zone.on('mousewheel', function (e) {
+        e.preventDefault();
 
-      var zoom = model.zoom;
-      var delta = e.deltaY;
-      delta = delta > 0 ? delta + zoomRate : Math.abs(delta) - zoomRate;
-      zoom *= delta;
-      model.zoom = zoom;
-      that.compute();
-    });
+        var zoom = model.zoom;
+        var delta = e.deltaY;
+        delta = delta > 0 ? delta + zoomRate : Math.abs(delta) - zoomRate;
+        zoom *= delta;
+        model.zoom = zoom;
+        that.compute();
+      });
+    }
+
 
     var renderLoopInterval = setInterval(renderLoop, renderLoopIntervalTime);
 
