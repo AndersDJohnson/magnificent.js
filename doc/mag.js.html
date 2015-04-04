@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: mag.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: mag.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/**
+ * mag
+ */
+
+(function (root, factory) {
+  var name = 'Mag';
+  if (typeof define === 'function' && define.amd) {
+    define([], function () {
+        return (root[name] = factory());
+    });
+  } else if (typeof exports === 'object') {
+    module.exports = factory();
+  } else {
+    root[name] = factory();
+  }
+}(this, function () {
+
+
+  /**
+   * @typedef {Object} MagModelFocus
+   * @property {number} x - X position, from [0,1].
+   * @property {number} y - Y position, from [0,1].
+   */
+
+  /**
+   * @typedef {Object} MagModel
+   * @property {number} zoom - Zoom level, from (0,∞).
+   * @property {MagModelFocus} focus - Focus object.
+   */
+
+  /**
+   * @typedef {Object} MagOptions
+   * @property {MagModel} model - A model.
+   * @property {number} zoomMin - Minimum zoom level allowed, from (0,∞).
+   * @property {number} zoomMax - Maximum zoom level allowed, from (0,∞).
+   * @property {boolean} constrainLens - Whether lens position is constrained.
+   * @property {boolean} constrainZoomed - Whether zoomed position is constrained.
+   */
+
+
+  /**
+   * Mag constructor.
+   * 
+   * @alias module:mag
+   * 
+   * @class
+   * 
+   * @param {MagOptions} options - Options.
+   */
+  var Mag = function (options) {
+    options = options || {};
+    options.model = options.model || {};
+    options.zoomMin = options.zoomMin || 1;
+    options.zoomMax = options.zoomMax || 10;
+    options.constrainLens = ! (options.constrainLens === false);
+    options.constrainZoomed = ! (options.constrainZoomed === false);
+
+    this.model = options.model;
+    this.options = options;
+
+    this.fillModel();
+  };
+
+
+  Mag.prototype.fillXY = function (r) {
+    r = r || {};
+    r.x = r.x || 0;
+    r.y = r.y || 0;
+    return r;
+  };
+
+  Mag.prototype.fillWH = function (r) {
+    r = r || {};
+    r.w = r.w || 0;
+    r.h = r.h || 0;
+    return r;
+  };
+
+  Mag.prototype.fillModel = function () {
+    var model = this.model;
+    model.mode = model.mode || 'lag';
+    model.focus = this.fillXY(model.focus);
+    model.lens = this.fillXY(this.fillWH(model.lens));
+    model.zoomed = this.fillXY(this.fillWH(model.zoomed));
+    model.boundedLens = this.fillXY(this.fillWH(model.boundedLens));
+    model.zoom = model.zoom || 1;
+  };
+
+  /**
+   * Update computed model state, especially lens and zoomed.
+   */
+  Mag.prototype.compute = function () {
+    var lens, focus, zoomed, zoom, dw, dh;
+    var options = this.options;
+    var model = this.model;
+    lens = model.lens;
+    focus = model.focus;
+    zoomed = model.zoomed;
+    zoom = model.zoom;
+
+    zoom = this.minMax(zoom, options.zoomMin, options.zoomMax);
+
+    focus.x = this.minMax(focus.x, 0, 1);
+    focus.y = this.minMax(focus.y, 0, 1);
+
+    dw = 1 / zoom;
+    dh = 1 / zoom;
+    lens.x = focus.x - (dw / 2);
+    lens.y = focus.y - (dh / 2);
+    lens.w = dw;
+    lens.h = dh;
+
+    if (options.constrainLens) {
+      lens = this.constrainLens(lens);
+    }
+
+    zoomed.w = zoom;
+    zoomed.h = zoom;
+    zoomed.x = 0.5 - focus.x * zoom;
+    zoomed.y = 0.5 - focus.y * zoom;
+
+    // the following is better equation for constrained zoom
+    // zoomed.x = focus.x * (1 - zoom);
+    // zoomed.y = focus.y * (1 - zoom);
+
+    if (options.constrainZoomed) {
+      zoomed.x = this.minMax(zoomed.x, 1 - zoom, 0);
+      zoomed.y = this.minMax(zoomed.y, 1 - zoom, 0);
+    }
+
+    model.lens = lens;
+    model.focus = focus;
+    model.zoomed = zoomed;
+    model.zoom = zoom;
+  };
+
+
+  Mag.prototype.minMax = function (val, min, max) {
+    return val &lt; min ? min : ( val > max ? max : val );
+  };
+
+  Mag.prototype.minMax1 = function (val, min) {
+    return this.minMax(val, min, 1);
+  };
+
+
+  Mag.prototype.constrainLensWH = function (r) {
+    return {
+      w: this.minMax1(r.w, 0.1),
+      h: this.minMax1(r.h, 0.1),
+      x: r.x,
+      y: r.y
+    };
+  };
+
+  Mag.prototype.constrainLensXY = function (r) {
+    return {
+      x: this.minMax(r.x, 0),
+      y: this.minMax(r.y, 0),
+      w: r.w,
+      h: r.h
+    };
+  };
+
+  Mag.prototype.constrainLens = function (r) {
+    var c = this.constrainLensXY(this.constrainLensWH(r));
+    if (((c.w + c.x) > 1)) {
+      c.x = Math.max(0, 1 - c.w);
+    }
+    if (((c.h + c.y) > 1)) {
+      c.y = Math.max(0, 1 - c.h);
+    }
+    return c;
+  };
+
+
+  Mag.prototype.project = function (frame) {
+    var model = this.model;
+    var lens = model.lens;
+    return {
+      x: lens.x * frame.w,
+      y: lens.y * frame.h,
+      w: lens.w * frame.w,
+      h: lens.h * frame.h
+    };
+  };
+
+  return Mag;
+}));
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Externals</h3><ul><li><a href="external-HTMLElement.html">HTMLElement</a></li><li><a href="external-jQuery.html">jQuery</a></li></ul><h3>Classes</h3><ul><li><a href="module-mag.html">module:mag</a></li><li><a href="module-mag-jquery.html">module:mag-jquery</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sat Apr 04 2015 02:33:05 GMT-0500 (CDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
