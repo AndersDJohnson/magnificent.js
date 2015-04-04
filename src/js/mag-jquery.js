@@ -559,8 +559,14 @@
   };
 
 
-  Magnificent.prototype.zoom = function (factor) {
+  Magnificent.prototype.zoomBy = function (factor) {
     this.model.zoom *= 1 + factor;
+    this.compute();
+  };
+
+
+  Magnificent.prototype.zoomTo = function (zoom) {
+    this.model.zoom = zoom;
     this.compute();
   };
 
