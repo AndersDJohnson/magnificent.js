@@ -1,48 +1,87 @@
 
-var $host;
-var $controls;
-var $hud;
 
-$host = $('[mag-thumb="inner"]');
-$host.mag({
-  //zoomedContainer: $('[mag-zoom="inner"]')
-  toggle: false
-});
+(function () {
+	var $host;
 
-$controls = $(
-	'<div>' +
-		'<button class="mag-eg-ctrl-zoom-out">-</button>' +
-		'<button class="mag-eg-ctrl-zoom-in">+</button>' +
-	'</div>'
-);
-$controls.find('.mag-eg-ctrl-zoom-out').on('click', function () {
-	$host.mag('zoom', -0.5);
-});
-$controls.find('.mag-eg-ctrl-zoom-in').on('click', function () {
-	$host.mag('zoom', 0.5);
-});
-$host.closest('.col').append($controls);
+	$host = $('[mag-thumb="inner"]');
+	$host.mag({
+	  toggle: true
+	});
 
-window.m = $host.data('mag').model;
+})();
 
 
-$host = $('[mag-thumb="outer"]');
-$host.mag({
-  mode: 'outer'//,
-  //zoomedContainer: $('[mag-zoom="outer"]')//,
-  //toggle: false
-});
+(function () {
+	var $host;
 
-$host = $('[mag-thumb="drag"]');
-$host.mag({
-  position: 'drag',
-  toggle: false
-});
-$hud = $('<div></div>')
-$host.closest('.col').append($hud);
+	$host = $('[mag-thumb="outer"]');
+	$host.mag({
+	  mode: 'outer'
+	});
+})();
 
-$host.on('compute', function (e) {
-	var mag = $(this).data('mag');
-	var m = mag.model;
-	$hud.html('zoom: ' + m.zoom + ', focus: x: ' + m.focus.x + ' y: ' + m.focus.y);
-});
+
+(function () {
+	var $host;
+
+	$host = $('[mag-thumb="outer-drag"]');
+	$host.mag({
+	  mode: 'outer',
+	  position: 'drag',
+	  toggle: false
+	});
+})();
+
+
+(function () {
+	var $host;
+	var $controls;
+	var $hud;
+
+	$host = $('[mag-thumb="drag"]');
+	$host.mag({
+	  position: 'drag',
+	  toggle: false
+	});
+
+	$hudLeft = $('<div class="mag-eg-hud mag-eg-hud-left"></div>');
+	$hudLeft.appendTo($host.parent());
+
+	$hudRight = $('<div class="mag-eg-hud mag-eg-hud-right"></div>');
+	$hudRight.appendTo($host.parent());
+
+	var toPerc = function (p) {
+		return (p * 100).toFixed(1) + '%';
+	};
+
+	$host.on('compute', function (e) {
+		var mag = $(this).data('mag');
+		var m = mag.model;
+		$hudLeft.html(
+			'<div>' + m.zoom.toFixed(1) + 'x</div>'
+		);
+		$hudRight.html(
+			'<div>(' + toPerc(m.focus.x) + ', ' + toPerc(m.focus.y) + ')</div>'
+		);
+	});
+})();
+
+
+
+(function () {
+	var $host;
+	var $controls;
+
+	$host = $('[mag-thumb="controls"]');
+	$host.mag({
+		toggle: false,
+		position: false
+	});
+
+	$controls = $('[mag-ctrl="controls"]');
+	$controls.magCtrl({
+		mag: $host
+	});
+
+})();
+

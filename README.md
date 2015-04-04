@@ -2,7 +2,8 @@
 
 A jQuery plugin for responsive zoom of images & more!
 
-Demo: http://andrz.me/magnificent.js/examples/demo/index.html
+Check out the **[demo]**!
+
 
 ## New in v2
 
@@ -16,7 +17,7 @@ Either download, or install via [Bower][bower]:
 
 `$ bower install --save jquery-magnificent`
 
-Then see examples: http://andrz.me/magnificent.js/examples/demo/index.html
+Then see examples in [demo].
 
 
 ## v1.x
@@ -24,4 +25,5 @@ Then see examples: http://andrz.me/magnificent.js/examples/demo/index.html
 See https://github.com/adjohnson916/magnificent.js/tree/v1.x.
 
 
+[demo]: http://andrz.me/magnificent.js/examples/demo/
 [bower]: http://bower.io/ 

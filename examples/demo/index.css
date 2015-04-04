@@ -37,3 +37,25 @@
     left: 100%;
 }
 */
+
+.mag-eg-hud {
+    position: absolute;
+    z-index: 10;
+    text-align: right;
+    padding: 0.5em;
+    color: white;
+    background: black;
+    background: rgba(0,0,0,0.5);
+}
+
+.mag-eg-hud-left {
+    left: 0;
+    bottom: 0;
+    text-align: left;
+}
+
+.mag-eg-hud-right {
+    right: 0;
+    bottom: 0;
+    text-align: right;
+}

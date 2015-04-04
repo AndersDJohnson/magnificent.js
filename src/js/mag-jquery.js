@@ -11,6 +11,10 @@
   }
 }(this, function (Mag, $) {
 
+
+  $(':root').addClass('mag-js');
+
+
   var normalizeOffsets = function (e) {
     var offset = $(e.target).offset();
     return {
@@ -67,7 +71,8 @@
     zoomMin: 1,
     zoomMax: 10,
     zoomRate: 0.2,
-    toggle: true
+    toggle: true,
+    smooth: true
   };
 
 
@@ -80,9 +85,15 @@
   Magnificent.prototype.toggle = function (enter) {
     if (enter) {
       this.$zoomedContainer.fadeIn();
+      if (this.$lens) {
+        this.$lens.fadeIn();
+      }
     }
     else {
       this.$zoomedContainer.fadeOut();
+      if (this.$lens) {
+        this.$lens.fadeOut();
+      }
     }
   };
 
@@ -221,10 +232,17 @@
     if (options.position) {
       $el.attr('mag-position', options.position);
     }
+    else if (options.position === false) {
+      options.positionEvent = false;
+    }
 
     if (options.positionEvent) {
       $el.attr('mag-position-event', options.positionEvent);
     }
+
+
+    $el.attr('mag-toggle', options.toggle);
+
 
     if (options.showLens) {
       $lens = this.$lens = $('<div class="mag-lens"></div>');
@@ -233,9 +251,6 @@
 
     var $noflow = $('<div class="mag-noflow" mag-theme="' + options.theme + '"></div>');
     $el.append($noflow);
-
-    var $zone = $('<div class="mag-zone"></div>');
-    $noflow.append($zone);
 
 
     if (options.mode === 'inner') {
@@ -265,6 +280,13 @@
     $zoomedContainer.append($zoomed);
 
 
+    $zoomedContainer.attr('mag-toggle', options.toggle);
+
+
+    var $zone = $('<div class="mag-zone"></div>');
+    $el.append($zone);
+
+
     this.$el = $el;
     this.$zone = $zone;
     this.$noflow = $noflow;
@@ -276,6 +298,9 @@
     if (options.toggle) {
       if (options.initialShow === 'thumb') {
         $zoomedContainer.hide();
+        if ($lens) {
+          $lens.hide();
+        }
       }
       else if (options.initialShow === 'zoomed') {
         //
@@ -302,7 +327,7 @@
     var dragRate = 0.2;
     var zoomRate = options.zoomRate;
 
-    var approach = function (thresh, rate, dest, src, props, srcProps) {
+    var approach = function (enabled, thresh, rate, dest, src, props, srcProps) {
       srcProps = srcProps ? srcProps : props;
       if (! $.isArray(props)) {
         props = [props];
@@ -312,7 +337,7 @@
         var prop = props[i];
         var srcProp = srcProps[i];
         var diff = src[srcProp] - dest[prop];
-        if (Math.abs(diff) > thresh) {
+        if (enabled && Math.abs(diff) > thresh) {
           dest[prop] += diff * rate;
         }
         else {
@@ -322,9 +347,10 @@
     };
 
     var renderLoop = function () {
-      approach(0.01, lazyRate, modelLazy.focus, model.focus, 'x');
-      approach(0.01, lazyRate, modelLazy.focus, model.focus, 'y');
-      approach(0.05, lazyRate, modelLazy, model, 'zoom');
+      approach(options.smooth, 0.01, lazyRate, modelLazy.focus, model.focus, 'x');
+      approach(options.smooth, 0.01, lazyRate, modelLazy.focus, model.focus, 'y');
+      approach(options.smooth, 0.05, lazyRate, modelLazy, model, 'zoom');
+
 
       that.magLazy.compute();
 
@@ -373,39 +399,85 @@
     }
     else if (options.position === 'drag') {
 
-      var startFocus = null;
+      if (options.mode === 'inner') {
+        var startFocus = null;
 
-      $zone.drag('start', function () {
-        dragging = true;
-        $el.addClass('mag--dragging');
-        startFocus = {
-          x: model.focus.x,
-          y: model.focus.y
-        };
-      });
+        $zone.drag('start', function () {
+          dragging = true;
+          $el.addClass('mag--dragging');
+          startFocus = {
+            x: model.focus.x,
+            y: model.focus.y
+          };
+        });
 
-      $zone.drag('end', function () {
-        dragging = false;
-        $el.removeClass('mag--dragging');
-        startFocus = null;
-      });
+        $zone.drag('end', function () {
+          dragging = false;
+          $el.removeClass('mag--dragging');
+          startFocus = null;
+        });
 
-      $zone.drag(function( e, dd ) {
-        var offset = $zone.offset();
-        ratios = ratioOffsetsFor($zone, dd.originalX - dd.offsetX, dd.originalY - dd.offsetY);
+        $zone.drag(function( e, dd ) {
+          var offset = $zone.offset();
+          ratios = ratioOffsetsFor($zone, dd.originalX - dd.offsetX, dd.originalY - dd.offsetY);
 
-        ratios = {
-          x: ratios.x / model.zoom,
-          y: ratios.y / model.zoom
-        };
+          ratios = {
+            x: ratios.x / model.zoom,
+            y: ratios.y / model.zoom
+          };
 
-        var focus = model.focus;
+          var focus = model.focus;
 
-        focus.x = startFocus.x + ratios.x;
-        focus.y = startFocus.y + ratios.y;
+          focus.x = startFocus.x + ratios.x;
+          focus.y = startFocus.y + ratios.y;
 
-        that.compute();
-      });
+          that.compute();
+        });
+      }
+      else {
+
+        var startFocus = null;
+
+        $zone.drag('start', function () {
+          dragging = true;
+          $el.addClass('mag--dragging');
+          startFocus = {
+            x: model.focus.x,
+            y: model.focus.y
+          };
+        });
+
+        $zone.drag('end', function () {
+          dragging = false;
+          $el.removeClass('mag--dragging');
+          startFocus = null;
+        });
+
+        $zone.drag(function( e, dd ) {
+          var offset = $zone.offset();
+          ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
+
+          var focus = model.focus;
+
+          focus.x = ratios.x;
+          focus.y = ratios.y;
+
+          that.compute();
+        });
+
+        $zone.on('click', function (e) {
+          var offset = $zone.offset();
+          ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
+
+          var focus = model.focus;
+
+          focus.x = ratios.x;
+          focus.y = ratios.y;
+
+          that.compute();
+        });
+      }
+
 
     }
     else if (options.position === 'joystick') {
@@ -442,7 +514,6 @@
         });
 
         $zone.drag(function( e, dd ){
-
           var offset = $zone.offset();
           ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
         });
@@ -464,21 +535,27 @@
       }, joystickIntervalTime);
 
     }
+    else if (options.position === false) {
+      // assume manual programmatic positioning
+    }
     else {
       throw new Error("Invalid 'position' option.");
     }
 
 
-    $zone.on('mousewheel', function (e) {
-      e.preventDefault();
+    if (options.position) {
+      $zone.on('mousewheel', function (e) {
+        e.preventDefault();
 
-      var zoom = model.zoom;
-      var delta = e.deltaY;
-      delta = delta > 0 ? delta + zoomRate : Math.abs(delta) - zoomRate;
-      zoom *= delta;
-      model.zoom = zoom;
-      that.compute();
-    });
+        var zoom = model.zoom;
+        var delta = e.deltaY;
+        delta = delta > 0 ? delta + zoomRate : Math.abs(delta) - zoomRate;
+        zoom *= delta;
+        model.zoom = zoom;
+        that.compute();
+      });
+    }
+
 
     var renderLoopInterval = setInterval(renderLoop, renderLoopIntervalTime);
 
@@ -486,9 +563,42 @@
   };
 
 
-  Magnificent.prototype.zoom = function (factor) {
-    // this.model.zoom *= 1 + factor;
-    this.model.zoom = 6;
+  Magnificent.prototype.zoomBy = function (factor) {
+    this.model.zoom *= 1 + factor;
+    this.compute();
+  };
+
+
+  Magnificent.prototype.zoomTo = function (zoom) {
+    this.model.zoom = zoom;
+    this.compute();
+  };
+
+
+  Magnificent.prototype.moveBy = function (shift) {
+    if (shift.x != null) {
+      if (! shift.absolute) {
+        shift.x /= this.model.zoom;
+      }
+      this.model.focus.x += shift.x;
+    }
+    if (shift.y != null) {
+      if (! shift.absolute) {
+        shift.y /= this.model.zoom;
+      }
+      this.model.focus.y += shift.y;
+    }
+    this.compute();
+  };
+
+
+  Magnificent.prototype.moveTo = function (coords) {
+    if (coords.x != null) {
+      this.model.focus.x = coords.x;
+    }
+    if (coords.y != null) {
+      this.model.focus.y = coords.y;
+    }
     this.compute();
   };
 

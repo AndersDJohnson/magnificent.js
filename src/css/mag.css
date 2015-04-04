@@ -79,3 +79,7 @@
 [mag-zoom] {
     display: none;
 }
+
+.mag-js [mag-zoom][mag-toggle="false"] {
+    display: block;
+}

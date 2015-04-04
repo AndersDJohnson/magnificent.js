@@ -40,18 +40,18 @@
           <div class="col col-md-6">
             <div class="mag-eg-doc">
               <h3>Inner</h3>
-              <pre><code>
-&lt;div mag-thumb=&quot;inner&quot;&gt;
+              <pre><code><!--
+-->&lt;div mag-thumb=&quot;inner&quot;&gt;
   &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
 &lt;/div&gt;
 &lt;div mag-zoom=&quot;inner&quot;&gt;
   &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
-&lt;/div&gt;
-              </code></pre>
-              <pre><code>
-$host = $('[mag-thumb=&quot;inner&quot;]');
-$host.mag();
-              </code></pre>
+&lt;/div&gt;<!--
+              --></code></pre>
+              <pre><code><!--
+-->$host = $('[mag-thumb=&quot;inner&quot;]');
+$host.mag();<!--
+              --></code></pre>
             </div>
           </div>
         </div>
@@ -78,22 +78,68 @@ $host.mag();
           <div class="col col-md-6">
             <div class="mag-eg-doc">
               <h3>Outer</h3>
-              <pre><code>
-&lt;div class=&quot;outer-wrap&quot;&gt;
+              <pre><code><!--
+-->&lt;div class=&quot;outer-wrap&quot;&gt;
   &lt;div mag-thumb=&quot;outer&quot;&gt;
     &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
   &lt;/div&gt;
   &lt;div mag-zoom=&quot;outer&quot;&gt;
     &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
   &lt;/div&gt;
-&lt;/div&gt;
-              </code></pre>
-              <pre><code>
-$host = $('[mag-thumb=&quot;outer&quot;]');
+&lt;/div&gt;<!--
+              --></code></pre>
+              <pre><code><!--
+-->$host = $('[mag-thumb=&quot;outer&quot;]');
 $host.mag({
   mode: 'outer'
 });
               </code></pre>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="row mag-eg-row">
+          <div class="col col-md-6">
+            <div class="mag-eg-el-wrap img-thumbnail">
+              <div class="proportion">
+                <div mag-thumb="outer-drag" class="mag-eg-el">
+                  <img src="img/rieti/500x334.jpg" />
+                </div>
+                <div class="filler"></div>
+              </div>
+            </div>
+            <div class="mag-eg-el-wrap img-thumbnail">
+              <div class="proportion">
+                <div mag-zoom="outer-drag" class="mag-eg-el" style="float: right;">
+                  <img src="img/rieti/full.jpg" />
+                </div>
+                <div class="filler"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col col-md-6">
+            <div class="mag-eg-doc">
+              <h3>Outer Drag</h3>
+              <pre><code><!--
+-->&lt;div class=&quot;outer-wrap&quot;&gt;
+  &lt;div mag-thumb=&quot;outer&quot;&gt;
+    &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
+  &lt;/div&gt;
+  &lt;div mag-zoom=&quot;outer&quot;&gt;
+    &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;<!--
+              --></code></pre>
+              <pre><code><!--
+-->$host = $('[mag-thumb=&quot;outer&quot;]');
+$host.mag({
+  mode: 'outer',
+  position: 'drag',
+  toggle: false
+});<!--
+              --></code></pre>
             </div>
           </div>
         </div>
@@ -115,24 +161,74 @@ $host.mag({
           <div class="col col-md-6">
             <div class="mag-eg-doc">
               <h3>Drag</h3>
-              <pre><code>
-&lt;div mag-thumb=&quot;drag&quot;&gt;
+              <pre><code><!--
+-->&lt;div mag-thumb=&quot;drag&quot;&gt;
   &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
 &lt;/div&gt;
 &lt;div mag-zoom=&quot;drag&quot;&gt;
   &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
-&lt;/div&gt;
-              </code></pre>
-              <pre><code>
-$host = $('[mag-thumb=&quot;drag&quot;]');
+&lt;/div&gt;<!--
+              --></code></pre>
+              <pre><code><!--
+-->$host = $('[mag-thumb=&quot;drag&quot;]');
 $host.mag({
   position: 'drag',
   toggle: false
-});
-              </code></pre>
+});<!--
+              --></code></pre>
             </div>
           </div>
         </div>
+
+
+        <div class="row mag-eg-row" id="controls">
+          <div class="col col-md-6">
+            <div class="mag-eg-el-wrap img-thumbnail">
+              <div class="proportion">
+                <div mag-thumb="controls" class="mag-eg-el">
+                  <img src="img/rieti/500x334.jpg" />
+                </div>
+                <div mag-zoom="controls" class="mag-eg-el">
+                  <img src="img/rieti/full.jpg" />
+                </div>
+                <div class="filler"></div>
+              </div>
+            </div>
+            <div mag-ctrl="controls">
+              <button class="mag-eg-ctrl-zoom-out" mag-ctrl-zoom-by="-0.5">-</button>
+              <button class="mag-eg-ctrl-zoom-in" mag-ctrl-zoom-by="0.5">+</button>
+              <button class="mag-eg-ctrl-move-up" mag-ctrl-move-by-y="-0.5">^</button>
+              <button class="mag-eg-ctrl-move-down" mag-ctrl-move-by-y="0.5">v</button>
+              <button class="mag-eg-ctrl-move-left" mag-ctrl-move-by-x="-0.5">&lt;</button>
+              <button class="mag-eg-ctrl-move-right" mag-ctrl-move-by-x="0.5">&gt;</button>
+            </div>
+          </div>
+          <div class="col col-md-6">
+            <div class="mag-eg-doc">
+              <h3><a href="#controls">Controls</a></h3>
+              <pre><code><!--
+-->&lt;script src="src/js/mag-control.js"&gt;&lt;/script&gt;
+
+&lt;div mag-thumb=&quot;controls&quot;&gt;
+  &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
+&lt;/div&gt;
+&lt;div mag-zoom=&quot;controls&quot;&gt;
+  &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
+&lt;/div&gt;<!--
+              --></code></pre>
+              <pre><code><!--
+-->$host = $('[mag-thumb=&quot;controls&quot;]');
+$host.mag();
+
+$controls = $('[mag-ctrl="controls"]');
+$controls.magCtrl({
+  mag: $host
+});<!--
+            --></code></pre>
+            </div>
+          </div>
+        </div>
+
 
       </main>
     </div>
@@ -143,6 +239,7 @@ $host.mag({
     <script src="../../bower_components/jquery.threedubmedia/event.drag/jquery.event.drag.js"></script>
     <script src="../../src/js/mag.js"></script>
     <script src="../../src/js/mag-jquery.js"></script>
+    <script src="../../src/js/mag-control.js"></script>
     <script src="index.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css" />

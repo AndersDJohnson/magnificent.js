@@ -1,7 +1,7 @@
 {
   "name": "magnificent",
   "main": "src/js/mag-jquery.js",
-  "version": "2.0.0-beta",
+  "version": "2.0.0-beta.1",
   "authors": [
     "Anders D. Johnson"
   ],
