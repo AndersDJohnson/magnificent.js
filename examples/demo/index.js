@@ -7,7 +7,7 @@
 	$host = $('[mag-thumb="inner"]');
 	$host.mag({
 	  //zoomedContainer: $('[mag-zoom="inner"]')
-	  toggle: false
+	  toggle: true
 	});
 
 	$controls = $(
