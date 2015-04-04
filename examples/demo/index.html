@@ -98,6 +98,51 @@ $host.mag({
           </div>
         </div>
 
+
+
+        <div class="row mag-eg-row">
+          <div class="col col-md-6">
+            <div class="mag-eg-el-wrap img-thumbnail">
+              <div class="proportion">
+                <div mag-thumb="outer-drag" class="mag-eg-el">
+                  <img src="img/rieti/500x334.jpg" />
+                </div>
+                <div class="filler"></div>
+              </div>
+            </div>
+            <div class="mag-eg-el-wrap img-thumbnail">
+              <div class="proportion">
+                <div mag-zoom="outer-drag" class="mag-eg-el" style="float: right;">
+                  <img src="img/rieti/full.jpg" />
+                </div>
+                <div class="filler"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col col-md-6">
+            <div class="mag-eg-doc">
+              <h3>Outer Drag</h3>
+              <pre><code>
+&lt;div class=&quot;outer-wrap&quot;&gt;
+  &lt;div mag-thumb=&quot;outer&quot;&gt;
+    &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
+  &lt;/div&gt;
+  &lt;div mag-zoom=&quot;outer&quot;&gt;
+    &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+              </code></pre>
+              <pre><code>
+$host = $('[mag-thumb=&quot;outer&quot;]');
+$host.mag({
+  mode: 'outer',
+  position: 'drag'
+});
+              </code></pre>
+            </div>
+          </div>
+        </div>
+
         <div class="row mag-eg-row">
           <div class="col col-md-6">
             <div class="mag-eg-el-wrap img-thumbnail">
