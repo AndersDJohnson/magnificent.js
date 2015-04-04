@@ -80,9 +80,15 @@
   Magnificent.prototype.toggle = function (enter) {
     if (enter) {
       this.$zoomedContainer.fadeIn();
+      if (this.$lens) {
+        this.$lens.fadeIn();
+      }
     }
     else {
       this.$zoomedContainer.fadeOut();
+      if (this.$lens) {
+        this.$lens.fadeOut();
+      }
     }
   };
 
@@ -277,6 +283,9 @@
     if (options.toggle) {
       if (options.initialShow === 'thumb') {
         $zoomedContainer.hide();
+        if ($lens) {
+          $lens.hide();
+        }
       }
       else if (options.initialShow === 'zoomed') {
         //
