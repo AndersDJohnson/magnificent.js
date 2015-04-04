@@ -386,39 +386,78 @@
     }
     else if (options.position === 'drag') {
 
-      var startFocus = null;
+      if (options.mode === 'inner') {
+        var startFocus = null;
 
-      $zone.drag('start', function () {
-        dragging = true;
-        $el.addClass('mag--dragging');
-        startFocus = {
-          x: model.focus.x,
-          y: model.focus.y
-        };
-      });
+        $zone.drag('start', function () {
+          dragging = true;
+          $el.addClass('mag--dragging');
+          startFocus = {
+            x: model.focus.x,
+            y: model.focus.y
+          };
+        });
 
-      $zone.drag('end', function () {
-        dragging = false;
-        $el.removeClass('mag--dragging');
-        startFocus = null;
-      });
+        $zone.drag('end', function () {
+          dragging = false;
+          $el.removeClass('mag--dragging');
+          startFocus = null;
+        });
 
-      $zone.drag(function( e, dd ) {
-        var offset = $zone.offset();
-        ratios = ratioOffsetsFor($zone, dd.originalX - dd.offsetX, dd.originalY - dd.offsetY);
+        $zone.drag(function( e, dd ) {
+          var offset = $zone.offset();
+          ratios = ratioOffsetsFor($zone, dd.originalX - dd.offsetX, dd.originalY - dd.offsetY);
 
-        ratios = {
-          x: ratios.x / model.zoom,
-          y: ratios.y / model.zoom
-        };
+          ratios = {
+            x: ratios.x / model.zoom,
+            y: ratios.y / model.zoom
+          };
 
-        var focus = model.focus;
+          var focus = model.focus;
 
-        focus.x = startFocus.x + ratios.x;
-        focus.y = startFocus.y + ratios.y;
+          focus.x = startFocus.x + ratios.x;
+          focus.y = startFocus.y + ratios.y;
 
-        that.compute();
-      });
+          that.compute();
+        });
+      }
+      else {
+
+        var startFocus = null;
+
+        $zone.drag('start', function () {
+          dragging = true;
+          $el.addClass('mag--dragging');
+          startFocus = {
+            x: model.focus.x,
+            y: model.focus.y
+          };
+        });
+
+        $zone.drag('end', function () {
+          dragging = false;
+          $el.removeClass('mag--dragging');
+          startFocus = null;
+        });
+
+        $zone.drag(function( e, dd ) {
+          var offset = $zone.offset();
+          ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
+
+          ratios = {
+            x: ratios.x,
+            y: ratios.y
+          };
+
+          var focus = model.focus;
+
+          focus.x = ratios.x;
+          focus.y = ratios.y;
+
+          that.compute();
+        });
+      }
+
 
     }
     else if (options.position === 'joystick') {
@@ -455,7 +494,6 @@
         });
 
         $zone.drag(function( e, dd ){
-
           var offset = $zone.offset();
           ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
         });

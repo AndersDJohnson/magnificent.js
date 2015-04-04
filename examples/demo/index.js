@@ -25,6 +25,18 @@
 
 (function () {
 	var $host;
+
+	$host = $('[mag-thumb="outer-drag"]');
+	$host.mag({
+	  mode: 'outer',
+	  position: 'drag',
+	  toggle: false
+	});
+})();
+
+
+(function () {
+	var $host;
 	var $controls;
 	var $hud;
 
