@@ -67,7 +67,8 @@
     zoomMin: 1,
     zoomMax: 10,
     zoomRate: 0.2,
-    toggle: true
+    toggle: true,
+    smooth: true
   };
 
 
@@ -322,7 +323,7 @@
     var dragRate = 0.2;
     var zoomRate = options.zoomRate;
 
-    var approach = function (thresh, rate, dest, src, props, srcProps) {
+    var approach = function (enabled, thresh, rate, dest, src, props, srcProps) {
       srcProps = srcProps ? srcProps : props;
       if (! $.isArray(props)) {
         props = [props];
@@ -332,7 +333,7 @@
         var prop = props[i];
         var srcProp = srcProps[i];
         var diff = src[srcProp] - dest[prop];
-        if (Math.abs(diff) > thresh) {
+        if (enabled && Math.abs(diff) > thresh) {
           dest[prop] += diff * rate;
         }
         else {
@@ -342,9 +343,10 @@
     };
 
     var renderLoop = function () {
-      approach(0.01, lazyRate, modelLazy.focus, model.focus, 'x');
-      approach(0.01, lazyRate, modelLazy.focus, model.focus, 'y');
-      approach(0.05, lazyRate, modelLazy, model, 'zoom');
+      approach(options.smooth, 0.01, lazyRate, modelLazy.focus, model.focus, 'x');
+      approach(options.smooth, 0.01, lazyRate, modelLazy.focus, model.focus, 'y');
+      approach(options.smooth, 0.05, lazyRate, modelLazy, model, 'zoom');
+
 
       that.magLazy.compute();
 
