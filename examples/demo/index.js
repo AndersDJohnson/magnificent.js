@@ -79,12 +79,9 @@
 	});
 
 	$controls = $('[mag-ctrl="controls"]');
-
 	$controls.magCtrl({
 		mag: $host
 	});
-
-	$host.closest('.col').append($controls);
 
 })();
 
