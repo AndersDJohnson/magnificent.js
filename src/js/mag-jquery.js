@@ -444,10 +444,17 @@
           var offset = $zone.offset();
           ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
 
-          ratios = {
-            x: ratios.x,
-            y: ratios.y
-          };
+          var focus = model.focus;
+
+          focus.x = ratios.x;
+          focus.y = ratios.y;
+
+          that.compute();
+        });
+
+        $zone.on('click', function (e) {
+          var offset = $zone.offset();
+          ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
 
           var focus = model.focus;
 
