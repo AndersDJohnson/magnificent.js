@@ -43,13 +43,22 @@
 	  position: 'drag',
 	  toggle: false
 	});
-	$hud = $('<div></div>')
-	$host.closest('.col').append($hud);
+
+	$hud = $('<div class="mag-eg-hud"></div>');
+	// $host.closest('.col').append($hud);
+	$host.parent().append($hud);
+
+	var toPerc = function (p) {
+		return (p * 100).toFixed(1) + '%';
+	};
 
 	$host.on('compute', function (e) {
 		var mag = $(this).data('mag');
 		var m = mag.model;
-		$hud.html('zoom: ' + m.zoom + ', focus: x: ' + m.focus.x + ' y: ' + m.focus.y);
+		$hud.html(
+			'<div>' + m.zoom.toFixed(1) + 'x</div>' +
+			'<div>(' + toPerc(m.focus.x) + ', ' + toPerc(m.focus.y) + ')</div>'
+		);
 	});
 })();
 
