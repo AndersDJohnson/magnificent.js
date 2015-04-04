@@ -235,6 +235,10 @@
       $el.attr('mag-position-event', options.positionEvent);
     }
 
+
+    $el.attr('mag-toggle', options.toggle);
+
+
     if (options.showLens) {
       $lens = this.$lens = $('<div class="mag-lens"></div>');
       $el.append($lens);
@@ -269,6 +273,9 @@
     $zoomed = this.$zoomed = $('<div class="mag-zoomed"></div>');
     $zoomed.html($zoomedChildren);
     $zoomedContainer.append($zoomed);
+
+
+    $zoomedContainer.attr('mag-toggle', options.toggle);
 
 
     var $zone = $('<div class="mag-zone"></div>');

@@ -76,6 +76,6 @@
     z-index: 2;
 }
 
-[mag-zoom] {
+[mag-zoom][mag-toggle="true"] {
     display: none;
 }
