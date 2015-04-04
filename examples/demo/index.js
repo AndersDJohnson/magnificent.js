@@ -74,10 +74,10 @@
 		'</div>'
 	);
 	$controls.find('.mag-eg-ctrl-zoom-out').on('click', function () {
-		$host.mag('zoom', -0.5);
+		$host.mag('zoomBy', -0.5);
 	});
 	$controls.find('.mag-eg-ctrl-zoom-in').on('click', function () {
-		$host.mag('zoom', 0.5);
+		$host.mag('zoomBy', 0.5);
 	});
 	$host.closest('.col').append($controls);
 
