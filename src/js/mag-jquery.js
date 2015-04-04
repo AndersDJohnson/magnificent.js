@@ -1,3 +1,19 @@
+/**
+ * mag-jquery
+ */
+
+
+/**
+ * @external jQuery
+ * @see {@link https://api.jquery.com/jQuery/}
+ */
+
+/**
+ * @external HTMLElement
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement}
+ */
+
+
 (function (root, factory) {
   var name = 'Magnificent';
   if (typeof define === 'function' && define.amd) {
@@ -52,22 +68,68 @@
     return css;
   };
 
-
+  /**
+   * Magnificent constructor.
+   * 
+   * @alias module:mag-jquery
+   * 
+   * @class
+   * @param {external:HTMLElement|external:jQuery} element - DOM element to embellish.
+   * @param {MagnificentOptions} options - Options to override defaults.
+   */
   var Magnificent = function (element, options) {
     this.element = $( element );
     this.options = $.extend( true, {}, this.options, options );
     this._init();
   };
 
+  /**
+   * @typedef MagnificentOptions
+   *
+   *  Mode:<br>
+   * @property {string} mode
+   *  <dl>
+   *    <dt>"inner"</dt><dd><i>(default)</i> Zoom region embedded in thumbnail.</dd>
+   *    <dt>"outer"</dt><dd>Zoom region independent of thumbnail.</dd>
+   *  </dl>
+   * @property {string|boolean} position - What interaction(s) position zoomed region.
+   *  <dl>
+   *    <dt>"mirror"</dt><dd><i>(default)</i> Zoomed region follows mouse/pointer.</dd>
+   *    <dt>"drag"</dt><dd>Drag to move.</dd>
+   *    <dt>"joystick"</dt><dd>Weird joystick interaction to move.</dd>
+   *    <dt>false</dt><dd>No mouse/touch.</dd>
+   *  </dl>
+   * @property {string} positionEvent - Controls what event(s) cause positioning.
+   *  <dl>
+   *    <dt>"move"</dt><dd><i>(default)</i> On move (e.g. mouseover).</dd>
+   *    <dt>"hold"</dt><dd>On hold (e.g. while mousedown).</dd>
+   *  </dl>
+   * @property {string} theme - Themes apply a style to the widgets.
+   *  <dl>
+   *    <dt>"default"</dt><dd><i>(default)</i> Default theme.</dd>
+   *  </dl>
+   * @property {string} initialShow
+   *  <dl>
+   *    <dt>"thumb"</dt><dd><i>(default)</i> Whether to show thumbnail or zoomed first,
+   *      e.g. in "inner" mode.</dd>
+   *  </dl>
+   * @property {number} zoomRate - Rate at which to adjust zoom, from (0,∞). Default = 0.2.
+   * @property {number} zoomMin - Minimum zoom level allowed, from (0,∞). Default = 2.
+   * @property {number} zoomMax - Maximum zoom level allowed, from (0,∞). Default = 10.
+   * @property {boolean} constrainLens - Whether lens position is constrained. Default = true.
+   * @property {boolean} constrainZoomed - Whether zoomed position is constrained. Default = false.
+   * @property {boolean} toggle - Whether toggle display of zoomed vs. thumbnail upon interaction. Default = true.
+   * @property {boolean} smooth - Whether the zoomed region should gradually approach target, rather than immediately. Default = true.
+   */
 
   Magnificent.prototype.options = {
     mode: 'inner',
     position: 'mirror',
     positionEvent: 'move',
-    constrainLens: true,
-    constrainZoomed: false,
     theme: 'default',
     initialShow: 'thumb',
+    constrainLens: true,
+    constrainZoomed: false,
     zoomMin: 1,
     zoomMax: 10,
     zoomRate: 0.2,
@@ -79,8 +141,7 @@
   /**
    * Default toggle implementation.
    *
-   * @param  {[type]} enter [description]
-   * @return {[type]}       [description]
+   * @param {boolean} enter - Whether entering, rather leaving.
    */
   Magnificent.prototype.toggle = function (enter) {
     if (enter) {
