@@ -1,4 +1,31 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: mag-jquery.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: mag-jquery.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/**
  * mag-jquery
  */
 
@@ -86,33 +113,33 @@
   /**
    * @typedef MagnificentOptions
    *
-   *  Mode:<br>
+   *  Mode:&lt;br>
    * @property {string} mode
-   *  <dl>
-   *    <dt>"inner"</dt><dd><i>(default)</i> Zoom region embedded in thumbnail.</dd>
-   *    <dt>"outer"</dt><dd>Zoom region independent of thumbnail.</dd>
-   *  </dl>
+   *  &lt;dl>
+   *    &lt;dt>"inner"&lt;/dt>&lt;dd>&lt;i>(default)&lt;/i> Zoom region embedded in thumbnail.&lt;/dd>
+   *    &lt;dt>"outer"&lt;/dt>&lt;dd>Zoom region independent of thumbnail.&lt;/dd>
+   *  &lt;/dl>
    * @property {string|boolean} position - What interaction(s) position zoomed region.
-   *  <dl>
-   *    <dt>"mirror"</dt><dd><i>(default)</i> Zoomed region follows mouse/pointer.</dd>
-   *    <dt>"drag"</dt><dd>Drag to move.</dd>
-   *    <dt>"joystick"</dt><dd>Weird joystick interaction to move.</dd>
-   *    <dt>false</dt><dd>No mouse/touch.</dd>
-   *  </dl>
+   *  &lt;dl>
+   *    &lt;dt>"mirror"&lt;/dt>&lt;dd>&lt;i>(default)&lt;/i> Zoomed region follows mouse/pointer.&lt;/dd>
+   *    &lt;dt>"drag"&lt;/dt>&lt;dd>Drag to move.&lt;/dd>
+   *    &lt;dt>"joystick"&lt;/dt>&lt;dd>Weird joystick interaction to move.&lt;/dd>
+   *    &lt;dt>false&lt;/dt>&lt;dd>No mouse/touch.&lt;/dd>
+   *  &lt;/dl>
    * @property {string} positionEvent - Controls what event(s) cause positioning.
-   *  <dl>
-   *    <dt>"move"</dt><dd><i>(default)</i> On move (e.g. mouseover).</dd>
-   *    <dt>"hold"</dt><dd>On hold (e.g. while mousedown).</dd>
-   *  </dl>
+   *  &lt;dl>
+   *    &lt;dt>"move"&lt;/dt>&lt;dd>&lt;i>(default)&lt;/i> On move (e.g. mouseover).&lt;/dd>
+   *    &lt;dt>"hold"&lt;/dt>&lt;dd>On hold (e.g. while mousedown).&lt;/dd>
+   *  &lt;/dl>
    * @property {string} theme - Themes apply a style to the widgets.
-   *  <dl>
-   *    <dt>"default"</dt><dd><i>(default)</i> Default theme.</dd>
-   *  </dl>
+   *  &lt;dl>
+   *    &lt;dt>"default"&lt;/dt>&lt;dd>&lt;i>(default)&lt;/i> Default theme.&lt;/dd>
+   *  &lt;/dl>
    * @property {string} initialShow
-   *  <dl>
-   *    <dt>"thumb"</dt><dd><i>(default)</i> Whether to show thumbnail or zoomed first,
-   *      e.g. in "inner" mode.</dd>
-   *  </dl>
+   *  &lt;dl>
+   *    &lt;dt>"thumb"&lt;/dt>&lt;dd>&lt;i>(default)&lt;/i> Whether to show thumbnail or zoomed first,
+   *      e.g. in "inner" mode.&lt;/dd>
+   *  &lt;/dl>
    * @property {number} zoomRate - Rate at which to adjust zoom, from (0,∞). Default = 0.2.
    * @property {number} zoomMin - Minimum zoom level allowed, from (0,∞). Default = 2.
    * @property {number} zoomMax - Maximum zoom level allowed, from (0,∞). Default = 10.
@@ -306,11 +333,11 @@
 
 
     if (options.showLens) {
-      $lens = this.$lens = $('<div class="mag-lens"></div>');
+      $lens = this.$lens = $('&lt;div class="mag-lens">&lt;/div>');
       $el.append($lens);
     }
 
-    var $noflow = $('<div class="mag-noflow" mag-theme="' + options.theme + '"></div>');
+    var $noflow = $('&lt;div class="mag-noflow" mag-theme="' + options.theme + '">&lt;/div>');
     $el.append($noflow);
 
 
@@ -331,12 +358,12 @@
       throw new Error("Invalid 'mode' option.");
     }
 
-    var $thumb = $('<div class="mag-thumb"></div>');
+    var $thumb = $('&lt;div class="mag-thumb">&lt;/div>');
     $thumb.html($thumbChildren);
     $el.append($thumb);
 
 
-    $zoomed = this.$zoomed = $('<div class="mag-zoomed"></div>');
+    $zoomed = this.$zoomed = $('&lt;div class="mag-zoomed">&lt;/div>');
     $zoomed.html($zoomedChildren);
     $zoomedContainer.append($zoomed);
 
@@ -344,7 +371,7 @@
     $zoomedContainer.attr('mag-toggle', options.toggle);
 
 
-    var $zone = $('<div class="mag-zone"></div>');
+    var $zone = $('&lt;div class="mag-zone">&lt;/div>');
     $el.append($zone);
 
 
@@ -394,7 +421,7 @@
         props = [props];
         srcProps = [srcProps];
       }
-      for (var i = 0, m = props.length; i < m; ++i) {
+      for (var i = 0, m = props.length; i &lt; m; ++i) {
         var prop = props[i];
         var srcProp = srcProps[i];
         var diff = src[srcProp] - dest[prop];
@@ -669,3 +696,26 @@
 
   return Magnificent;
 }));
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Externals</h3><ul><li><a href="external-HTMLElement.html">HTMLElement</a></li><li><a href="external-jQuery.html">jQuery</a></li></ul><h3>Classes</h3><ul><li><a href="module-mag.html">module:mag</a></li><li><a href="module-mag-jquery.html">module:mag-jquery</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sat Apr 04 2015 02:33:05 GMT-0500 (CDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
