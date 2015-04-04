@@ -487,8 +487,7 @@
 
 
   Magnificent.prototype.zoom = function (factor) {
-    // this.model.zoom *= 1 + factor;
-    this.model.zoom = 6;
+    this.model.zoom *= 1 + factor;
     this.compute();
   };
 
