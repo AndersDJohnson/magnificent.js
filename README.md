@@ -28,8 +28,10 @@ See https://github.com/adjohnson916/magnificent.js/tree/v1.x.
 ## Alternatives
 
 * [Magnifier.js]
+* [ElevateZoom]
 
 [mag-demo]: http://andrz.me/magnificent.js/examples/demo/
 [mag-jsdoc]: http://andrz.me/magnificent.js/doc/
 [bower]: http://bower.io/ 
 [Magnifier.js]: http://mark-rolich.github.io/Magnifier.js/
+[ElevateZoom]: http://www.elevateweb.co.uk/image-zoom
