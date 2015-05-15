@@ -25,6 +25,11 @@ Then see examples in [demo][mag-demo]. And the [JSDoc][mag-jsdoc].
 See https://github.com/adjohnson916/magnificent.js/tree/v1.x.
 
 
+## Alternatives
+
+* [Magnifier.js]
+
 [mag-demo]: http://andrz.me/magnificent.js/examples/demo/
 [mag-jsdoc]: http://andrz.me/magnificent.js/doc/
 [bower]: http://bower.io/ 
+[Magnifier.js]: http://mark-rolich.github.io/Magnifier.js/
