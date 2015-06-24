@@ -11,14 +11,16 @@ Check out the [demo][mag-demo]!
 
 ## Usage
 
-Include `src/js/mag.js`, `src/js/mag-jquery.js`, `src/css/mag.css`, and `src/theme/default.css` in your page.
+Either [download manually](https://github.com/adjohnson916/magnificent.js/releases), or install via [Bower][bower]:
+```
+$ bower install --save jquery-magnificent
+```
 
-Either download, or install via [Bower][bower]:
+In your page, include:
+* All files specified in the `main` property of the [bower.json](bower.json) file.
+* All dependencies, as specified in the `dependencies` property of the [bower.json](bower.json) file.
 
-`$ bower install --save jquery-magnificent#2`
-
-Then see examples in [demo][mag-demo]. And the [JSDoc][mag-jsdoc].
-
+Then see usage examples in [demo][mag-demo]. And the [JSDoc][mag-jsdoc].
 
 ## v1.x
 
