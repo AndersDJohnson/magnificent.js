@@ -16,11 +16,30 @@ Either [download manually](https://github.com/adjohnson916/magnificent.js/releas
 $ bower install --save jquery-magnificent
 ```
 
-In your page, include:
-* All files specified in the `main` property of the [bower.json](bower.json) file.
-* All dependencies, as specified in the `dependencies` property of the [bower.json](bower.json) file.
+For the basic setup include in your page the following depencies:
 
-Then see usage examples in [demo][mag-demo]. And the [JSDoc][mag-jsdoc].
+CSS
+```html
+<link href="path/to/css/mag.css" rel="stylesheet">
+<link href="path/to/css/theme/default.css" rel="stylesheet">
+```
+
+JavaScript
+```html
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="path/to/js/jquery-bridget.js"></script>
+<script type="text/javascript" src="path/to/js/mag.js"></script>
+<script type="text/javascript" src="path/to/js/mag-jquery.js"></script>
+```
+To include jquery-bridget please refer to [jquery-bridget github project][jquery-bridget]
+
+To use the additional functionality described in the [demo][mag-demo], include also:
+
+[https://github.com/jquery/jquery-mousewheel][jquery-mousewheel]
+
+[https://github.com/threedubmedia/jquery.threedubmedia][jquery-threedubmedia]
+
+Usage examples are available in the [demo][mag-demo] and the [JSDoc][mag-jsdoc].
 
 ## v1.x
 
@@ -37,3 +56,6 @@ See https://github.com/adjohnson916/magnificent.js/tree/v1.x.
 [bower]: http://bower.io/ 
 [Magnifier.js]: http://mark-rolich.github.io/Magnifier.js/
 [ElevateZoom]: http://www.elevateweb.co.uk/image-zoom
+[jquery-bridget]: https://github.com/desandro/jquery-bridget
+[jquery-mousewheel]: https://github.com/jquery/jquery-mousewheel
+[jquery-threedubmedia]: https://github.com/threedubmedia/jquery.threedubmedia
