@@ -8,7 +8,7 @@
     "url": "git://github.com/adjohnson916/magnificent.js.git"
   },
   "bugs": {
-    "url" : "https://github.com/owner/project/issues"
+    "url": "https://github.com/owner/project/issues"
   },
   "scripts": {
     "test": "grunt test"
@@ -21,7 +21,9 @@
     "grunt-jsdoc": "^0.5.8",
     "grunt-simple-mocha": "^0.4.0",
     "load-grunt-tasks": "^3.1.0",
-    "verb": "git+https://github.com/verbose/verb.git"
+    "verb": "git+https://github.com/verbose/verb.git",
+    "gulp-util": "~3.0.6",
+    "arrayify": "~1.0.0"
   },
   "verb": {
     "data": {
