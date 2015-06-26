@@ -4,7 +4,8 @@
   "description": "",
   "main": "src/js/mag.js",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "sync-pkg": "sync-pkg --extend --empty -p version -p !dependencies -p !devDependencies -p !main"
   },
   "author": "Anders D. Johnson",
   "license": "MIT",
@@ -13,6 +14,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-jsdoc": "^0.5.8",
     "grunt-simple-mocha": "^0.4.0",
-    "load-grunt-tasks": "^3.1.0"
+    "load-grunt-tasks": "^3.1.0",
+    "sync-pkg": "git+https://github.com/adjohnson916/sync-pkg.git#adjohnson916"
   }
 }
