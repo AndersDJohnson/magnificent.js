@@ -16,7 +16,7 @@ Either [download manually](https://github.com/adjohnson916/magnificent.js/releas
 $ bower install --save jquery-magnificent
 ```
 
-For the basic setup include in your page the following depencies:
+For the basic setup include in your page the following dependencies:
 
 CSS
 ```html
@@ -31,12 +31,14 @@ JavaScript
 <script type="text/javascript" src="path/to/js/mag.js"></script>
 <script type="text/javascript" src="path/to/js/mag-jquery.js"></script>
 ```
-To include jquery-bridget please refer to [jquery-bridget github project][jquery-bridget]
+To include jquery-bridget please refer to [jquery-bridget github project][jquery-bridget] or check your bower installation folders for the path.
 
 To use the additional functionality described in the [demo][mag-demo], include also:
 
+* For scroll zoom include also:
 [https://github.com/jquery/jquery-mousewheel][jquery-mousewheel]
 
+* For drag events:
 [https://github.com/threedubmedia/jquery.threedubmedia][jquery-threedubmedia]
 
 Usage examples are available in the [demo][mag-demo] and the [JSDoc][mag-jsdoc].
