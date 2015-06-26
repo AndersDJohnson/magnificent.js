@@ -29,6 +29,10 @@ In your page, include:
 * All files specified in the `main` property of the [bower.json](bower.json) file.
 * All dependencies, as specified in the `dependencies` property of the [bower.json](bower.json) file.
 
+* `src/js/mag-jquery.js`
+
+* `0@[object Object]`
+
 Then see usage examples in [demo](http://andrz.me/magnificent.js/examples/demo/). And the [JSDoc](http://andrz.me/magnificent.js/doc/).
 
 ## Contributing
