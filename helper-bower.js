@@ -86,7 +86,8 @@ var replaceGitHubUrlWithRaw = function (url) {
 var mainList = function (opts) {
   opts = opts || {};
   if (!opts.basePath) opts.basePath = '';
-  j = parse(opts);
+  var j = parse(opts);
+  var parentBowerJson = opts.parentBowerJson || j;
   var ts = [];
   if (j.main) {
     var ms = arrayify(j.main);
@@ -104,6 +105,25 @@ var mainList = function (opts) {
         url = name;
       }
       name = '[' + name + '](' + url + ')';
+
+      if (parentBowerJson) {
+        if (parentBowerJson.optional) {
+          var optFiles = parentBowerJson.optional.files;
+          if (optFiles) {
+            var norm = {};
+            Object.keys(optFiles).forEach(function (k) {
+              var v = optFiles[k];
+              k = cleanPath(k);
+              norm[k] = v;
+            });
+            if (norm[mp]) {
+              var optMsg = norm[mp];
+              name += ' (Optional: ' + optMsg + ')';
+            }
+          }
+        }
+      }
+
       ts.push({
         name: name
       });
@@ -122,7 +142,7 @@ var main = function (opts) {
 
 var deps = function (opts) {
   opts = opts || {};
-  j = parse(opts);
+  var j = parse(opts);
   var ts = [];
   if (j.dependencies) {
     var d = j.dependencies;
@@ -138,7 +158,8 @@ var deps = function (opts) {
           bowerFile: nf,
           indent: opts.indent,
           shim: opts.shim,
-          name: n
+          name: n,
+          parentBowerJson: j
         });
       } catch (e) {
         console.error(e, e.stack);

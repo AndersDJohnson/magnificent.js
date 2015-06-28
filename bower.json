@@ -21,15 +21,24 @@
     "bootstrap": "~3.3.2"
   },
   "optional": {
-    "main": {
-      "src/theme/default.css": "Or another theme."
+    "files": {
+      "src/theme/default.css": "Or another theme.",
+      "bower_components/jquery-mousewheel/jquery.mousewheel.js": "For scroll zoom.",
+      "bower_components/jquery.threedubmedia/event.drag/jquery.event.drag.js": "For drag interaction."
     },
     "dependencies": {
-      "jquery-mousewheel": "For scroll zoom.",
-      "jquery.threedubmedia": "For drag interaction."
-    },
-    "files": {
-      "bower_components/jquery-mousewheel/jquery.mousewheel.js": "For scroll zoom."
+      "jquery-mousewheel": {
+        "note": "Not required.",
+        "files": {
+          "jquery.mousewheel.js": "For scroll zoom."
+        }
+      },
+      "jquery.threedubmedia": {
+        "note": "Not required.",
+        "files": {
+          "event.drag/jquery.event.drag.js": "For drag interaction."
+        }
+      }
     }
   }
 }
