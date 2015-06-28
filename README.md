@@ -29,10 +29,10 @@ In your page, include:
 * 
 All main files:
 
-  - `src/js/mag.js`
-  - `src/js/mag-jquery.js`
-  - `src/css/mag.css`
-  - `src/theme/default.css`
+  - [src/js/mag.js](src/js/mag.js)
+  - [src/js/mag-jquery.js](src/js/mag-jquery.js)
+  - [src/css/mag.css](src/css/mag.css)
+  - [src/theme/default.css](src/theme/default.css)
 * 
 Any dependencies:
 
