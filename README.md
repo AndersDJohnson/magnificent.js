@@ -32,7 +32,8 @@ All main files:
   - [src/js/mag.js](src/js/mag.js)
   - [src/js/mag-jquery.js](src/js/mag-jquery.js)
   - [src/css/mag.css](src/css/mag.css)
-  - [src/theme/default.css](src/theme/default.css)
+  - [src/theme/default.css](src/theme/default.css) (Optional: Or another theme.)
+
 * 
 Any dependencies:
 
@@ -43,10 +44,10 @@ Any dependencies:
     + [bower_components/jquery-bridget/jquery.bridget.js](https://raw.githubusercontent.com/desandro/jquery-bridget/v1.1.0/jquery.bridget.js)
 
   - [jquery-mousewheel](https://github.com/jquery/jquery-mousewheel)@~3.1.12
-    + [bower_components/jquery-mousewheel/jquery.mousewheel.js](https://raw.githubusercontent.com/jquery/jquery-mousewheel/3.1.12/./jquery.mousewheel.js)
+    + [bower_components/jquery-mousewheel/jquery.mousewheel.js](https://raw.githubusercontent.com/jquery/jquery-mousewheel/3.1.12/./jquery.mousewheel.js) (Optional: For scroll zoom.)
 
   - [jquery.threedubmedia](https://github.com/threedubmedia/jquery.threedubmedia)@*
-    + [bower_components/jquery.threedubmedia/event.drag/jquery.event.drag.js](https://raw.githubusercontent.com/threedubmedia/jquery.threedubmedia/master/event.drag/jquery.event.drag.js)
+    + [bower_components/jquery.threedubmedia/event.drag/jquery.event.drag.js](https://raw.githubusercontent.com/threedubmedia/jquery.threedubmedia/master/event.drag/jquery.event.drag.js) (Optional: For drag interaction.)
 
 Then see usage examples in [demo](http://andrz.me/magnificent.js/examples/demo/). And the [JSDoc](http://andrz.me/magnificent.js/doc/).
 
