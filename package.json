@@ -16,14 +16,15 @@
   "author": "Anders D. Johnson",
   "license": "MIT",
   "devDependencies": {
+    "arrayify": "~1.0.0",
     "grunt": "^0.4.5",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-jsdoc": "^0.5.8",
     "grunt-simple-mocha": "^0.4.0",
-    "load-grunt-tasks": "^3.1.0",
-    "verb": "git+https://github.com/verbose/verb.git",
     "gulp-util": "~3.0.6",
-    "arrayify": "~1.0.0"
+    "load-grunt-tasks": "^3.1.0",
+    "parse-github-url": "adjohnson916/parse-github-url#dotted-repo",
+    "verb": "git+https://github.com/verbose/verb.git"
   },
   "verb": {
     "data": {

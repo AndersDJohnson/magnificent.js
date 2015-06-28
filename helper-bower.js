@@ -2,6 +2,7 @@
 var fs = require('fs');
 var path = require('path');
 var arrayify = require('arrayify');
+var gh = require('parse-github-url');
 
 var parse = function (opts) {
   opts = opts || {};
@@ -34,12 +35,18 @@ var mdList = function (list, indent) {
   if (!indent) indent = 0;
   var nest = times('  ', indent) + '* ';
   return list.map(function (item) {
+    var ret;
+    var name;
+    var children = '';
     if (typeof item === 'string') {
-      return nest + item;
+      name = item;
     }
     else {
-      return nest + item.name + (item.children ? '\n' + mdList(item.children, indent+1) : '');
+      name = item.name;
+      children = (item.children ? '\n' + mdList(item.children, indent+1) : '');
     }
+    ret = nest + name + children;
+    return ret;
   }).join('\n');
 };
 
@@ -59,6 +66,18 @@ var cleanPath = function () {
   return mp;
 };
 
+var getGitHubUrlFromBowerJson = function (bowerJson) {
+  var ghRepo = gh(bowerJson._source);
+  url = 'https://github.com/' + ghRepo.repopath;
+  return url;
+};
+
+var getGitHubRawUrlFromBowerJson = function (bowerJson) {
+  var ghRepo = gh(bowerJson._source);
+  url = 'https://raw.githubusercontent.com/' + ghRepo.repopath;
+  return url;
+};
+
 
 var mainList = function (opts) {
   opts = opts || {};
@@ -69,8 +88,20 @@ var mainList = function (opts) {
     var ms = arrayify(j.main);
     ms.forEach(function (m) {
       var mp = cleanPath(opts.basePath, m);
+      var name = mp;
+      if (j._resolution) {
+        // var ghBaseUrl = getGitHubUrlFromBowerJson(j);
+        // var url = ghBaseUrl + '/blob/' + j._resolution.tag + '/' + m;
+        var ghRawBaseUrl = getGitHubRawUrlFromBowerJson(j);
+        var commitish = j._resolution.tag || j._resolution.branch || j._resolution.commit;
+        var url = ghRawBaseUrl + '/' + commitish + '/' + m;
+        name = '[' + name + '](' + url + ')';
+      }
+      else {
+        name = '`' + name + '`';
+      }
       ts.push({
-        name: '`' + mp + '`'
+        name: name
       });
     });
   }
@@ -85,7 +116,6 @@ var main = function (opts) {
   return t;
 };
 
-
 var deps = function (opts) {
   opts = opts || {};
   j = parse(opts);
@@ -94,9 +124,11 @@ var deps = function (opts) {
     var d = j.dependencies;
     for (var n in d) {
       var ch;
+      var dj;
       try {
         var nb = getBasePathForDep(n);
-        var nf = getBowerFileForDep(n);
+        nf = getBowerFileForDep(n);
+        dj = parse({bowerFile: nf});
         ch = mainList({
           basePath: nb,
           bowerFile: nf,
@@ -107,9 +139,38 @@ var deps = function (opts) {
       } catch (e) {
         console.error(e, e.stack);
       }
-      var v = d[n];
+      // var v = d[n];
+      var v;
+      if (dj) {
+        v = dj._target;
+      }
+      if (!v) {
+        v = d[n];
+      }
+      var url;
+      try {
+        url = getGitHubUrlFromBowerJson(dj);
+      }
+      catch (e) {
+        url = j.homepage;
+      }
+
+      if (url) {
+        // n = '[`' + n + '`](' + url + ')';
+        n = '[' + n + '](' + url + ')';
+      }
+      else {
+        // n = '`' + n + '`';
+      }
+      v = '@' + v;
+      // var name = n + '`@' + v + '`';
+      // var name = n + '`' + v + '`';
+      var name = n;
+      if (v) {
+        name += v;
+      }
       var item = {
-        name: '`' + n + '@' + v + '`'
+        name: name
       };
       if (ch && ch.length) {
         item.children = ch;
