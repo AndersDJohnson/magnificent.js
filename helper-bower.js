@@ -78,6 +78,10 @@ var getGitHubRawUrlFromBowerJson = function (bowerJson) {
   return url;
 };
 
+var replaceGitHubUrlWithRaw = function (url) {
+  return url.replace(/^https?:\/\/github\.com/, 'https://raw.githubusercontent.com');
+};
+
 
 var mainList = function (opts) {
   opts = opts || {};
@@ -95,11 +99,11 @@ var mainList = function (opts) {
         var ghRawBaseUrl = getGitHubRawUrlFromBowerJson(j);
         var commitish = j._resolution.tag || j._resolution.branch || j._resolution.commit;
         var url = ghRawBaseUrl + '/' + commitish + '/' + m;
-        name = '[' + name + '](' + url + ')';
       }
       else {
-        name = '`' + name + '`';
+        url = name;
       }
+      name = '[' + name + '](' + url + ')';
       ts.push({
         name: name
       });
