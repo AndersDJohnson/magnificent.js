@@ -187,7 +187,7 @@ var deps = function (opts) {
       else {
         // n = '`' + n + '`';
       }
-      v = '@' + v;
+      v = '@' + '`' + v + '`';
       // var name = n + '`@' + v + '`';
       // var name = n + '`' + v + '`';
       var name = n;
