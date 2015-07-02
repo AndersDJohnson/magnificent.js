@@ -8,7 +8,7 @@
     "url": "git://github.com/adjohnson916/magnificent.js.git"
   },
   "bugs": {
-    "url": "https://github.com/owner/project/issues"
+    "url": "https://github.com/adjohnson916/magnificent.js/issues"
   },
   "scripts": {
     "test": "grunt test"
