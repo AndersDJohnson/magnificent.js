@@ -1,0 +1,21 @@
+{
+  "name": "verb-helper-bower",
+  "version": "1.0.0",
+  "description": "Verb helper for Bower.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/adjohnson916/verb-helper-bower.git"
+  },
+  "bugs": {
+    "url": "https://github.com/adjohnson916/verb-helper-bower/issues"
+  },
+  "scripts": {
+  },
+  "author": "Anders D. Johnson",
+  "license": "MIT",
+  "dependencies": {
+    "arrayify": "~1.0.0",
+    "parse-github-url": "~0.1.1"
+  }
+}
