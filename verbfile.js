@@ -14,8 +14,11 @@ verb.task('default', function() {
     .pipe(verb.dest('./'));
 });
 
+verb.data(require('./verb/data'));
 
-// var helperBower = require('./verb-helper-bower');
+ // var helperBower = require('./verb-helper-bower');
 var helperBower = require('verb-helper-bower');
 verb.helper('bowerMain', helperBower.main);
+verb.helper('bowerMainHTML', helperBower.mainHTML);
 verb.helper('bowerDeps', helperBower.deps);
+verb.helper('bowerDepsHTML', helperBower.depsHTML);
