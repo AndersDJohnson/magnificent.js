@@ -30,5 +30,6 @@
       "descriptionMore": "A jQuery plugin for responsive zoom of images & more!",
       "save": true
     }
-  }
+  },
+  "dependencies": {}
 }

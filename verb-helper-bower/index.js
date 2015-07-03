@@ -3,6 +3,8 @@ var fs = require('fs');
 var path = require('path');
 var arrayify = require('arrayify');
 var gh = require('parse-github-url');
+var traverse = require('traverse');
+var _ = require('lodash');
 
 var parse = function (opts) {
   opts = opts || {};
@@ -68,13 +70,13 @@ var cleanPath = function () {
 
 var getGitHubUrlFromBowerJson = function (bowerJson) {
   var ghRepo = gh(bowerJson._source);
-  url = 'https://github.com/' + ghRepo.repopath;
+  var url = 'https://github.com/' + ghRepo.repopath;
   return url;
 };
 
 var getGitHubRawUrlFromBowerJson = function (bowerJson) {
   var ghRepo = gh(bowerJson._source);
-  url = 'https://raw.githubusercontent.com/' + ghRepo.repopath;
+  var url = 'https://raw.githubusercontent.com/' + ghRepo.repopath;
   return url;
 };
 
@@ -93,14 +95,15 @@ var mainList = function (opts) {
     var ms = arrayify(j.main);
     ms.forEach(function (m) {
       var children = [];
-      var mp = cleanPath(opts.basePath, m);
-      var name = mp;
+      var file = cleanPath(opts.basePath, m);
+      var name = file;
+      var url;
       if (j._resolution) {
         // var ghBaseUrl = getGitHubUrlFromBowerJson(j);
         // var url = ghBaseUrl + '/blob/' + j._resolution.tag + '/' + m;
         var ghRawBaseUrl = getGitHubRawUrlFromBowerJson(j);
         var commitish = j._resolution.tag || j._resolution.branch || j._resolution.commit;
-        var url = ghRawBaseUrl + '/' + commitish + '/' + m;
+        url = ghRawBaseUrl + '/' + commitish + '/' + m;
       }
       else {
         url = name;
@@ -117,8 +120,8 @@ var mainList = function (opts) {
               k = cleanPath(k);
               norm[k] = v;
             });
-            if (norm[mp]) {
-              var optMsg = norm[mp];
+            if (norm[file]) {
+              var optMsg = norm[file];
               children.push('Optional: ' + optMsg);
             }
           }
@@ -127,6 +130,7 @@ var mainList = function (opts) {
 
       ts.push({
         name: name,
+        file: file,
         children: children
       });
     });
@@ -138,11 +142,72 @@ var mainList = function (opts) {
 var main = function (opts) {
   opts = opts || {};
   var ts = mainList(opts);
-  t = mdList(ts, opts.indent);
+  var t = mdList(ts, opts.indent);
   return t;
 };
 
-var deps = function (opts) {
+
+var fileToHTML = function (file, opts) {
+  var j = parse(opts);
+  var prefix;
+  if (typeof opts.prefix === 'string') {
+    prefix = opts.prefix;
+  }
+  else {
+    prefix = 'bower_components/' + j.name + '/';
+  }
+  var ext = path.extname(file);
+  file = prefix + file;
+  var html;
+  if (ext === '.css') {
+    html = '<link rel="stylesheet" href="' + file + '" />';
+  }
+  else if (ext === '.js') {
+    html = '<script src="' + file + '"></script>';
+  }
+  return html;
+};
+
+var sortHTMLs = function (htmls) {
+  return _.sortBy(htmls, function (o) {
+    // JS at the bottom
+    if (o.ext === '.js') return 1;
+    return -1;
+  })
+  .map(function (o) {
+    return o.html;
+  });
+};
+
+var getHTMLsForList = function (ts, opts) {
+  var htmls = [];
+  traverse(ts).forEach(function (o) {
+    var file = o.file;
+    if (file) {
+      var h = fileToHTML(file, opts);
+      htmls.push({
+        ext: h.ext,
+        html: h
+      });
+    }
+  });
+  return htmls;
+};
+
+var markdownHTMLCode = function (t) {
+  return '```html\n' + t.join('\n') + '\n```\n';
+};
+
+var mainHTML = function (opts) {
+  opts = opts || {};
+  var j = parse(opts);
+  var ts = mainList(opts);
+  var htmls = getHTMLsForList(ts, opts);
+  htmls = sortHTMLs(htmls);
+  return markdownHTMLCode(htmls);
+};
+
+var depsList = function (opts) {
   opts = opts || {};
   var j = parse(opts);
   var ts = [];
@@ -153,7 +218,7 @@ var deps = function (opts) {
       var dj;
       try {
         var nb = getBasePathForDep(n);
-        nf = getBowerFileForDep(n);
+        var nf = getBowerFileForDep(n);
         dj = parse({bowerFile: nf});
         ch = mainList({
           basePath: nb,
@@ -205,10 +270,30 @@ var deps = function (opts) {
       ts.push(item);
     }
   }
-  t = mdList(ts, opts.indent);
+  return ts;
+};
+
+var deps = function (opts) {
+  opts = opts || {};
+  var j = parse(opts);
+  var ts = depsList(opts);
+  var t = mdList(ts, opts.indent);
   return t;
+};
+
+var depsHTML = function (opts) {
+  opts = opts || {};
+  var j = parse(opts);
+  var ts = depsList(opts);
+  var htmls = getHTMLsForList(ts, _.defaults({
+    prefix: ''
+  }, opts));
+  htmls = sortHTMLs(htmls);
+  return markdownHTMLCode(htmls);
 };
 
 
 exports.main = main;
+exports.mainHTML = mainHTML;
 exports.deps = deps;
+exports.depsHTML = depsHTML;

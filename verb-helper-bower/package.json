@@ -10,12 +10,13 @@
   "bugs": {
     "url": "https://github.com/adjohnson916/verb-helper-bower/issues"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "author": "Anders D. Johnson",
   "license": "MIT",
   "dependencies": {
     "arrayify": "~1.0.0",
-    "parse-github-url": "~0.1.1"
+    "lodash": "^3.10.0",
+    "parse-github-url": "~0.1.1",
+    "traverse": "^0.6.6"
   }
 }
