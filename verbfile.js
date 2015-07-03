@@ -6,6 +6,8 @@
 var verb = require('verb');
 var gutil = require('gulp-util');
 
+verb.disable('dest:format plugin');
+
 verb.task('default', function() {
   verb.src(['.verb*.md', 'docs/_verb/**/*.md'])
     .on('error', gutil.log)
