@@ -92,6 +92,7 @@ var mainList = function (opts) {
   if (j.main) {
     var ms = arrayify(j.main);
     ms.forEach(function (m) {
+      var children = [];
       var mp = cleanPath(opts.basePath, m);
       var name = mp;
       if (j._resolution) {
@@ -118,14 +119,15 @@ var mainList = function (opts) {
             });
             if (norm[mp]) {
               var optMsg = norm[mp];
-              name += ' (Optional: ' + optMsg + ')';
+              children.push('Optional: ' + optMsg);
             }
           }
         }
       }
 
       ts.push({
-        name: name
+        name: name,
+        children: children
       });
     });
   }
