@@ -89,3 +89,13 @@
 .mag-js [mag-zoom][mag-toggle="false"] {
     display: block;
 }
+
+[mag-flow="inline"] {
+    display: inline-block;
+    position: relative;
+    width: auto;
+    height: auto;
+}
+[mag-flow="inline"] .mag-thumb {
+    position: relative;
+}
