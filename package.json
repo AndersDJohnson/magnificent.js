@@ -1,20 +1,38 @@
 {
   "name": "magnificent",
   "version": "2.0.1",
-  "description": "",
+  "description": "Zoom responsively.",
   "main": "src/js/mag.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/adjohnson916/magnificent.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/adjohnson916/magnificent.js/issues"
+  },
   "scripts": {
     "test": "grunt test",
     "sync-pkg": "sync-pkg --extend --empty -p version -p !dependencies -p !devDependencies -p !main"
   },
   "author": "Anders D. Johnson",
   "license": "MIT",
+  "dependencies": {},
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-jsdoc": "^0.5.8",
     "grunt-simple-mocha": "^0.4.0",
     "load-grunt-tasks": "^3.1.0",
-    "sync-pkg": "git+https://github.com/adjohnson916/sync-pkg.git#adjohnson916"
+    "sync-pkg": "git+https://github.com/adjohnson916/sync-pkg.git#adjohnson916",
+    "gulp-util": "~3.0.6",
+    "load-grunt-tasks": "^3.1.0",
+    "verb": "git+https://github.com/verbose/verb.git",
+    "verb-helper-bower": "file:./verb-helper-bower"
+  },
+  "verb": {
+    "data": {
+      "descriptionMore": "A jQuery plugin for responsive zoom of images & more!",
+      "save": true
+    }
   }
 }
