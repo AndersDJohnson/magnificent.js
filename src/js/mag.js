@@ -122,10 +122,17 @@
       lens = this.constrainLensXY(lens);
     }
 
-    zoomed.w = zoom;
-    zoomed.h = zoom;
-    zoomed.x = 0.5 - focus.x * zoom;
-    zoomed.y = 0.5 - focus.y * zoom;
+    zoomed.w = 1 / dw;
+    zoomed.h = 1 / dh;
+
+    var z = this.constrainZoomed(zoomed, options);
+    if (z.w !== zoomed.w) {
+      zoom *= z.w / zoomed.w;
+    }
+    zoomed = z;
+
+    zoomed.x = 0.5 - focus.x * zoomed.w;
+    zoomed.y = 0.5 - focus.y * zoomed.h;
 
     // the following is better equation for constrained zoom
     // zoomed.x = focus.x * (1 - zoom);
@@ -151,6 +158,28 @@
     return this.minMax(val, min, 1);
   };
 
+  Mag.prototype.constrainZoomed = function (r, options) {
+    var wm;
+    var hm;
+    wm = this.minMax(r.w, options.zoomMin, options.zoomMax);
+    if (wm !== r.w) {
+      hm *= wm / r.w;
+      hm  = this.minMax(hm, options.zoomMin, options.zoomMax);
+    }
+    else {
+      hm = this.minMax(r.h, options.zoomMin, options.zoomMax);
+      if (hm !== r.h) {
+        wm *= hm / r.h;
+        wm = this.minMax(wm, options.zoomMin, options.zoomMax);
+      }
+    }
+    return {
+      w: wm,
+      h: hm,
+      x: r.x,
+      y: r.y
+    };
+  };
 
   Mag.prototype.constrainLensWH = function (r) {
     var wm;
