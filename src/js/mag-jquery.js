@@ -116,6 +116,7 @@
    * @property {number} zoomRate - Rate at which to adjust zoom, from (0,∞). Default = 0.2.
    * @property {number} zoomMin - Minimum zoom level allowed, from (0,∞). Default = 2.
    * @property {number} zoomMax - Maximum zoom level allowed, from (0,∞). Default = 10.
+   * @property {number} ratio - Ratio of outer (w/h) to inner (w/h) container ratios. Default = 1.
    * @property {boolean} constrainLens - Whether lens position is constrained. Default = true.
    * @property {boolean} constrainZoomed - Whether zoomed position is constrained. Default = false.
    * @property {boolean} toggle - Whether toggle display of zoomed vs. thumbnail upon interaction. Default = true.
@@ -134,7 +135,8 @@
     zoomMax: 10,
     zoomRate: 0.2,
     toggle: true,
-    smooth: true
+    smooth: true,
+    ratio: 1
   };
 
 
@@ -200,6 +202,8 @@
 
     var $lens = this.$lens;
 
+    var ratio = options.ratio;
+
     var model = this.model = {
       focus: {
         x: 0.5,
@@ -209,7 +213,8 @@
       lens: {
         w: 0,
         h: 0
-      }
+      },
+      ratio: ratio
     };
 
     var mag = this.mag = new Mag({
@@ -229,7 +234,8 @@
       lens: {
         w: 0,
         h: 0
-      }
+      },
+      ratio: ratio
     };
 
     var magLazy = this.magLazy = new Mag({
