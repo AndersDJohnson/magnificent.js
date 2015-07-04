@@ -32,6 +32,8 @@ In your page, include:
 
   * [src/js/mag-jquery.js](src/js/mag-jquery.js)
 
+  * [src/js/mag-control.js](src/js/mag-control.js)
+    * Optional: For controls.
   * [src/css/mag.css](src/css/mag.css)
 
   * [src/theme/default.css](src/theme/default.css)
@@ -40,6 +42,7 @@ In your page, include:
 ```html
 <script src="bower_components/magnificent/src/js/mag.js"></script>
 <script src="bower_components/magnificent/src/js/mag-jquery.js"></script>
+<script src="bower_components/magnificent/src/js/mag-control.js"></script>
 <link rel="stylesheet" href="bower_components/magnificent/src/css/mag.css" />
 <link rel="stylesheet" href="bower_components/magnificent/src/theme/default.css" />
 ```
