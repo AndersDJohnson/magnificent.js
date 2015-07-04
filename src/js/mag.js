@@ -55,6 +55,8 @@
     options.constrainLens = ! (options.constrainLens === false);
     options.constrainZoomed = ! (options.constrainZoomed === false);
 
+    this.id = options.id;
+
     this.model = options.model;
     this.options = options;
 
@@ -84,6 +86,7 @@
     model.zoomed = this.fillXY(this.fillWH(model.zoomed));
     model.boundedLens = this.fillXY(this.fillWH(model.boundedLens));
     model.zoom = model.zoom || 1;
+    model.ratio = model.ratio || 1;
   };
 
   /**
@@ -105,13 +108,18 @@
 
     dw = 1 / zoom;
     dh = 1 / zoom;
-    lens.x = focus.x - (dw / 2);
-    lens.y = focus.y - (dh / 2);
+    dh = dh / model.ratio;
+
     lens.w = dw;
     lens.h = dh;
 
     if (options.constrainLens) {
-      lens = this.constrainLens(lens);
+      lens = this.constrainLensWH(lens);
+    }
+    lens.x = focus.x - (lens.w / 2);
+    lens.y = focus.y - (lens.h / 2);
+    if (options.constrainLens) {
+      lens = this.constrainLensXY(lens);
     }
 
     zoomed.w = zoom;
@@ -145,9 +153,23 @@
 
 
   Mag.prototype.constrainLensWH = function (r) {
+    var wm;
+    var hm;
+    wm = this.minMax1(r.w, 0.1);
+    if (wm !== r.w) {
+      hm *= wm / r.w;
+      hm  = this.minMax1(hm, 0.1);
+    }
+    else {
+      hm = this.minMax1(r.h, 0.1);
+      if (hm !== r.h) {
+        wm *= hm / r.h;
+        wm = this.minMax1(wm, 0.1);
+      }
+    }
     return {
-      w: this.minMax1(r.w, 0.1),
-      h: this.minMax1(r.h, 0.1),
+      w: wm,
+      h: hm,
       x: r.x,
       y: r.y
     };
@@ -155,8 +177,8 @@
 
   Mag.prototype.constrainLensXY = function (r) {
     return {
-      x: this.minMax(r.x, 0),
-      y: this.minMax(r.y, 0),
+      x: this.minMax(r.x, 0, 1 - r.w),
+      y: this.minMax(r.y, 0, 1 - r.h),
       w: r.w,
       h: r.h
     };
