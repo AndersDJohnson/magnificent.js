@@ -45,11 +45,11 @@ var mdList = function (list, indent) {
     }
     else {
       name = item.name;
-      children = (item.children ? '\n' + mdList(item.children, indent+1) : '');
+      children = (item.children ? mdList(item.children, indent+1) : '');
     }
-    ret = nest + name + children;
+    ret = nest + name + '\n' + children;
     return ret;
-  }).join('\n');
+  }).join('');
 };
 
 var getBasePathForDep = function (depName) {
