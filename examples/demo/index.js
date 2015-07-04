@@ -14,6 +14,15 @@
 (function () {
 	var $host;
 
+	$host = $('[mag-thumb="inner-inline"]');
+	$host.mag();
+
+})();
+
+
+(function () {
+	var $host;
+
 	$host = $('[mag-thumb="outer"]');
 	$host.mag({
 	  mode: 'outer',

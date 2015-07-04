@@ -32,6 +32,12 @@
 }
 */
 
+
+[mag-thumb="inner-inline"] {
+    float: left;
+}
+
+
 .mag-eg-hud {
     position: absolute;
     z-index: 10;
