@@ -58,6 +58,38 @@ $host.mag();<!--
 
         <div class="row mag-eg-row">
           <div class="col col-md-6">
+            <div class="mag-eg-el-wrap">
+              <div class="img-thumbnail">
+                <div mag-thumb="inner-inline" mag-flow="inline" class="mag-eg-el">
+                  <img src="img/alley/500x300.jpg" style="width: 400px; height: auto" />
+                </div>
+                <div mag-zoom="inner-inline" class="mag-eg-el">
+                  <img src="img/alley/1000x600.jpg" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col col-md-6">
+            <div class="mag-eg-doc">
+              <h3>Inner Inline</h3>
+              <pre><code class="lang-html"><!--
+-->&lt;div mag-thumb=&quot;inner-inline&quot; mag-flow=&quot;inline&quot;&gt;
+  &lt;img src=&quot;img/alley/500x300.jpg&quot; style=&quot;width: 400px&quot; /&gt;
+&lt;/div&gt;
+&lt;div mag-zoom=&quot;inner-inline&quot;&gt;
+  &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
+&lt;/div&gt;<!--
+              --></code></pre>
+              <pre><code class="lang-js"><!--
+-->$host = $('[mag-thumb=&quot;inner-inline&quot;]');
+$host.mag();<!--
+              --></code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mag-eg-row">
+          <div class="col col-md-6">
             <div class="mag-eg-el-wrap img-thumbnail">
               <div class="proportion">
                 <div mag-thumb="outer" class="mag-eg-el">
