@@ -66,12 +66,11 @@ $host.mag();<!--
                 <div class="filler"></div>
               </div>
             </div>
-            <div class="mag-eg-el-wrap img-thumbnail">
-              <div class="proportion">
-                <div mag-zoom="outer" class="mag-eg-el" style="float: right;">
+            <div class="mag-eg-el-wrap img-thumbnail" style="height:auto;width:auto">
+              <div style="height: 300px; width: 300px">
+                <div mag-zoom="outer" class="mag-eg-el" style="float: right;position:relative;overflow:hidden;">
                   <img src="img/rieti/full.jpg" />
                 </div>
-                <div class="filler"></div>
               </div>
             </div>
           </div>
@@ -83,15 +82,18 @@ $host.mag();<!--
   &lt;div mag-thumb=&quot;outer&quot;&gt;
     &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
   &lt;/div&gt;
-  &lt;div mag-zoom=&quot;outer&quot;&gt;
-    &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
+  &lt;div style=&quot;width: 300px; height: 300px;&quot;&gt;
+    &lt;div mag-zoom=&quot;outer&quot;&gt;
+      &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;<!--
               --></code></pre>
               <pre><code><!--
 -->$host = $('[mag-thumb=&quot;outer&quot;]');
 $host.mag({
-  mode: 'outer'
+  mode: 'outer',
+  ratio: 1 / 1.6
 });
               </code></pre>
             </div>
