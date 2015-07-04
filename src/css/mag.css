@@ -10,8 +10,8 @@
 }
 
 .mag-zoomed-container {
-    /*position: absolute;*/
-    position: relative;
+    position: absolute;
+    /*position: relative;*/
     height: 100%;
     width: 100%;
     left: 0;
@@ -63,6 +63,12 @@
     width: 100%;
     left: 0;
     top: 0;
+}
+
+[mag-thumb] {
+    position: absolute;
+    height: 100%;
+    width: 100%;
 }
 
 [mag-thumb] img {
