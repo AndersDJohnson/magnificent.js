@@ -3,6 +3,7 @@
   "main": [
     "src/js/mag.js",
     "src/js/mag-jquery.js",
+    "src/js/mag-control.js",
     "src/css/mag.css",
     "src/theme/default.css"
   ],
@@ -23,6 +24,7 @@
   "optional": {
     "files": {
       "src/theme/default.css": "Or another theme.",
+      "src/js/mag-control.js": "For controls.",
       "bower_components/jquery-mousewheel/jquery.mousewheel.js": "For scroll zoom.",
       "bower_components/jquery.threedubmedia/event.drag/jquery.event.drag.js": "For drag interaction."
     },
