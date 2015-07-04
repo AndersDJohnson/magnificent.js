@@ -16,7 +16,8 @@
 
 	$host = $('[mag-thumb="outer"]');
 	$host.mag({
-	  mode: 'outer'
+	  mode: 'outer',
+	  ratio: 1 / 1.6
 	});
 })();
 
