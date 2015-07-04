@@ -14,7 +14,10 @@
     "test": "grunt test",
     "sync-pkg": "sync-pkg --extend --empty -p version -p !dependencies -p !devDependencies -p !main"
   },
-  "author": "Anders D. Johnson",
+  "author": {
+    "name": "Anders D. Johnson",
+    "url": "https://github.com/adjohnson916"
+  },
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {

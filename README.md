@@ -109,7 +109,7 @@ See https://github.com/adjohnson916/magnificent.js/tree/v1.x.
 * [ElevateZoom]
 
 ## License
-Copyright © 2014-2015 Anders D. Johnson
+Copyright © 2013-2015 [Anders D. Johnson](https://github.com/adjohnson916).
 Released under the MIT license.
 
 
