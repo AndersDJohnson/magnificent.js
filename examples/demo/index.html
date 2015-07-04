@@ -40,7 +40,7 @@
           <div class="col col-md-6">
             <div class="mag-eg-doc">
               <h3>Inner</h3>
-              <pre><code><!--
+              <pre><code class="lang-html"><!--
 -->&lt;div mag-thumb=&quot;inner&quot;&gt;
   &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
 &lt;/div&gt;
@@ -48,7 +48,7 @@
   &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
 &lt;/div&gt;<!--
               --></code></pre>
-              <pre><code><!--
+              <pre><code class="lang-js"><!--
 -->$host = $('[mag-thumb=&quot;inner&quot;]');
 $host.mag();<!--
               --></code></pre>
@@ -77,7 +77,7 @@ $host.mag();<!--
           <div class="col col-md-6">
             <div class="mag-eg-doc">
               <h3>Outer</h3>
-              <pre><code><!--
+              <pre><code class="lang-html"><!--
 -->&lt;div class=&quot;outer-wrap&quot;&gt;
   &lt;div mag-thumb=&quot;outer&quot;&gt;
     &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
@@ -89,7 +89,7 @@ $host.mag();<!--
   &lt;/div&gt;
 &lt;/div&gt;<!--
               --></code></pre>
-              <pre><code><!--
+              <pre><code class="lang-js"><!--
 -->$host = $('[mag-thumb=&quot;outer&quot;]');
 $host.mag({
   mode: 'outer',
@@ -124,7 +124,7 @@ $host.mag({
           <div class="col col-md-6">
             <div class="mag-eg-doc">
               <h3>Outer Drag</h3>
-              <pre><code><!--
+              <pre><code class="lang-html"><!--
 -->&lt;div class=&quot;outer-wrap&quot;&gt;
   &lt;div mag-thumb=&quot;outer&quot;&gt;
     &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
@@ -134,7 +134,7 @@ $host.mag({
   &lt;/div&gt;
 &lt;/div&gt;<!--
               --></code></pre>
-              <pre><code><!--
+              <pre><code class="lang-js"><!--
 -->$host = $('[mag-thumb=&quot;outer&quot;]');
 $host.mag({
   mode: 'outer',
@@ -163,7 +163,7 @@ $host.mag({
           <div class="col col-md-6">
             <div class="mag-eg-doc">
               <h3>Drag</h3>
-              <pre><code><!--
+              <pre><code class="lang-html"><!--
 -->&lt;div mag-thumb=&quot;drag&quot;&gt;
   &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
 &lt;/div&gt;
@@ -171,7 +171,7 @@ $host.mag({
   &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
 &lt;/div&gt;<!--
               --></code></pre>
-              <pre><code><!--
+              <pre><code class="lang-js"><!--
 -->$host = $('[mag-thumb=&quot;drag&quot;]');
 $host.mag({
   position: 'drag',
@@ -208,7 +208,7 @@ $host.mag({
           <div class="col col-md-6">
             <div class="mag-eg-doc">
               <h3><a href="#controls">Controls</a></h3>
-              <pre><code><!--
+              <pre><code class="lang-html"><!--
 -->&lt;script src="src/js/mag-control.js"&gt;&lt;/script&gt;
 
 &lt;div mag-thumb=&quot;controls&quot;&gt;
@@ -227,7 +227,7 @@ $host.mag({
   &lt;button mag-ctrl-move-by-x=&quot;0.5&quot;&gt;&gt;&lt;/button&gt;
 &lt;/div&gt;<!--
               --></code></pre>
-              <pre><code><!--
+              <pre><code class="lang-js"><!--
 -->$host = $('[mag-thumb=&quot;controls&quot;]');
 $host.mag();
 
@@ -253,8 +253,8 @@ $controls.magCtrl({
     <script src="../../src/js/mag-control.js"></script>
     <script src="index.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/github.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 
   </body>
