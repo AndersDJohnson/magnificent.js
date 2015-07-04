@@ -78,14 +78,12 @@ $host.mag();<!--
             <div class="mag-eg-doc">
               <h3>Outer</h3>
               <pre><code class="lang-html"><!--
--->&lt;div class=&quot;outer-wrap&quot;&gt;
-  &lt;div mag-thumb=&quot;outer&quot;&gt;
-    &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div style=&quot;width: 300px; height: 300px;&quot;&gt;
-    &lt;div mag-zoom=&quot;outer&quot;&gt;
-      &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
-    &lt;/div&gt;
+-->&lt;div mag-thumb=&quot;outer&quot;&gt;
+  &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
+&lt;/div&gt;
+&lt;div style=&quot;width: 300px; height: 300px;&quot;&gt;
+  &lt;div mag-zoom=&quot;outer&quot;&gt;
+    &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
   &lt;/div&gt;
 &lt;/div&gt;<!--
               --></code></pre>
@@ -125,17 +123,16 @@ $host.mag({
             <div class="mag-eg-doc">
               <h3>Outer Drag</h3>
               <pre><code class="lang-html"><!--
--->&lt;div class=&quot;outer-wrap&quot;&gt;
-  &lt;div mag-thumb=&quot;outer&quot;&gt;
-    &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div mag-zoom=&quot;outer&quot;&gt;
-    &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
-  &lt;/div&gt;
-&lt;/div&gt;<!--
+-->&lt;div mag-thumb=&quot;outer-drag&quot;&gt;
+  &lt;img src=&quot;img/alley/500x300.jpg&quot; /&gt;
+&lt;/div&gt;
+&lt;div mag-zoom=&quot;outer-drag&quot;&gt;
+  &lt;img src=&quot;img/alley/1000x600.jpg&quot; /&gt;
+&lt;/div&gt;
+<!--
               --></code></pre>
               <pre><code class="lang-js"><!--
--->$host = $('[mag-thumb=&quot;outer&quot;]');
+-->$host = $('[mag-thumb=&quot;outer-drag&quot;]');
 $host.mag({
   mode: 'outer',
   position: 'drag',
