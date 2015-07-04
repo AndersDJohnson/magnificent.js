@@ -74,6 +74,14 @@ var getGitHubUrlFromBowerJson = function (bowerJson) {
   return url;
 };
 
+var getGitHubVersionUrlFromBowerJson = function (bowerJson) {
+  var ghRepo = gh(bowerJson._source);
+  var resolution = bowerJson._resolution;
+  var tree = resolution.tag || resolution.branch || resolution.commit;
+  var url = 'https://github.com/' + ghRepo.repopath + '/tree/' + tree;
+  return url;
+};
+
 var getGitHubRawUrlFromBowerJson = function (bowerJson) {
   var ghRepo = gh(bowerJson._source);
   var url = 'https://raw.githubusercontent.com/' + ghRepo.repopath;
@@ -207,6 +215,15 @@ var mainHTML = function (opts) {
   return markdownHTMLCode(htmls);
 };
 
+var mdLinkify = function (text, url) {
+  if (url) {
+    return '[' + text + '](' + url + ')';
+  }
+  else {
+    return text;
+  }
+};
+
 var depsList = function (opts) {
   opts = opts || {};
   var j = parse(opts);
@@ -247,20 +264,19 @@ var depsList = function (opts) {
         url = j.homepage;
       }
 
-      if (url) {
-        // n = '[`' + n + '`](' + url + ')';
-        n = '[' + n + '](' + url + ')';
+      // n = '`' + n + '`';
+      n = mdLinkify(n, url);
+
+      var vUrl;
+      try {
+        vUrl = getGitHubVersionUrlFromBowerJson(dj);
       }
-      else {
-        // n = '`' + n + '`';
-      }
-      v = '@' + '`' + v + '`';
-      // var name = n + '`@' + v + '`';
-      // var name = n + '`' + v + '`';
-      var name = n;
-      if (v) {
-        name += v;
-      }
+      catch (e) {}
+
+      // v = '`' + v + '`';
+      v = mdLinkify(v, vUrl);
+
+      var name = n + '@' + v;
       var item = {
         name: name
       };

@@ -50,16 +50,16 @@ In your page, include:
 
 * Any dependencies:
 
-  * [jquery](https://github.com/jquery/jquery)@`>=1.4.2 <3`
+  * [jquery](https://github.com/jquery/jquery)@[>=1.4.2 <3](https://github.com/jquery/jquery/tree/2.1.4)
     * [bower_components/jquery/dist/jquery.js](https://raw.githubusercontent.com/jquery/jquery/2.1.4/dist/jquery.js)
 
-  * [jquery-bridget](https://github.com/desandro/jquery-bridget)@`~1.1.0`
+  * [jquery-bridget](https://github.com/desandro/jquery-bridget)@[~1.1.0](https://github.com/desandro/jquery-bridget/tree/v1.1.0)
     * [bower_components/jquery-bridget/jquery.bridget.js](https://raw.githubusercontent.com/desandro/jquery-bridget/v1.1.0/jquery.bridget.js)
 
-  * [jquery-mousewheel](https://github.com/jquery/jquery-mousewheel)@`~3.1.12`
+  * [jquery-mousewheel](https://github.com/jquery/jquery-mousewheel)@[~3.1.12](https://github.com/jquery/jquery-mousewheel/tree/3.1.12)
     * [bower_components/jquery-mousewheel/jquery.mousewheel.js](https://raw.githubusercontent.com/jquery/jquery-mousewheel/3.1.12/./jquery.mousewheel.js)
       * Optional: For scroll zoom.
-  * [jquery.threedubmedia](https://github.com/threedubmedia/jquery.threedubmedia)@`*`
+  * [jquery.threedubmedia](https://github.com/threedubmedia/jquery.threedubmedia)@[*](https://github.com/threedubmedia/jquery.threedubmedia/tree/master)
     * [bower_components/jquery.threedubmedia/event.drag/jquery.event.drag.js](https://raw.githubusercontent.com/threedubmedia/jquery.threedubmedia/master/event.drag/jquery.event.drag.js)
       * Optional: For drag interaction.
 
