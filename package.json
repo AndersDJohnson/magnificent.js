@@ -25,10 +25,9 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-jsdoc": "^0.5.8",
     "grunt-simple-mocha": "^0.4.0",
-    "load-grunt-tasks": "^3.1.0",
-    "sync-pkg": "git+https://github.com/adjohnson916/sync-pkg.git#adjohnson916",
     "gulp-util": "~3.0.6",
     "load-grunt-tasks": "^3.1.0",
+    "sync-pkg": "^0.6.2",
     "verb": "git+https://github.com/verbose/verb.git",
     "verb-helper-bower": "file:./verb-helper-bower"
   },
