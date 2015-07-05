@@ -36,6 +36,15 @@
                 <div class="filler"></div>
               </div>
             </div>
+            <div mag-ctrl="controls">
+              <button class="mag-eg-ctrl-zoom-out" mag-ctrl-zoom-by="-0.5">-</button>
+              <button class="mag-eg-ctrl-zoom-in" mag-ctrl-zoom-by="0.5">+</button>
+              <button class="mag-eg-ctrl-move-up" mag-ctrl-move-by-y="-0.5">^</button>
+              <button class="mag-eg-ctrl-move-down" mag-ctrl-move-by-y="0.5">v</button>
+              <button class="mag-eg-ctrl-move-left" mag-ctrl-move-by-x="-0.5">&lt;</button>
+              <button class="mag-eg-ctrl-move-right" mag-ctrl-move-by-x="0.5">&gt;</button>
+              <button class="mag-eg-ctrl-fullscreen" mag-ctrl-fullscreen>[ ]</button>
+            </div>
           </div>
           <div class="col col-md-6">
             <div class="mag-eg-doc">
@@ -232,6 +241,7 @@ $host.mag({
               <button class="mag-eg-ctrl-move-down" mag-ctrl-move-by-y="0.5">v</button>
               <button class="mag-eg-ctrl-move-left" mag-ctrl-move-by-x="-0.5">&lt;</button>
               <button class="mag-eg-ctrl-move-right" mag-ctrl-move-by-x="0.5">&gt;</button>
+              <button class="mag-eg-ctrl-fullscreen" mag-ctrl-fullscreen>[ ]</button>
             </div>
           </div>
           <div class="col col-md-6">
@@ -254,6 +264,7 @@ $host.mag({
   &lt;button mag-ctrl-move-by-y=&quot;0.5&quot;&gt;v&lt;/button&gt;
   &lt;button mag-ctrl-move-by-x=&quot;-0.5&quot;&gt;&lt;&lt;/button&gt;
   &lt;button mag-ctrl-move-by-x=&quot;0.5&quot;&gt;&gt;&lt;/button&gt;
+  &lt;button mag-ctrl-fullscreen&gt;[ ]&lt;/button&gt;
 &lt;/div&gt;<!--
               --></code></pre>
               <pre><code class="lang-js"><!--
@@ -277,6 +288,7 @@ $controls.magCtrl({
     <script src="../../bower_components/jquery-bridget/jquery.bridget.js"></script>
     <script src="../../bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
     <script src="../../bower_components/jquery.threedubmedia/event.drag/jquery.event.drag.js"></script>
+    <script src="../../bower_components/screenfull/dist/screenfull.js"></script>
     <script src="../../src/js/mag.js"></script>
     <script src="../../src/js/mag-jquery.js"></script>
     <script src="../../src/js/mag-control.js"></script>
