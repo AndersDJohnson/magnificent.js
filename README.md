@@ -7,6 +7,12 @@ Check out the [demo][mag-demo]!
 ## New in v2
 
 * Scroll to zoom
+* Drag interaction
+* Inline option
+* Controls
+* Independent proportions for thumb vs. zoom
+* CSS 3D transforms
+* Full screen (coming soon)
 
 ## Install
 
