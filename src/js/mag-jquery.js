@@ -212,7 +212,8 @@
    * @property {boolean} constrainZoomed - Whether zoomed position is constrained. Default = false.
    * @property {boolean} toggle - Whether toggle display of zoomed vs. thumbnail upon interaction. Default = true.
    * @property {boolean} smooth - Whether the zoomed region should gradually approach target, rather than immediately. Default = true.
-   * @property {boolean} cssMode - CSS mode to use for scaling and translating. Either '3d', '2d', or 'position'. Default = '3d'.
+   * @property {string} cssMode - CSS mode to use for scaling and translating. Either '3d', '2d', or 'position'. Default = '3d'.
+   * @property {MagModel} initial - Initial settings for model - focus, lens, zoom, etc.
    */
 
   Magnificent.prototype.options = {
@@ -300,16 +301,21 @@
 
     var ratio = options.ratio;
 
+    var initial = options.initial || {};
+    var zoom = typeof initial.zoom !== 'undefined' ? initial.zoom : 2;
+    var focus = typeof initial.focus !== 'undefined' ? initial.focus : {
+      x: 0.5,
+      y: 0.5
+    };
+    var lens = typeof initial.lens !== 'undefined' ? initial.lens : {
+      w: 0,
+      h: 0
+    };
+
     var model = this.model = {
-      focus: {
-        x: 0.5,
-        y: 0.5
-      },
-      zoom: 2,
-      lens: {
-        w: 0,
-        h: 0
-      },
+      focus: focus,
+      zoom: zoom,
+      lens: lens,
       ratio: ratio
     };
 
@@ -323,13 +329,13 @@
 
     var modelLazy = this.modelLazy = {
       focus: {
-        x: 0.5,
-        y: 0.5
+        x: model.focus.x,
+        y: model.focus.y
       },
-      zoom: 2,
+      zoom: model.zoom,
       lens: {
-        w: 0,
-        h: 0
+        w: model.lens.w,
+        h: model.lens.h
       },
       ratio: ratio
     };

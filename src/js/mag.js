@@ -23,9 +23,16 @@
    */
 
   /**
+   * @typedef {Object} MagModelLens
+   * @property {number} w - Width, from (0,∞).
+   * @property {number} h - Height, from (0,∞).
+   */
+
+  /**
    * @typedef {Object} MagModel
    * @property {number} zoom - Zoom level, from (0,∞).
    * @property {MagModelFocus} focus - Focus object.
+   * @property {MagModelLens} lens - Lens object.
    */
 
   /**
