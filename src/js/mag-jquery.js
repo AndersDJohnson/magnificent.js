@@ -59,12 +59,103 @@
     return (frac * 100) + '%';
   };
 
-  var toCSS = function (pt) {
+  var toCSS = function (pt, mode, id) {
+
+    if (mode === '3d') {
+      return toCSSTransform3d(pt, id);
+    }
+
+    if (mode === '2d') {
+      return toCSSTransform2d(pt, id);
+    }
+
+    // mode === 'position'
+    return toCSSPosition(pt, id);
+  };
+
+  var toCSSPosition = function (pt, id) {
     var css = {};
+
     if (pt.x !== undefined) css.left = cssPerc(pt.x);
     if (pt.y !== undefined) css.top = cssPerc(pt.y);
     if (pt.w !== undefined) css.width = cssPerc(pt.w);
     if (pt.h !== undefined) css.height = cssPerc(pt.h);
+
+    return css;
+  };
+
+  var toCSSTransform2d = function (pt, id) {
+    var css = {};
+    var left;
+    var top;
+    var width;
+    var height;
+
+    var x = pt.x;
+    var y = pt.y;
+    var w = pt.w;
+    var h = pt.h;
+
+    x += (w - 1) * (0.5 - x) / w;
+    y += (h - 1) * (0.5 - y) / h;
+
+    if (x !== undefined) left = cssPerc(x);
+    if (y !== undefined) top = cssPerc(y);
+    if (w !== undefined) width = w;
+    if (h !== undefined) height = h;
+
+    var transform = '';
+
+    if (width) transform += ' scaleX(' + width + ')';
+    if (height) transform += ' scaleY(' + height + ')';
+    if (left) transform += ' translateX(' + left + ')';
+    if (top) transform += ' translateY(' + top + ')';
+
+    css.transform = transform;
+    // TODO: vendor prefixes?
+
+    return css;
+  };
+
+  var toCSSTransform3d = function (pt, id) {
+    var css = {};
+    var left;
+    var top;
+    var width;
+    var height;
+
+    var x = pt.x;
+    var y = pt.y;
+    var w = pt.w;
+    var h = pt.h;
+
+    x += (w - 1) * (0.5 - x) / w;
+    y += (h - 1) * (0.5 - y) / h;
+
+    if (x !== undefined) left = cssPerc(x);
+    if (y !== undefined) top = cssPerc(y);
+    if (w !== undefined) width = w;
+    if (h !== undefined) height = h;
+
+    var transform = '';
+    transform += ' scale3d('
+      + (width !== undefined ? width : 0) + ','
+      + (height !== undefined ? height : 0)
+      + ',1)';
+    transform += ' translate3d('
+      + (left !== undefined ? left : 0) + ','
+      + (top !== undefined ? top : 0)
+      + ',0)';
+    css.transform = transform;
+    // TODO: more vendor prefixes?
+    css['-webkit-transform'] = transform;
+
+    css.width = '100%';
+    css.height = '100%';
+    css.position = 'absolute';
+    css.top = '0';
+    css.left = '0';
+
     return css;
   };
 
@@ -121,6 +212,7 @@
    * @property {boolean} constrainZoomed - Whether zoomed position is constrained. Default = false.
    * @property {boolean} toggle - Whether toggle display of zoomed vs. thumbnail upon interaction. Default = true.
    * @property {boolean} smooth - Whether the zoomed region should gradually approach target, rather than immediately. Default = true.
+   * @property {boolean} cssMode - CSS mode to use for scaling and translating. Either '3d', '2d', or 'position'. Default = '3d'.
    */
 
   Magnificent.prototype.options = {
@@ -134,9 +226,10 @@
     zoomMin: 1,
     zoomMax: 10,
     zoomRate: 0.2,
+    ratio: 1,
     toggle: true,
     smooth: true,
-    ratio: 1
+    cssMode: '3d'
   };
 
 
@@ -177,11 +270,11 @@
     var $zoomed = this.$zoomed;
     if ($lens) {
       lens = this.modelLazy.lens;
-      var lensCSS = toCSS(lens);
+      var lensCSS = toCSS(lens, that.options.cssMode, that.id);
       $lens.css(lensCSS);
     }
     zoomed = this.modelLazy.zoomed;
-    var zoomedCSS = toCSS(zoomed);
+    var zoomedCSS = toCSS(zoomed, that.options.cssMode, that.id);
     $zoomed.css(zoomedCSS);
 
     this.$el.trigger('render', that);
@@ -195,6 +288,9 @@
     var $el = this.$el = this.element;
 
     var options = this.options;
+
+    var id = $el.attr('mag-thumb');
+    this.id = id;
 
     if ($.isFunction(options.toggle)) {
       this.toggle = options.toggle;
@@ -266,8 +362,7 @@
 
 
     if (! options.zoomedContainer) {
-      var id = $el.attr('mag-thumb');
-      options.zoomedContainer = $('[mag-zoom="' + id + '"]');
+      options.zoomedContainer = $('[mag-zoom="' + that.id + '"]');
     }
 
     if (options.zoomedContainer) {
