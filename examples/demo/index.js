@@ -8,6 +8,11 @@
 	  toggle: true
 	});
 
+	$controls = $('[mag-ctrl="controls"]');
+	$controls.magCtrl({
+		mag: $host
+	});
+
 })();
 
 
