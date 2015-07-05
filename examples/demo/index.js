@@ -8,7 +8,7 @@
 	  toggle: true
 	});
 
-	$controls = $('[mag-ctrl="controls"]');
+	$controls = $('[mag-ctrl="inner"]');
 	$controls.magCtrl({
 		mag: $host
 	});
