@@ -20,19 +20,21 @@
   MagnificentControl.prototype._init = function () {
 
     var $el = this.element;
+    var el = $el.get(0);
 
-    this.mag = this.options.mag;
+    this.$mag = $(this.options.mag);
+    this.mag = this.$mag.get(0);
+    this.magInst = this.$mag.data('mag');
 
-    if (this.mag instanceof $) {
-      this.mag = this.mag.data('mag');
-    }
-
+    var $mag = this.$mag;
     var mag = this.mag;
+    var magInst = this.magInst;
 
     $el.find('[mag-ctrl-zoom-by]').on('click', function () {
       var zoomBy = $.parseJSON($(this).attr('mag-ctrl-zoom-by'));
-      mag.zoomBy(zoomBy);
+      magInst.zoomBy(zoomBy);
     });
+
     $el.find('[mag-ctrl-move-by-x], [mag-ctrl-move-by-y]').on('click', function () {
       var x = $(this).attr('mag-ctrl-move-by-x');
       if (x != null) {
@@ -46,7 +48,15 @@
         x: x,
         y: y
       };
-      mag.moveBy(moveBy);
+      magInst.moveBy(moveBy);
+    });
+
+    $el.find('[mag-ctrl-fullscreen]').on('click', function () {
+      if (screenfull) {
+        if (screenfull.enabled) {
+          screenfull.request(mag);
+        }
+      }
     });
   };
 
