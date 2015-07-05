@@ -212,7 +212,7 @@
    * @property {boolean} constrainZoomed - Whether zoomed position is constrained. Default = false.
    * @property {boolean} toggle - Whether toggle display of zoomed vs. thumbnail upon interaction. Default = true.
    * @property {boolean} smooth - Whether the zoomed region should gradually approach target, rather than immediately. Default = true.
-   * @property {boolean} cssMode - CSS mode to use for scaling and translating. Either '3d', '2d', or 'position'. Default = '3d'.
+   * @property {string} cssMode - CSS mode to use for scaling and translating. Either '3d', '2d', or 'position'. Default = '3d'.
    */
 
   Magnificent.prototype.options = {
