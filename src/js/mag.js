@@ -59,8 +59,8 @@
     options.model = options.model || {};
     options.zoomMin = options.zoomMin || 1;
     options.zoomMax = options.zoomMax || 10;
-    options.constrainLens = ! (options.constrainLens === false);
-    options.constrainZoomed = ! (options.constrainZoomed === false);
+    options.constrainLens = options.constrainLens !== false;
+    options.constrainZoomed = options.constrainZoomed !== false;
 
     this.id = options.id;
 

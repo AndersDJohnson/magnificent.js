@@ -2,7 +2,7 @@ module.exports = function (grunt) {
 
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('default', 'test')
+  grunt.registerTask('default', 'test');
 
   grunt.registerTask('test', 'mocha');
   grunt.registerTask('mocha', 'simplemocha');
