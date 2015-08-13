@@ -1,7 +1,11 @@
+import $ from 'jquery';
+import '../../src/js/mag-jquery';
+import '../../src/js/mag-control';
+import 'jquery.threedubmedia';
 
-
-(function () {
+export default (function () {
 	var $host;
+	var $controls;
 
 	$host = $('[mag-thumb="inner"]');
 	$host.mag({

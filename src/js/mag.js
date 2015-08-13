@@ -2,18 +2,7 @@
  * mag
  */
 
-(function (root, factory) {
-  var name = 'Mag';
-  if (typeof define === 'function' && define.amd) {
-    define([], function () {
-        return (root[name] = factory());
-    });
-  } else if (typeof exports === 'object') {
-    module.exports = factory();
-  } else {
-    root[name] = factory();
-  }
-}(this, function () {
+export default (function () {
 
 
   /**
@@ -244,4 +233,4 @@
   };
 
   return Mag;
-}));
+})();

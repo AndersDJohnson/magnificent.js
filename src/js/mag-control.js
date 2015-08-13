@@ -1,15 +1,7 @@
-(function (root, factory) {
-  var name = 'MagnificentControl';
-  if (typeof define === 'function' && define.amd) {
-    define(['jquery', 'jquery-bridget'], function (mag, $) {
-        return (root[name] = factory(mag, $));
-    });
-  } else if (typeof exports === 'object') {
-    module.exports = factory(require('jquery'), require('jquery-bridget'));
-  } else {
-    root[name] = factory($);
-  }
-}(this, function ($) {
+// import $ from '../../bower_components/jquery/dist/jquery';
+import $ from '../../node_modules/jquery/dist/jquery';
+
+export default (function () {
 
   var MagnificentControl = function (element, options) {
     this.element = $( element );
@@ -64,4 +56,4 @@
   $.bridget('magCtrl', MagnificentControl);
 
   return MagnificentControl;
-}));
+})();

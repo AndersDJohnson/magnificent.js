@@ -14,19 +14,17 @@
  */
 
 
-(function (root, factory) {
-  var name = 'Magnificent';
-  if (typeof define === 'function' && define.amd) {
-    define(['mag',' jquery', 'jquery-bridget'], function (mag, $) {
-        return (root[name] = factory(mag, $));
-    });
-  } else if (typeof exports === 'object') {
-    module.exports = factory(require('./mag'), require('jquery'), require('jquery-bridget'));
-  } else {
-    root[name] = factory(Mag, $);
-  }
-}(this, function (Mag, $) {
+// import $ from '../../bower_components/jquery/dist/jquery';
+// import jQuery from '../../node_modules/jquery/dist/jquery';
+// import $ from '../../node_modules/jquery/dist/jquery';
+import $ from 'jquery';
+// import * as jb from 'jquery-bridget';
+import 'jquery-bridget';
+import Mag from './mag';
 
+// var $ = jQuery;
+
+export default (function () {
 
   $(':root').addClass('mag-js');
 
@@ -775,4 +773,5 @@
 
 
   return Magnificent;
-}));
+})();
+
