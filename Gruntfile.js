@@ -9,6 +9,10 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
 
+    jshint: {
+      all: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js']
+    },
+
     simplemocha: {
       options: {
         globals: ['should'],
