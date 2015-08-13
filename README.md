@@ -2,7 +2,7 @@
 
 > Zoom responsively. A jQuery plugin for responsive zoom of images & more!
 
-[![Build Status](https://travis-ci.org/adjohnson916/magnificent.js.svg)](https://travis-ci.org/adjohnson916/magnificent)
+[![Build Status](https://travis-ci.org/adjohnson916/magnificent.js.svg)](https://travis-ci.org/adjohnson916/magnificent.js)
 
 Check out the [demo][mag-demo]!
 
