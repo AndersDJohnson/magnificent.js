@@ -45,14 +45,14 @@
     return {
       x: normOff.x / $target.width(),
       y: normOff.y / $target.height()
-    }
+    };
   };
 
   var ratioOffsetsFor = function ($target, x, y) {
     return {
       x: x / $target.width(),
       y: y / $target.height()
-    }
+    };
   };
 
   var cssPerc = function (frac) {
@@ -138,14 +138,14 @@
     if (h !== undefined) height = h;
 
     var transform = '';
-    transform += ' scale3d('
-      + (width !== undefined ? width : 0) + ','
-      + (height !== undefined ? height : 0)
-      + ',1)';
-    transform += ' translate3d('
-      + (left !== undefined ? left : 0) + ','
-      + (top !== undefined ? top : 0)
-      + ',0)';
+    transform += ' scale3d(' +
+      (width !== undefined ? width : 0) + ',' +
+      (height !== undefined ? height : 0) +
+      ',1)';
+    transform += ' translate3d(' +
+      (left !== undefined ? left : 0) + ',' +
+      (top !== undefined ? top : 0) +
+      ',0)';
     css.transform = transform;
     // TODO: more vendor prefixes?
     css['-webkit-transform'] = transform;
@@ -381,7 +381,7 @@
       }
     }
 
-    if (options.mode === 'outer' && options.showLens == null) {
+    if (options.mode === 'outer' && typeof options.showLens === 'undefined') {
       options.showLens = true;
     }
 
@@ -567,8 +567,9 @@
     }
     else if (options.position === 'drag') {
 
+      var startFocus;
+
       if (options.mode === 'inner') {
-        var startFocus = null;
 
         $zone.drag('start', function () {
           dragging = true;
@@ -582,7 +583,7 @@
         $zone.drag('end', function () {
           dragging = false;
           $el.removeClass('mag--dragging');
-          startFocus = null;
+          startFocus = undefined;
         });
 
         $zone.drag(function( e, dd ) {
@@ -604,8 +605,6 @@
       }
       else {
 
-        var startFocus = null;
-
         $zone.drag('start', function () {
           dragging = true;
           $el.addClass('mag--dragging');
@@ -618,7 +617,7 @@
         $zone.drag('end', function () {
           dragging = false;
           $el.removeClass('mag--dragging');
-          startFocus = null;
+          startFocus = undefined;
         });
 
         $zone.drag(function( e, dd ) {
@@ -744,13 +743,13 @@
 
 
   Magnificent.prototype.moveBy = function (shift) {
-    if (shift.x != null) {
+    if (typeof shift.x !== 'undefined') {
       if (! shift.absolute) {
         shift.x /= this.model.zoom;
       }
       this.model.focus.x += shift.x;
     }
-    if (shift.y != null) {
+    if (typeof shift.y !== 'undefined') {
       if (! shift.absolute) {
         shift.y /= this.model.zoom;
       }
@@ -761,10 +760,10 @@
 
 
   Magnificent.prototype.moveTo = function (coords) {
-    if (coords.x != null) {
+    if (typeof coords.x !== 'undefined') {
       this.model.focus.x = coords.x;
     }
-    if (coords.y != null) {
+    if (typeof coords.y !== 'undefined') {
       this.model.focus.y = coords.y;
     }
     this.compute();
