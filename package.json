@@ -12,7 +12,8 @@
   },
   "scripts": {
     "test": "grunt test",
-    "sync-pkg": "sync-pkg --extend --empty -p version -p !dependencies -p !devDependencies -p !main"
+    "sync-pkg": "sync-pkg --extend --empty -p version -p !dependencies -p !devDependencies -p !main",
+    "verb": "verb"
   },
   "author": {
     "name": "Anders D. Johnson",
@@ -30,6 +31,7 @@
     "load-grunt-tasks": "^3.1.0",
     "sync-pkg": "^0.6.2",
     "verb": "git+https://github.com/verbose/verb.git",
+    "verb-cli": "^0.7.2",
     "verb-helper-bower": "file:./verb-helper-bower"
   },
   "verb": {
