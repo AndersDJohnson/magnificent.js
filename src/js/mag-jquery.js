@@ -23,7 +23,7 @@
   } else if (typeof exports === 'object') {
     module.exports = factory(require('./mag'), require('jquery'), require('jquery-bridget'));
   } else {
-    root[name] = factory(Mag, $);
+    root[name] = factory(root.Mag, root.$);
   }
 }(this, function (Mag, $) {
 

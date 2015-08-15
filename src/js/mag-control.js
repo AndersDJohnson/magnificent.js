@@ -7,7 +7,7 @@
   } else if (typeof exports === 'object') {
     module.exports = factory(require('jquery'), require('jquery-bridget'));
   } else {
-    root[name] = factory($);
+    root[name] = factory(root.$);
   }
 }(this, function ($) {
 
