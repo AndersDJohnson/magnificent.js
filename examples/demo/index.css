@@ -1,4 +1,14 @@
 
+.github-buttons {
+    margin: 15px 0;
+}
+
+.github-buttons img {
+    display: block;
+    float: left;
+    margin: 0 10px 10px 0;
+}
+
 .proportion {
     position: relative;
 }
