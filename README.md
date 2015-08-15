@@ -7,7 +7,7 @@
  [![Build Status](https://travis-ci.org/adjohnson916/magnificent.js.svg)](https://travis-ci.org/adjohnson916/magnificent.js) 
 [![dependencies](https://david-dm.org/adjohnson916/magnificent.js.svg)](https://david-dm.org/adjohnson916/magnificent.js)
 [![dependencies](https://david-dm.org/adjohnson916/magnificent.js/dev-status.svg)](https://david-dm.org/adjohnson916/magnificent.js#info=devDependencies)
-[![Gratipay](https://img.shields.io/gratipay/magnificent.svg)](https://gratipay.com/~adjohnson916/)
+[![Gratipay](https://img.shields.io/gratipay/adjohnson916.svg)](https://gratipay.com/adjohnson916/)
 
 [![NPM](https://nodei.co/npm/magnificent.png)](https://nodei.co/npm/magnificent/)
 
