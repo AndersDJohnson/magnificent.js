@@ -3,6 +3,7 @@
   "version": "2.0.2",
   "description": "Zoom responsively.",
   "main": [
+    "src/js/mag-analytics.js",
     "src/js/mag.js",
     "src/js/mag-jquery.js",
     "src/js/mag-control.js",
