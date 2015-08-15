@@ -2,12 +2,21 @@ module.exports = function (grunt) {
 
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('default', 'test')
+  grunt.registerTask('default', 'build');
 
+  grunt.registerTask('build', [
+    'lint',
+    'test'
+  ]);
+  grunt.registerTask('lint', 'jshint');
   grunt.registerTask('test', 'mocha');
   grunt.registerTask('mocha', 'simplemocha');
 
   grunt.initConfig({
+
+    jshint: {
+      all: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js']
+    },
 
     simplemocha: {
       options: {

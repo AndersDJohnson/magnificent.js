@@ -37,11 +37,11 @@
 
     $el.find('[mag-ctrl-move-by-x], [mag-ctrl-move-by-y]').on('click', function () {
       var x = $(this).attr('mag-ctrl-move-by-x');
-      if (x != null) {
+      if (x) {
         x = $.parseJSON(x);
       }
       var y = $(this).attr('mag-ctrl-move-by-y');
-      if (y != null) {
+      if (y) {
         y = $.parseJSON(y);
       }
       var moveBy = {
