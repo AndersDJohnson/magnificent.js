@@ -3,23 +3,10 @@
     margin: 15px 0;
 }
 
-.github-buttons iframe {
+.github-buttons img {
     display: block;
     float: left;
-    margin: 0 0 10px;
-}
-
-.github-buttons-large {
-    display: none;
-}
-
-@media (min-width: 768px) {
-    .github-buttons-small {
-        display: none;
-    }
-    .github-buttons-large {
-        display: block;
-    }
+    margin: 0 10px 10px 0;
 }
 
 .proportion {
