@@ -1,4 +1,14 @@
 
+.github-buttons {
+    margin: 15px 0;
+}
+
+.github-buttons iframe {
+    display: block;
+    float: left;
+    margin: 0 0 10px;
+}
+
 .proportion {
     position: relative;
 }
