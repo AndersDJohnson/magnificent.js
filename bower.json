@@ -1,6 +1,6 @@
 {
   "name": "magnificent",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Zoom responsively.",
   "main": [
     "src/js/mag.js",
@@ -10,7 +10,10 @@
     "src/theme/default.css"
   ],
   "authors": [
-    "Anders D. Johnson"
+    {
+      "name": "Anders D. Johnson",
+      "homepage": "https://github.com/adjohnson916"
+    }
   ],
   "license": "MIT",
   "dependencies": {
@@ -45,5 +48,9 @@
         }
       }
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/adjohnson916/magnificent.js.git"
   }
 }
