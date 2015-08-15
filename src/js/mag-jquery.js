@@ -17,7 +17,7 @@
 (function (root, factory) {
   var name = 'Magnificent';
   if (typeof define === 'function' && define.amd) {
-    define(['mag', 'jquery', 'jquery-bridget'], function (mag, $) {
+    define(['./mag', 'jquery', 'jquery-bridget'], function (mag, $) {
         return (root[name] = factory(mag, $));
     });
   } else if (typeof exports === 'object') {
