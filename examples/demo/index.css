@@ -9,6 +9,19 @@
     margin: 0 0 10px;
 }
 
+.github-buttons-large {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .github-buttons-small {
+        display: none;
+    }
+    .github-buttons-large {
+        display: block;
+    }
+}
+
 .proportion {
     position: relative;
 }
