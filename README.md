@@ -36,6 +36,14 @@ Install with [bower](http://bower.io/)
 $ bower install magnificent --save
 ```
 
+### npm
+
+Install with [npm](https://www.npmjs.com/)
+
+```sh
+$ npm i magnificent --save
+```
+
 ### Manual
 
 [Download manually](https://github.com/adjohnson916/magnificent.js/releases).
