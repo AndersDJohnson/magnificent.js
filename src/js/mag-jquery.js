@@ -17,15 +17,16 @@
 (function (root, factory) {
   var name = 'Magnificent';
   if (typeof define === 'function' && define.amd) {
-    define(['./mag', 'jquery', 'jquery-bridget'], function (mag, $) {
-        return (root[name] = factory(mag, $));
+    define(['./mag', './mag-analytics', 'jquery', 'jquery-bridget'], function (mag, MagnificentAnalytics, $) {
+        return (root[name] = factory(mag, MagnificentAnalytics, $));
     });
   } else if (typeof exports === 'object') {
-    module.exports = factory(require('./mag'), require('jquery'), require('jquery-bridget'));
+    module.exports = factory(require('./mag'), require('./mag-analytics'),
+      require('jquery'), require('jquery-bridget'));
   } else {
-    root[name] = factory(root.Mag, root.$);
+    root[name] = factory(root.Mag, root.MagnificentAnalytics, root.$);
   }
-}(this, function (Mag, $) {
+}(this, function (Mag, MagnificentAnalytics, $) {
 
 
   $(':root').addClass('mag-js');
@@ -772,6 +773,10 @@
 
   $.bridget('mag', Magnificent);
 
+
+  if (MagnificentAnalytics) {
+    MagnificentAnalytics.track('mag-jquery.js');
+  }
 
   return Magnificent;
 }));
