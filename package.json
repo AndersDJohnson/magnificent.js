@@ -13,7 +13,8 @@
   "scripts": {
     "test": "grunt test",
     "sync-pkg": "sync-pkg --extend --empty -p version -p !dependencies -p !devDependencies -p !main",
-    "verb": "verb"
+    "verb": "verb",
+    "ncu": "ncu"
   },
   "author": {
     "name": "Anders D. Johnson",
@@ -26,7 +27,7 @@
     "grunt-cli": "^0.1.13",
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-jsdoc": "^0.5.8",
+    "grunt-jsdoc": "^0.6.7",
     "grunt-simple-mocha": "^0.4.0",
     "gulp-util": "~3.0.6",
     "load-grunt-tasks": "^3.1.0",
