@@ -1,8 +1,8 @@
 (function (root, factory) {
   var name = 'MagnificentControl';
   if (typeof define === 'function' && define.amd) {
-    define(['jquery', 'jquery-bridget'], function (mag, $) {
-        return (root[name] = factory(mag, $));
+    define(['jquery', 'jquery-bridget'], function ($) {
+        return (root[name] = factory($));
     });
   } else if (typeof exports === 'object') {
     module.exports = factory(require('jquery'), require('jquery-bridget'));
