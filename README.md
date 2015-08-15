@@ -1,7 +1,5 @@
 # magnificent
 
-[![Join the chat at https://gitter.im/adjohnson916/magnificent.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/adjohnson916/magnificent.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 > Zoom responsively. A jQuery plugin for responsive zoom of images & more!
 
 [![NPM version](https://badge.fury.io/js/magnificent.svg)](http://badge.fury.io/js/magnificent)
@@ -9,10 +7,12 @@
  [![Build Status](https://travis-ci.org/adjohnson916/magnificent.js.svg)](https://travis-ci.org/adjohnson916/magnificent.js) 
 [![dependencies](https://david-dm.org/adjohnson916/magnificent.js.svg)](https://david-dm.org/adjohnson916/magnificent.js)
 [![dependencies](https://david-dm.org/adjohnson916/magnificent.js/dev-status.svg)](https://david-dm.org/adjohnson916/magnificent.js#info=devDependencies)
-[![Gratipay](https://img.shields.io/gratipay/adjohnson916.svg)](https://gratipay.com/~adjohnson916/)
+[![Gratipay](https://img.shields.io/gratipay/magnificent.svg)](https://gratipay.com/~adjohnson916/)
 
 [![NPM](https://nodei.co/npm/magnificent.png)](https://nodei.co/npm/magnificent/)
 
+
+[![Join the chat at https://gitter.im/adjohnson916/magnificent.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/adjohnson916/magnificent.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Check out the [demo][mag-demo]!
 
