@@ -17,16 +17,22 @@
 (function (root, factory) {
   var name = 'Magnificent';
   if (typeof define === 'function' && define.amd) {
-    define(['./mag', './mag-analytics', 'jquery', 'jquery-bridget'], function (mag, MagnificentAnalytics, $) {
-        return (root[name] = factory(mag, MagnificentAnalytics, $));
-    });
+    define(['./mag', './mag-analytics', 'jquery', 'hammerjs', 'prevent-ghost-click', 'jquery-bridget'],
+      function (mag, MagnificentAnalytics, Hammer, $) {
+        return (root[name] = factory(mag, MagnificentAnalytics, $, Hammer, PreventGhostClick));
+      }
+    );
   } else if (typeof exports === 'object') {
     module.exports = factory(require('./mag'), require('./mag-analytics'),
-      require('jquery'), require('jquery-bridget'));
+      require('jquery'), require('hammerjs'), require('prevent-ghost-click'),
+      require('jquery-bridget')
+    );
   } else {
-    root[name] = factory(root.Mag, root.MagnificentAnalytics, root.$);
+    root[name] = factory(root.Mag, root.MagnificentAnalytics,
+      root.$, root.Hammer, root.PreventGhostClick
+    );
   }
-}(this, function (Mag, MagnificentAnalytics, $) {
+}(this, function (Mag, MagnificentAnalytics, $, Hammer) {
 
 
   $(':root').addClass('mag-js');
@@ -454,6 +460,7 @@
 
 
     var $zone = $('<div class="mag-zone"></div>');
+    var zone = $zone.get(0);
     $el.append($zone);
 
 
@@ -714,15 +721,65 @@
 
     if (options.position) {
       $zone.on('mousewheel', function (e) {
+        // console.log('mousewheel', {
+        //   deltaX: e.deltaX,
+        //   deltaY: e.deltaY,
+        //   deltaFactor: e.deltaFactor
+        // });
         e.preventDefault();
 
         var zoom = model.zoom;
-        var delta = e.deltaY;
+        var delta = (e.deltaY + e.deltaX) / 2;
+        // if (e.deltaFactor) {
+        //   delta *= e.deltaFactor;
+        // }
         delta = delta > 0 ? delta + zoomRate : Math.abs(delta) - zoomRate;
         zoom *= delta;
         model.zoom = zoom;
         that.compute();
       });
+
+      if (PreventGhostClick) {
+        PreventGhostClick(zone);
+      }
+
+      if (Hammer) {
+        var hammerEl = zone;
+        var hammerOptions = {};
+        var hammertime = new Hammer(hammerEl, hammerOptions);
+        hammertime.get('pinch').set({ enable: true });
+
+        // console.log('options.pos', options.position);
+        // if (options.position === 'mirror') {
+        if (options.mode === 'inner') {
+          hammertime.on('pan', function (e) {
+            e.preventDefault();
+            // console.log('pan', e);
+
+            that.toggle.call(that, true);
+
+            model.focus.x += -0.001 * e.deltaX;
+            model.focus.y += -0.001 * e.deltaY;
+          });
+        }
+
+        hammertime.on('pinch', function(e) {
+          e.preventDefault();
+          // console.log('pinch', e);
+
+          that.toggle.call(that, true);
+
+          var rate = 0.1;
+          var zoom = model.zoom;
+          var delta = (e.deltaY + e.deltaX) / 2;
+          // alert('delta=' + delta);
+          delta = delta > 0 ? delta : Math.abs(delta);
+          delta *= rate;
+          zoom *= delta;
+          model.zoom = zoom;
+          that.compute();
+        });
+      }
     }
 
 
