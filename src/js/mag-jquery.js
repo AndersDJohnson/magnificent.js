@@ -728,12 +728,14 @@
         // });
         e.preventDefault();
 
+        var rate = 0.2;
         var zoom = model.zoom;
         var delta = (e.deltaY + e.deltaX) / 2;
         // if (e.deltaFactor) {
         //   delta *= e.deltaFactor;
         // }
-        delta = delta > 0 ? delta + zoomRate : Math.abs(delta) - zoomRate;
+        delta *= rate;
+        delta += 1;
         zoom *= delta;
         model.zoom = zoom;
         that.compute();
@@ -758,8 +760,10 @@
 
             that.toggle.call(that, true);
 
-            model.focus.x += -0.001 * e.deltaX;
-            model.focus.y += -0.001 * e.deltaY;
+            var rate = -0.0005;
+
+            model.focus.x += rate * e.deltaX;
+            model.focus.y += rate * e.deltaY;
           });
         }
 
@@ -769,12 +773,12 @@
 
           that.toggle.call(that, true);
 
-          var rate = 0.1;
+          var rate = -0.01;
           var zoom = model.zoom;
           var delta = (e.deltaY + e.deltaX) / 2;
-          // alert('delta=' + delta);
-          delta = delta > 0 ? delta : Math.abs(delta);
+          // delta = delta > 0 ? delta : Math.abs(delta);
           delta *= rate;
+          delta += 1;
           zoom *= delta;
           model.zoom = zoom;
           that.compute();

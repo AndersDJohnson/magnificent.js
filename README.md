@@ -16,15 +16,23 @@
 
 Check out the [demo][mag-demo]!
 
-## New in v2
+## Features
 
-* Scroll to zoom
+### 2.0
+
+* Scroll-to-zoom
 * Drag interaction
 * Inline option
-* Controls
-* Independent proportions for thumb vs. zoom
+* Control buttons
+* Different proportions for thumb vs. zoom
 * CSS 3D transforms
 * Full screen (coming soon)
+* Event support, e.g. for stats/HUDs
+
+### 2.1
+
+* Touch events (pan, pinch)
+
 
 ## Install
 
@@ -62,7 +70,7 @@ Otherwise, you'll have to include individually in your page any main files you n
 
 * First, any dependencies of any main files you need:
 
-  * [jquery](https://github.com/jquery/jquery)@[>=1.4.2 <3](https://github.com/jquery/jquery/tree/2.1.4)
+  * [jquery](https://github.com/jquery/jquery)@[>=1.2.2](https://github.com/jquery/jquery/tree/2.1.4)
     * [bower_components/jquery/dist/jquery.js](https://raw.githubusercontent.com/jquery/jquery/2.1.4/dist/jquery.js)
   * [jquery-bridget](https://github.com/desandro/jquery-bridget)@[~1.1.0](https://github.com/desandro/jquery-bridget/tree/v1.1.0)
     * [bower_components/jquery-bridget/jquery.bridget.js](https://raw.githubusercontent.com/desandro/jquery-bridget/v1.1.0/jquery.bridget.js)
@@ -77,6 +85,10 @@ Otherwise, you'll have to include individually in your page any main files you n
       * Optional: For fullscreen.
   * [google-analytics-js](https://github.com/adjohnson916/google-analytics-js)@[~0.0.0](https://github.com/adjohnson916/google-analytics-js/tree/0.0.0)
     * [bower_components/google-analytics-js/gajs.js](https://raw.githubusercontent.com/adjohnson916/google-analytics-js/0.0.0/gajs.js)
+  * [hammerjs](https://github.com/EightMedia/hammer.js)@[~2.0.4](https://github.com/EightMedia/hammer.js/tree/2.0.4)
+    * [bower_components/hammerjs/hammer.js](https://raw.githubusercontent.com/EightMedia/hammer.js/2.0.4/hammer.js)
+  * [prevent-ghost-click](https://github.com/adjohnson916/prevent-ghost-click.js)@[~0.0.0](https://github.com/adjohnson916/prevent-ghost-click.js/tree/v0.0.0)
+    * [bower_components/prevent-ghost-click/PreventGhostClick.js](https://raw.githubusercontent.com/adjohnson916/prevent-ghost-click.js/v0.0.0/PreventGhostClick.js)
 
 
 ```html
@@ -86,6 +98,8 @@ Otherwise, you'll have to include individually in your page any main files you n
 <script src="bower_components/jquery.threedubmedia/event.drag/jquery.event.drag.js"></script>
 <script src="bower_components/screenfull/dist/screenfull.js"></script>
 <script src="bower_components/google-analytics-js/gajs.js"></script>
+<script src="bower_components/hammerjs/hammer.js"></script>
+<script src="bower_components/prevent-ghost-click/PreventGhostClick.js"></script>
 ```
 
 
