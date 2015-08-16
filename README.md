@@ -54,6 +54,8 @@ In your page, include:
 
 * All main files:
 
+  * [src/js/mag-analytics.js](src/js/mag-analytics.js)
+    * Optional: For analytics. Please :).
   * [src/js/mag.js](src/js/mag.js)
   * [src/js/mag-jquery.js](src/js/mag-jquery.js)
   * [src/js/mag-control.js](src/js/mag-control.js)
@@ -64,6 +66,7 @@ In your page, include:
 
 
 ```html
+<script src="bower_components/magnificent/src/js/mag-analytics.js"></script>
 <script src="bower_components/magnificent/src/js/mag.js"></script>
 <script src="bower_components/magnificent/src/js/mag-jquery.js"></script>
 <script src="bower_components/magnificent/src/js/mag-control.js"></script>
@@ -87,6 +90,8 @@ In your page, include:
   * [screenfull](https://github.com/sindresorhus/screenfull.js)@[~2.0.0](https://github.com/sindresorhus/screenfull.js/tree/v2.0.0)
     * [bower_components/screenfull/dist/screenfull.js](https://raw.githubusercontent.com/sindresorhus/screenfull.js/v2.0.0/dist/screenfull.js)
       * Optional: For fullscreen.
+  * [google-analytics-js](https://github.com/adjohnson916/google-analytics-js)@[~0.0.0](https://github.com/adjohnson916/google-analytics-js/tree/0.0.0)
+    * [bower_components/google-analytics-js/gajs.js](https://raw.githubusercontent.com/adjohnson916/google-analytics-js/0.0.0/gajs.js)
 
 
 ```html
@@ -95,6 +100,7 @@ In your page, include:
 <script src="bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
 <script src="bower_components/jquery.threedubmedia/event.drag/jquery.event.drag.js"></script>
 <script src="bower_components/screenfull/dist/screenfull.js"></script>
+<script src="bower_components/google-analytics-js/gajs.js"></script>
 ```
 
 
