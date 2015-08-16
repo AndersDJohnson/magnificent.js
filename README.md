@@ -48,34 +48,19 @@ $ npm i magnificent --save
 
 [Download manually](https://github.com/adjohnson916/magnificent.js/releases).
 
+
 ## Usage
 
-In your page, include:
+1. [Load](#load)
+2. [Integrate](#integrate)
 
-* All main files:
+### Load
 
-  * [src/js/mag-analytics.js](src/js/mag-analytics.js)
-    * Optional: For analytics. Please :).
-  * [src/js/mag.js](src/js/mag.js)
-  * [src/js/mag-jquery.js](src/js/mag-jquery.js)
-  * [src/js/mag-control.js](src/js/mag-control.js)
-    * Optional: For controls.
-  * [src/css/mag.css](src/css/mag.css)
-  * [src/theme/default.css](src/theme/default.css)
-    * Optional: Or another theme.
+If you're using AMD or Browersify, you'll probably just want to specify any main files you need, e.g. `src/js/mag-jquery.js`, as dependencies in your script(s).
 
+Otherwise, you'll have to include individually in your page any main files you need, preceded by their dependencies.
 
-```html
-<script src="bower_components/magnificent/src/js/mag-analytics.js"></script>
-<script src="bower_components/magnificent/src/js/mag.js"></script>
-<script src="bower_components/magnificent/src/js/mag-jquery.js"></script>
-<script src="bower_components/magnificent/src/js/mag-control.js"></script>
-<link rel="stylesheet" href="bower_components/magnificent/src/css/mag.css" />
-<link rel="stylesheet" href="bower_components/magnificent/src/theme/default.css" />
-```
-
-
-* Any dependencies:
+* First, any dependencies of any main files you need:
 
   * [jquery](https://github.com/jquery/jquery)@[>=1.4.2 <3](https://github.com/jquery/jquery/tree/2.1.4)
     * [bower_components/jquery/dist/jquery.js](https://raw.githubusercontent.com/jquery/jquery/2.1.4/dist/jquery.js)
@@ -104,8 +89,35 @@ In your page, include:
 ```
 
 
-Then see usage examples in [demo][mag-demo].
-Also see the [JSDoc][mag-jsdoc], especially the [options][mag-jsdoc-opts].
+* Then, any main files you need:
+
+  * [src/js/mag-analytics.js](src/js/mag-analytics.js)
+    * Optional: For analytics. Please :).
+  * [src/js/mag.js](src/js/mag.js)
+  * [src/js/mag-jquery.js](src/js/mag-jquery.js)
+  * [src/js/mag-control.js](src/js/mag-control.js)
+    * Optional: For controls.
+  * [src/css/mag.css](src/css/mag.css)
+  * [src/theme/default.css](src/theme/default.css)
+    * Optional: Or another theme.
+
+
+```html
+<script src="bower_components/magnificent/src/js/mag-analytics.js"></script>
+<script src="bower_components/magnificent/src/js/mag.js"></script>
+<script src="bower_components/magnificent/src/js/mag-jquery.js"></script>
+<script src="bower_components/magnificent/src/js/mag-control.js"></script>
+<link rel="stylesheet" href="bower_components/magnificent/src/css/mag.css" />
+<link rel="stylesheet" href="bower_components/magnificent/src/theme/default.css" />
+```
+
+
+
+### Integrate
+
+See usage examples in [demo][mag-demo].
+Also the [JSDoc][mag-jsdoc], especially [options][mag-jsdoc-opts].
+
 
 ## Contributing
 
