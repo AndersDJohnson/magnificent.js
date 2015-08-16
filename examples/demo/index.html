@@ -280,7 +280,10 @@ $host.mag({
               --></code></pre>
               <pre><code class="lang-js"><!--
 -->$host = $('[mag-thumb=&quot;controls&quot;]');
-$host.mag();
+$host.mag(
+  toggle: false,
+  position: false
+);
 
 $controls = $('[mag-ctrl="controls"]');
 $controls.magCtrl({
@@ -295,11 +298,19 @@ $controls.magCtrl({
       </main>
     </div>
 
+    <script>
+      // window.MAGNIFICENT_OPTIONS = {
+      //   // noTrack: true
+      // };
+    </script>
+
     <script src="../../bower_components/jquery/dist/jquery.js"></script>
     <script src="../../bower_components/jquery-bridget/jquery.bridget.js"></script>
     <script src="../../bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
     <script src="../../bower_components/jquery.threedubmedia/event.drag/jquery.event.drag.js"></script>
     <script src="../../bower_components/screenfull/dist/screenfull.js"></script>
+    <script src="../../bower_components/google-analytics-js/gajs.js"></script>
+    <script src="../../src/js/mag-analytics.js"></script>
     <script src="../../src/js/mag.js"></script>
     <script src="../../src/js/mag-jquery.js"></script>
     <script src="../../src/js/mag-control.js"></script>

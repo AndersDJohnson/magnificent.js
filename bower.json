@@ -3,6 +3,7 @@
   "version": "2.0.2",
   "description": "Zoom responsively.",
   "main": [
+    "src/js/mag-analytics.js",
     "src/js/mag.js",
     "src/js/mag-jquery.js",
     "src/js/mag-control.js",
@@ -21,7 +22,8 @@
     "jquery-bridget": "~1.1.0",
     "jquery-mousewheel": "~3.1.12",
     "jquery.threedubmedia": "threedubmedia/jquery.threedubmedia",
-    "screenfull": "~2.0.0"
+    "screenfull": "~2.0.0",
+    "google-analytics-js": "~0.0.0"
   },
   "devDependencies": {
     "bootstrap": "~3.3.2"
@@ -30,6 +32,7 @@
     "files": {
       "src/theme/default.css": "Or another theme.",
       "src/js/mag-control.js": "For controls.",
+      "src/js/mag-analytics.js": "For analytics. Please :).",
       "bower_components/jquery-mousewheel/jquery.mousewheel.js": "For scroll zoom.",
       "bower_components/jquery.threedubmedia/event.drag/jquery.event.drag.js": "For drag interaction.",
       "bower_components/screenfull/dist/screenfull.js": "For fullscreen."

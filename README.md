@@ -48,31 +48,19 @@ $ npm i magnificent --save
 
 [Download manually](https://github.com/adjohnson916/magnificent.js/releases).
 
+
 ## Usage
 
-In your page, include:
+1. [Load](#load)
+2. [Integrate](#integrate)
 
-* All main files:
+### Load
 
-  * [src/js/mag.js](src/js/mag.js)
-  * [src/js/mag-jquery.js](src/js/mag-jquery.js)
-  * [src/js/mag-control.js](src/js/mag-control.js)
-    * Optional: For controls.
-  * [src/css/mag.css](src/css/mag.css)
-  * [src/theme/default.css](src/theme/default.css)
-    * Optional: Or another theme.
+If you're using AMD or Browersify, you'll probably just want to specify any main files you need, e.g. `src/js/mag-jquery.js`, as dependencies in your script(s).
 
+Otherwise, you'll have to include individually in your page any main files you need, preceded by their dependencies.
 
-```html
-<script src="bower_components/magnificent/src/js/mag.js"></script>
-<script src="bower_components/magnificent/src/js/mag-jquery.js"></script>
-<script src="bower_components/magnificent/src/js/mag-control.js"></script>
-<link rel="stylesheet" href="bower_components/magnificent/src/css/mag.css" />
-<link rel="stylesheet" href="bower_components/magnificent/src/theme/default.css" />
-```
-
-
-* Any dependencies:
+* First, any dependencies of any main files you need:
 
   * [jquery](https://github.com/jquery/jquery)@[>=1.4.2 <3](https://github.com/jquery/jquery/tree/2.1.4)
     * [bower_components/jquery/dist/jquery.js](https://raw.githubusercontent.com/jquery/jquery/2.1.4/dist/jquery.js)
@@ -87,6 +75,8 @@ In your page, include:
   * [screenfull](https://github.com/sindresorhus/screenfull.js)@[~2.0.0](https://github.com/sindresorhus/screenfull.js/tree/v2.0.0)
     * [bower_components/screenfull/dist/screenfull.js](https://raw.githubusercontent.com/sindresorhus/screenfull.js/v2.0.0/dist/screenfull.js)
       * Optional: For fullscreen.
+  * [google-analytics-js](https://github.com/adjohnson916/google-analytics-js)@[~0.0.0](https://github.com/adjohnson916/google-analytics-js/tree/0.0.0)
+    * [bower_components/google-analytics-js/gajs.js](https://raw.githubusercontent.com/adjohnson916/google-analytics-js/0.0.0/gajs.js)
 
 
 ```html
@@ -95,11 +85,39 @@ In your page, include:
 <script src="bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
 <script src="bower_components/jquery.threedubmedia/event.drag/jquery.event.drag.js"></script>
 <script src="bower_components/screenfull/dist/screenfull.js"></script>
+<script src="bower_components/google-analytics-js/gajs.js"></script>
 ```
 
 
-Then see usage examples in [demo][mag-demo].
-Also see the [JSDoc][mag-jsdoc], especially the [options][mag-jsdoc-opts].
+* Then, any main files you need:
+
+  * [src/js/mag-analytics.js](src/js/mag-analytics.js)
+    * Optional: For analytics. Please :).
+  * [src/js/mag.js](src/js/mag.js)
+  * [src/js/mag-jquery.js](src/js/mag-jquery.js)
+  * [src/js/mag-control.js](src/js/mag-control.js)
+    * Optional: For controls.
+  * [src/css/mag.css](src/css/mag.css)
+  * [src/theme/default.css](src/theme/default.css)
+    * Optional: Or another theme.
+
+
+```html
+<script src="bower_components/magnificent/src/js/mag-analytics.js"></script>
+<script src="bower_components/magnificent/src/js/mag.js"></script>
+<script src="bower_components/magnificent/src/js/mag-jquery.js"></script>
+<script src="bower_components/magnificent/src/js/mag-control.js"></script>
+<link rel="stylesheet" href="bower_components/magnificent/src/css/mag.css" />
+<link rel="stylesheet" href="bower_components/magnificent/src/theme/default.css" />
+```
+
+
+
+### Integrate
+
+See usage examples in [demo][mag-demo].
+Also the [JSDoc][mag-jsdoc], especially [options][mag-jsdoc-opts].
+
 
 ## Contributing
 
