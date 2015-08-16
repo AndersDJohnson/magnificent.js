@@ -5,15 +5,15 @@
 (function (root, factory) {
   var name = 'Mag';
   if (typeof define === 'function' && define.amd) {
-    define([], function () {
-        return (root[name] = factory());
+    define(['./mag-analytics'], function (MagnificentAnalytics) {
+        return (root[name] = factory(MagnificentAnalytics));
     });
   } else if (typeof exports === 'object') {
-    module.exports = factory();
+    module.exports = factory(require('./mag-analytics'));
   } else {
-    root[name] = factory();
+    root[name] = factory(root.MagnificentAnalytics);
   }
-}(this, function () {
+}(this, function (MagnificentAnalytics) {
 
 
   /**
@@ -242,6 +242,11 @@
       h: lens.h * frame.h
     };
   };
+
+
+  if (MagnificentAnalytics) {
+    MagnificentAnalytics.track('mag.js');
+  }
 
   return Mag;
 }));
