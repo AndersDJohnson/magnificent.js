@@ -3,7 +3,7 @@
 > Zoom responsively. A jQuery plugin for responsive zoom of images & more!
 
 [![NPM version](https://badge.fury.io/js/magnificent.svg)](http://badge.fury.io/js/magnificent)
-[![Bower](https://img.shields.io/bower/v/magnificent.svg)]()
+[![Bower](https://img.shields.io/bower/v/magnificent.svg)](https://github.com/adjohnson916/magnificent.js)
  [![Build Status](https://travis-ci.org/adjohnson916/magnificent.js.svg)](https://travis-ci.org/adjohnson916/magnificent.js) 
 [![dependencies](https://david-dm.org/adjohnson916/magnificent.js.svg)](https://david-dm.org/adjohnson916/magnificent.js)
 [![dependencies](https://david-dm.org/adjohnson916/magnificent.js/dev-status.svg)](https://david-dm.org/adjohnson916/magnificent.js#info=devDependencies)
@@ -70,7 +70,7 @@ Otherwise, you'll have to include individually in your page any main files you n
 
 * First, any dependencies of any main files you need:
 
-  * [jquery](https://github.com/jquery/jquery)@[>=1.2.2](https://github.com/jquery/jquery/tree/2.1.4)
+  * [jquery](https://github.com/jquery/jquery)@[>=1.4.2 <3](https://github.com/jquery/jquery/tree/2.1.4)
     * [bower_components/jquery/dist/jquery.js](https://raw.githubusercontent.com/jquery/jquery/2.1.4/dist/jquery.js)
   * [jquery-bridget](https://github.com/desandro/jquery-bridget)@[~1.1.0](https://github.com/desandro/jquery-bridget/tree/v1.1.0)
     * [bower_components/jquery-bridget/jquery.bridget.js](https://raw.githubusercontent.com/desandro/jquery-bridget/v1.1.0/jquery.bridget.js)
