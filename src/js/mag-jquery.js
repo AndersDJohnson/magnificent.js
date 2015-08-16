@@ -176,6 +176,8 @@
   };
 
   /**
+   * Default options.
+   *
    * @typedef MagnificentOptions
    *
    *  Mode:<br>
@@ -216,7 +218,6 @@
    * @property {string} cssMode - CSS mode to use for scaling and translating. Either '3d', '2d', or 'position'. Default = '3d'.
    * @property {MagModel} initial - Initial settings for model - focus, lens, zoom, etc.
    */
-
   Magnificent.prototype.options = {
     mode: 'inner',
     position: 'mirror',
