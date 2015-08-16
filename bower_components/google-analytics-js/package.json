@@ -1,0 +1,25 @@
+{
+  "name": "google-analytics-js",
+  "version": "0.0.0",
+  "description": "JavaScript mini library to track usage of injected script via Google Analytics.",
+  "main": "gajs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adjohnson916/google-analytics-js.git"
+  },
+  "keywords": [
+    "google",
+    "analytics",
+    "tracking",
+    "js"
+  ],
+  "author": "Anders D. Johnson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adjohnson916/google-analytics-js/issues"
+  },
+  "homepage": "https://github.com/adjohnson916/google-analytics-js#readme"
+}
