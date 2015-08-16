@@ -760,8 +760,10 @@
 
             that.toggle.call(that, true);
 
-            model.focus.x += -0.001 * e.deltaX;
-            model.focus.y += -0.001 * e.deltaY;
+            var rate = -0.0005;
+
+            model.focus.x += rate * e.deltaX;
+            model.focus.y += rate * e.deltaY;
           });
         }
 
