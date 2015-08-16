@@ -32,6 +32,7 @@
     "files": {
       "src/theme/default.css": "Or another theme.",
       "src/js/mag-control.js": "For controls.",
+      "src/js/mag-analytics.js": "For analytics. Please :).",
       "bower_components/jquery-mousewheel/jquery.mousewheel.js": "For scroll zoom.",
       "bower_components/jquery.threedubmedia/event.drag/jquery.event.drag.js": "For drag interaction.",
       "bower_components/screenfull/dist/screenfull.js": "For fullscreen."
