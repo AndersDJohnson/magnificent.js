@@ -59,7 +59,7 @@ Check out the [demo][mag-demo]!
 
 ### 2.1
 
-* Touch events (pan, pinch)
+* Touch interaction (pan, pinch)
 
 
 ## Install
@@ -98,7 +98,7 @@ Otherwise, you'll have to include individually in your page any main files you n
 
 * First, any dependencies of any main files you need:
 
-  * [jquery](https://github.com/jquery/jquery)@[>=1.4.2 <3](https://github.com/jquery/jquery/tree/2.1.4)
+  * [jquery](https://github.com/jquery/jquery)@[>=1.2.2](https://github.com/jquery/jquery/tree/2.1.4)
     * [bower_components/jquery/dist/jquery.js](https://raw.githubusercontent.com/jquery/jquery/2.1.4/dist/jquery.js)
   * [jquery-bridget](https://github.com/desandro/jquery-bridget)@[~1.1.0](https://github.com/desandro/jquery-bridget/tree/v1.1.0)
     * [bower_components/jquery-bridget/jquery.bridget.js](https://raw.githubusercontent.com/desandro/jquery-bridget/v1.1.0/jquery.bridget.js)
