@@ -40,6 +40,17 @@ module.exports = function (grunt) {
       }
     },
 
+    connect: {
+      server: {
+        options: {
+          hostname: '*',
+          port: 6246, // MAGN in keypad
+          // base: '.',
+          keepalive: true
+        }
+      }
+    },
+
     jsdoc : {
       dist : {
         src: ['src/**/*.js', 'test/**/*.js'],
