@@ -1,15 +1,15 @@
 (function (root, factory) {
   var name = 'MagnificentControl';
   if (typeof define === 'function' && define.amd) {
-    define(['jquery', 'jquery-bridget'], function ($) {
-        return (root[name] = factory($));
+    define(['jquery', './mag-analytics', 'jquery-bridget'], function ($, MagnificentAnalytics) {
+        return (root[name] = factory($, MagnificentAnalytics));
     });
   } else if (typeof exports === 'object') {
-    module.exports = factory(require('jquery'), require('jquery-bridget'));
+    module.exports = factory(require('jquery'), require('./mag-analytics'), require('jquery-bridget'));
   } else {
-    root[name] = factory(root.$);
+    root[name] = factory(root.$, root.MagnificentAnalytics);
   }
-}(this, function ($) {
+}(this, function ($, MagnificentAnalytics) {
 
   var MagnificentControl = function (element, options) {
     this.element = $( element );
@@ -62,6 +62,11 @@
 
 
   $.bridget('magCtrl', MagnificentControl);
+
+
+  if (MagnificentAnalytics) {
+    MagnificentAnalytics.track('mag-control.js');
+  }
 
   return MagnificentControl;
 }));
