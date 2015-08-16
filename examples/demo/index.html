@@ -280,7 +280,10 @@ $host.mag({
               --></code></pre>
               <pre><code class="lang-js"><!--
 -->$host = $('[mag-thumb=&quot;controls&quot;]');
-$host.mag();
+$host.mag(
+  toggle: false,
+  position: false
+);
 
 $controls = $('[mag-ctrl="controls"]');
 $controls.magCtrl({
