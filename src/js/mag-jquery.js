@@ -773,12 +773,12 @@
 
           that.toggle.call(that, true);
 
-          var rate = 0.1;
+          var rate = -0.01;
           var zoom = model.zoom;
           var delta = (e.deltaY + e.deltaX) / 2;
-          // alert('delta=' + delta);
-          delta = delta > 0 ? delta : Math.abs(delta);
+          // delta = delta > 0 ? delta : Math.abs(delta);
           delta *= rate;
+          delta += 1;
           zoom *= delta;
           model.zoom = zoom;
           that.compute();
