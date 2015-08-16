@@ -29,6 +29,7 @@
 - [Usage](#usage)
   * [Load](#load)
   * [Integrate](#integrate)
+- [Analytics](#analytics)
 - [Contributing](#contributing)
   * [Build Docs](#build-docs)
   * [Tests](#tests)
@@ -60,7 +61,7 @@ Check out the [demo][mag-demo]!
 ### 2.1
 
 * Touch interaction (pan, pinch)
-
+* [Analytics](#analytics)
 
 ## Install
 
@@ -162,6 +163,21 @@ Otherwise, you'll have to include individually in your page any main files you n
 
 See usage examples in [demo][mag-demo].
 Also the [JSDoc][mag-jsdoc], especially [options][mag-jsdoc-opts].
+
+
+## Analytics
+
+This component includes tracking via Google Analytics.
+The purpose is to better understand how and where it's used, as a guide for development.
+
+To opt-out of this tracking, before loading the script on your page,
+use the global options in JavaScript, with `noTrack` set to `true`, as follows:
+
+```js
+window.MAGNIFICENT_OPTIONS = {
+  noTrack: true
+};
+```
 
 
 ## Contributing
