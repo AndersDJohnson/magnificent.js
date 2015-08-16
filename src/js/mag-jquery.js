@@ -728,12 +728,14 @@
         // });
         e.preventDefault();
 
+        var rate = 0.2;
         var zoom = model.zoom;
         var delta = (e.deltaY + e.deltaX) / 2;
         // if (e.deltaFactor) {
         //   delta *= e.deltaFactor;
         // }
-        delta = delta > 0 ? delta + zoomRate : Math.abs(delta) - zoomRate;
+        delta *= rate;
+        delta += 1;
         zoom *= delta;
         model.zoom = zoom;
         that.compute();
