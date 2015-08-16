@@ -37,21 +37,10 @@
       "src/js/mag-analytics.js": "For analytics. Please :).",
       "bower_components/jquery-mousewheel/jquery.mousewheel.js": "For scroll zoom.",
       "bower_components/jquery.threedubmedia/event.drag/jquery.event.drag.js": "For drag interaction.",
-      "bower_components/screenfull/dist/screenfull.js": "For fullscreen."
-    },
-    "dependencies": {
-      "jquery-mousewheel": {
-        "note": "Not required.",
-        "files": {
-          "jquery.mousewheel.js": "For scroll zoom."
-        }
-      },
-      "jquery.threedubmedia": {
-        "note": "Not required.",
-        "files": {
-          "event.drag/jquery.event.drag.js": "For drag interaction."
-        }
-      }
+      "bower_components/screenfull/dist/screenfull.js": "For fullscreen.",
+      "bower_components/hammerjs/hammer.js": "For touch interaction (pan, pinch).",
+      "bower_components/prevent-ghost-click/PreventGhostClick.js": "For touch interaction (pan, pinch).",
+      "bower_components/google-analytics-js/gajs.js": "For analytics. Please :)."
     }
   },
   "repository": {

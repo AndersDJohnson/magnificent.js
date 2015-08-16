@@ -113,10 +113,13 @@ Otherwise, you'll have to include individually in your page any main files you n
       * Optional: For fullscreen.
   * [google-analytics-js](https://github.com/adjohnson916/google-analytics-js)@[~0.0.0](https://github.com/adjohnson916/google-analytics-js/tree/0.0.0)
     * [bower_components/google-analytics-js/gajs.js](https://raw.githubusercontent.com/adjohnson916/google-analytics-js/0.0.0/gajs.js)
+      * Optional: For analytics. Please :).
   * [hammerjs](https://github.com/EightMedia/hammer.js)@[~2.0.4](https://github.com/EightMedia/hammer.js/tree/2.0.4)
     * [bower_components/hammerjs/hammer.js](https://raw.githubusercontent.com/EightMedia/hammer.js/2.0.4/hammer.js)
+      * Optional: For touch interaction (pan, pinch).
   * [prevent-ghost-click](https://github.com/adjohnson916/prevent-ghost-click.js)@[~0.0.0](https://github.com/adjohnson916/prevent-ghost-click.js/tree/v0.0.0)
     * [bower_components/prevent-ghost-click/PreventGhostClick.js](https://raw.githubusercontent.com/adjohnson916/prevent-ghost-click.js/v0.0.0/PreventGhostClick.js)
+      * Optional: For touch interaction (pan, pinch).
 
 
 ```html
