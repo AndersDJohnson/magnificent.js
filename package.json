@@ -21,7 +21,10 @@
     "url": "https://github.com/adjohnson916"
   },
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "detect-node": "^2.0.3",
+    "google-analytics-js": "0.0.0"
+  },
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
