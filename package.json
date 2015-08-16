@@ -44,7 +44,7 @@
     "sync-pkg": "^0.6.2",
     "verb": "git+https://github.com/verbose/verb.git",
     "verb-cli": "^0.7.2",
-    "verb-helper-bower": "file:./verb-helper-bower"
+    "verb-helper-bower": "0.0.0"
   },
   "verb": {
     "data": {

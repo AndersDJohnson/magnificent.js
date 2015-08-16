@@ -29,6 +29,7 @@
 - [Usage](#usage)
   * [Load](#load)
   * [Integrate](#integrate)
+- [Analytics](#analytics)
 - [Contributing](#contributing)
   * [Build Docs](#build-docs)
   * [Tests](#tests)
@@ -59,8 +60,8 @@ Check out the [demo][mag-demo]!
 
 ### 2.1
 
-* Touch events (pan, pinch)
-
+* Touch interaction (pan, pinch)
+* [Analytics](#analytics)
 
 ## Install
 
@@ -98,7 +99,7 @@ Otherwise, you'll have to include individually in your page any main files you n
 
 * First, any dependencies of any main files you need:
 
-  * [jquery](https://github.com/jquery/jquery)@[>=1.4.2 <3](https://github.com/jquery/jquery/tree/2.1.4)
+  * [jquery](https://github.com/jquery/jquery)@[>=1.2.2](https://github.com/jquery/jquery/tree/2.1.4)
     * [bower_components/jquery/dist/jquery.js](https://raw.githubusercontent.com/jquery/jquery/2.1.4/dist/jquery.js)
   * [jquery-bridget](https://github.com/desandro/jquery-bridget)@[~1.1.0](https://github.com/desandro/jquery-bridget/tree/v1.1.0)
     * [bower_components/jquery-bridget/jquery.bridget.js](https://raw.githubusercontent.com/desandro/jquery-bridget/v1.1.0/jquery.bridget.js)
@@ -113,10 +114,13 @@ Otherwise, you'll have to include individually in your page any main files you n
       * Optional: For fullscreen.
   * [google-analytics-js](https://github.com/adjohnson916/google-analytics-js)@[~0.0.0](https://github.com/adjohnson916/google-analytics-js/tree/0.0.0)
     * [bower_components/google-analytics-js/gajs.js](https://raw.githubusercontent.com/adjohnson916/google-analytics-js/0.0.0/gajs.js)
+      * Optional: For analytics. Please :).
   * [hammerjs](https://github.com/EightMedia/hammer.js)@[~2.0.4](https://github.com/EightMedia/hammer.js/tree/2.0.4)
     * [bower_components/hammerjs/hammer.js](https://raw.githubusercontent.com/EightMedia/hammer.js/2.0.4/hammer.js)
+      * Optional: For touch interaction (pan, pinch).
   * [prevent-ghost-click](https://github.com/adjohnson916/prevent-ghost-click.js)@[~0.0.0](https://github.com/adjohnson916/prevent-ghost-click.js/tree/v0.0.0)
     * [bower_components/prevent-ghost-click/PreventGhostClick.js](https://raw.githubusercontent.com/adjohnson916/prevent-ghost-click.js/v0.0.0/PreventGhostClick.js)
+      * Optional: For touch interaction (pan, pinch).
 
 
 ```html
@@ -159,6 +163,21 @@ Otherwise, you'll have to include individually in your page any main files you n
 
 See usage examples in [demo][mag-demo].
 Also the [JSDoc][mag-jsdoc], especially [options][mag-jsdoc-opts].
+
+
+## Analytics
+
+This component includes tracking via Google Analytics.
+The purpose is to better understand how and where it's used, as a guide for development.
+
+To opt-out of this tracking, before loading the script on your page,
+use the global options in JavaScript, with `noTrack` set to `true`, as follows:
+
+```js
+window.MAGNIFICENT_OPTIONS = {
+  noTrack: true
+};
+```
 
 
 ## Contributing
