@@ -16,7 +16,6 @@ verb.task('default', function() {
 
 verb.data(require('./verb/data'));
 
- // var helperBower = require('./verb-helper-bower');
 var helperBower = require('verb-helper-bower');
 verb.helper('bowerMain', helperBower.main);
 verb.helper('bowerMainHTML', helperBower.mainHTML);
