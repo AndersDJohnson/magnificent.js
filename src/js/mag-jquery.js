@@ -402,7 +402,7 @@
 
       that.$originalZoomedContainer = $zoomedContainer.clone();
 
-      $zoomedChildren = $zoomedContainer.children();
+      $zoomedChildren = $zoomedContainer.children(); 
       $zoomedContainer.empty();
 
       if (options.mode === 'inner') {
@@ -826,16 +826,20 @@
     var that = this;
     // Trigger custom destroy event for any listeners.
     that.$el.trigger(that.eventName('destroy'));
-    // Turn off all events.
-    that.$el.off(that.eventName());
 
-    // Replace elements with originals.
+    // Unbind and replace elements with originals.
 
-    if (that.$originalZoomedContainer) {
+    if (that.$originalZoomedContainer && that.$zoomedContainer) {
+      // Turn off all events.
+      that.$zoomedContainer.off(that.eventName());
+      // Replace
       that.$zoomedContainer.after(that.$originalZoomedContainer);
       that.$zoomedContainer.remove();
     }
 
+    // Turn off all events.
+    that.$el.off(that.eventName());
+    // Replace
     that.$el.after(that.$originalEl);
     that.$el.remove();
   };
