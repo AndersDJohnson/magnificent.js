@@ -238,7 +238,8 @@
     ratio: 1,
     toggle: true,
     smooth: true,
-    cssMode: '3d'
+    cssMode: '3d',
+    eventNamespace: 'magnificent'
   };
 
 
@@ -287,6 +288,12 @@
     $zoomed.css(zoomedCSS);
 
     this.$el.trigger('render', that);
+  };
+
+
+  Magnificent.prototype.eventName = function (eventName) {
+    var eventNamespace = this.options.eventNamespace;
+    return eventName + (eventNamespace ? '.' + eventNamespace : '');
   };
 
 
@@ -486,11 +493,11 @@
         throw new Error("Invalid 'initialShow' option.");
       }
 
-      $el.on('mouseenter', function () {
+      $el.on(that.eventName('mouseenter'), function () {
         that.toggle.call(that, true);
       });
 
-      $el.on('mouseleave', function () {
+      $el.on(that.eventName('mouseleave'), function () {
         that.toggle.call(that, false);
       });
     }
@@ -546,7 +553,7 @@
       if (options.positionEvent === 'move') {
         lazyRate = 0.2;
 
-        $zone.on('mousemove', function(e){
+        $zone.on(that.eventName('mousemove'), function(e){
           var ratios = ratioOffsets(e);
           adjustForMirror(ratios);
         });
@@ -641,7 +648,7 @@
           that.compute();
         });
 
-        $zone.on('click', function (e) {
+        $zone.on(that.eventName('click'), function (e) {
           var offset = $zone.offset();
           ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
 
@@ -672,7 +679,7 @@
         dragging = true;
         lazyRate = 0.5;
 
-        $zone.on('mousemove', function(e){
+        $zone.on(that.eventName('mousemove'), function(e){
           ratios = ratioOffsets(e);
         });
       }
@@ -720,7 +727,7 @@
 
 
     if (options.position) {
-      $zone.on('mousewheel', function (e) {
+      $zone.on(that.eventName('mousewheel'), function (e) {
         // console.log('mousewheel', {
         //   deltaX: e.deltaX,
         //   deltaY: e.deltaY,
@@ -754,7 +761,7 @@
         // console.log('options.pos', options.position);
         // if (options.position === 'mirror') {
         if (options.mode === 'inner') {
-          hammertime.on('pan', function (e) {
+          hammertime.on(that.eventName('pan'), function (e) {
             e.preventDefault();
             // console.log('pan', e);
 
@@ -767,7 +774,7 @@
           });
         }
 
-        hammertime.on('pinch', function(e) {
+        hammertime.on(that.eventName('pinch'), function(e) {
           e.preventDefault();
           // console.log('pinch', e);
 
