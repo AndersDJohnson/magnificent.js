@@ -238,7 +238,9 @@
     ratio: 1,
     toggle: true,
     smooth: true,
-    cssMode: '3d'
+    cssMode: '3d',
+    eventNamespace: 'magnificent',
+    dataNamespace: 'magnificent'
   };
 
 
@@ -290,11 +292,27 @@
   };
 
 
+  Magnificent.prototype.eventName = function (name) {
+    name = name || '';
+    var namespace = this.options.eventNamespace;
+    return name + (namespace ? ('.' + namespace) : '');
+  };
+
+
+  Magnificent.prototype.dataName = function (name) {
+    name = name || '';
+    var namespace = this.options.dataNamespace;
+    return (namespace ? (namespace + '.') : '') + name;
+  };
+
+
   Magnificent.prototype._init = function () {
 
     var that = this;
 
     var $el = this.$el = this.element;
+
+    this.$originalEl = $el.clone();
 
     var options = this.options;
 
@@ -381,6 +399,9 @@
 
     if (options.zoomedContainer) {
       $zoomedContainer = $(options.zoomedContainer);
+
+      that.$originalZoomedContainer = $zoomedContainer.clone();
+
       $zoomedChildren = $zoomedContainer.children();
       $zoomedContainer.empty();
 
@@ -486,11 +507,11 @@
         throw new Error("Invalid 'initialShow' option.");
       }
 
-      $el.on('mouseenter', function () {
+      $el.on(that.eventName('mouseenter'), function () {
         that.toggle.call(that, true);
       });
 
-      $el.on('mouseleave', function () {
+      $el.on(that.eventName('mouseleave'), function () {
         that.toggle.call(that, false);
       });
     }
@@ -546,7 +567,7 @@
       if (options.positionEvent === 'move') {
         lazyRate = 0.2;
 
-        $zone.on('mousemove', function(e){
+        $zone.on(that.eventName('mousemove'), function(e){
           var ratios = ratioOffsets(e);
           adjustForMirror(ratios);
         });
@@ -641,7 +662,7 @@
           that.compute();
         });
 
-        $zone.on('click', function (e) {
+        $zone.on(that.eventName('click'), function (e) {
           var offset = $zone.offset();
           ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
 
@@ -672,7 +693,7 @@
         dragging = true;
         lazyRate = 0.5;
 
-        $zone.on('mousemove', function(e){
+        $zone.on(that.eventName('mousemove'), function(e){
           ratios = ratioOffsets(e);
         });
       }
@@ -720,7 +741,7 @@
 
 
     if (options.position) {
-      $zone.on('mousewheel', function (e) {
+      $zone.on(that.eventName('mousewheel'), function (e) {
         // console.log('mousewheel', {
         //   deltaX: e.deltaX,
         //   deltaY: e.deltaY,
@@ -747,8 +768,17 @@
 
       if (Hammer) {
         var hammerEl = zone;
+        var $hammerEl = $zone;
         var hammerOptions = {};
         var hammertime = new Hammer(hammerEl, hammerOptions);
+
+        // Register custom destroy event listener to queue Hammer destroy.
+        that.$el.on('destroy', function () {
+          hammertime.destroy();
+        });
+
+        $hammerEl.data(that.dataName('hammer'));
+
         hammertime.get('pinch').set({ enable: true });
 
         // console.log('options.pos', options.position);
@@ -790,6 +820,24 @@
     var renderLoopInterval = setInterval(renderLoop, renderLoopIntervalTime);
 
 
+  };
+
+  Magnificent.prototype.destroy = function() {
+    var that = this;
+    // Trigger custom destroy event for any listeners.
+    that.$el.trigger(that.eventName('destroy'));
+    // Turn off all events.
+    that.$el.off(that.eventName());
+
+    // Replace elements with originals.
+
+    if (that.$originalZoomedContainer) {
+      that.$zoomedContainer.after(that.$originalZoomedContainer);
+      that.$zoomedContainer.remove();
+    }
+
+    that.$el.after(that.$originalEl);
+    that.$el.remove();
   };
 
 
