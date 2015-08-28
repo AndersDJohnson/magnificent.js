@@ -239,7 +239,8 @@
     toggle: true,
     smooth: true,
     cssMode: '3d',
-    eventNamespace: 'magnificent'
+    eventNamespace: 'magnificent',
+    dataNamespace: 'magnificent'
   };
 
 
@@ -291,9 +292,15 @@
   };
 
 
-  Magnificent.prototype.eventName = function (eventName) {
-    var eventNamespace = this.options.eventNamespace;
-    return eventName + (eventNamespace ? '.' + eventNamespace : '');
+  Magnificent.prototype.eventName = function (name) {
+    var namespace = this.options.eventNamespace;
+    return name + (namespace ? ('.' + namespace) : '');
+  };
+
+
+  Magnificent.prototype.dataName = function (name) {
+    var namespace = this.options.dataNamespace;
+    return (namespace ? (namespace + '.') : '') + name;
   };
 
 
@@ -754,8 +761,12 @@
 
       if (Hammer) {
         var hammerEl = zone;
+        var $hammerEl = $zone;
         var hammerOptions = {};
         var hammertime = new Hammer(hammerEl, hammerOptions);
+
+        $hammerEl.data(that.dataName('hammer'));
+
         hammertime.get('pinch').set({ enable: true });
 
         // console.log('options.pos', options.position);
