@@ -58,6 +58,10 @@
         }
       }
     });
+
+    $el.find('[mag-ctrl-destroy]').on('click', function () {
+      magInst.destroy();
+    });
   };
 
 
