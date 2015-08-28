@@ -293,12 +293,14 @@
 
 
   Magnificent.prototype.eventName = function (name) {
+    name = name || '';
     var namespace = this.options.eventNamespace;
     return name + (namespace ? ('.' + namespace) : '');
   };
 
 
   Magnificent.prototype.dataName = function (name) {
+    name = name || '';
     var namespace = this.options.dataNamespace;
     return (namespace ? (namespace + '.') : '') + name;
   };
@@ -309,6 +311,8 @@
     var that = this;
 
     var $el = this.$el = this.element;
+
+    this.$originalEl = $el.clone();
 
     var options = this.options;
 
@@ -395,6 +399,9 @@
 
     if (options.zoomedContainer) {
       $zoomedContainer = $(options.zoomedContainer);
+
+      that.$originalZoomedContainer = $zoomedContainer.clone();
+
       $zoomedChildren = $zoomedContainer.children();
       $zoomedContainer.empty();
 
@@ -765,6 +772,11 @@
         var hammerOptions = {};
         var hammertime = new Hammer(hammerEl, hammerOptions);
 
+        // Register custom destroy event listener to queue Hammer destroy.
+        that.$el.on('destroy', function () {
+          hammertime.destroy();
+        });
+
         $hammerEl.data(that.dataName('hammer'));
 
         hammertime.get('pinch').set({ enable: true });
@@ -808,6 +820,24 @@
     var renderLoopInterval = setInterval(renderLoop, renderLoopIntervalTime);
 
 
+  };
+
+  Magnificent.prototype.destroy = function() {
+    var that = this;
+    // Trigger custom destroy event for any listeners.
+    that.$el.trigger(that.eventName('destroy'));
+    // Turn off all events.
+    that.$el.off(that.eventName());
+
+    // Replace elements with originals.
+
+    if (that.$originalZoomedContainer) {
+      that.$zoomedContainer.after(that.$originalZoomedContainer);
+      that.$zoomedContainer.remove();
+    }
+
+    that.$el.after(that.$originalEl);
+    that.$el.remove();
   };
 
 
