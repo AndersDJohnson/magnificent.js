@@ -761,7 +761,7 @@
         // console.log('options.pos', options.position);
         // if (options.position === 'mirror') {
         if (options.mode === 'inner') {
-          hammertime.on(that.eventName('pan'), function (e) {
+          hammertime.on('pan', function (e) {
             e.preventDefault();
             // console.log('pan', e);
 
@@ -774,7 +774,7 @@
           });
         }
 
-        hammertime.on(that.eventName('pinch'), function(e) {
+        hammertime.on('pinch', function(e) {
           e.preventDefault();
           // console.log('pinch', e);
 
