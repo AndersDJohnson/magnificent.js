@@ -481,6 +481,7 @@
 
 
     var $zone = $('<div class="mag-zone"></div>');
+    $zone.attr('mag-id', id);
     var zone = $zone.get(0);
     $el.append($zone);
 
@@ -741,7 +742,7 @@
 
 
     if (options.position) {
-      $zone.on(that.eventName('mousewheel'), function (e) {
+      $(document).on('mousewheel', '[mag-id=' + id + '].mag-zone', function (e) {
         // console.log('mousewheel', {
         //   deltaX: e.deltaX,
         //   deltaY: e.deltaY,
