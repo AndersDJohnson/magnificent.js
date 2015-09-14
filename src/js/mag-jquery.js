@@ -500,24 +500,11 @@
     this.$zoomed = $zoomed;
     this.$zoomedContainer = $zoomedContainer;
 
-    /*
-      Proxy events from container to zone for weird IE 9-10 behavior despite z-index.
-     */
-    var proxyEvents = [
-      'mousemove',
-      'mousewheel',
-      'draginit',
-      'dragstart',
-      'drag',
-      'dragend'
-    ];
-    var nsProxyEvents = $.map(proxyEvents, function (name) {
-      return that.eventName(name);
-    });
-    $zoomedContainer.on(nsProxyEvents.join(' '), function (e){
-      var $t = $(this);
-      $zone.trigger(that.eventName(e.type), e);
-    });
+
+    that.proxyToZone($zoomedContainer)
+    if (options.mode === 'outer') {
+      that.proxyToZone($thumb);
+    }
 
 
     if (options.toggle) {
@@ -851,6 +838,31 @@
 
 
   };
+
+
+  Magnificent.prototype.proxyToZone = function ($el) {
+    var that = this;
+    var $zone = that.$zone;
+    /*
+      Proxy events from container to zone for weird IE 9-10 behavior despite z-index.
+     */
+    var proxyEvents = [
+      'mousemove',
+      'mousewheel',
+      'draginit',
+      'dragstart',
+      'drag',
+      'dragend'
+    ];
+    var nsProxyEvents = $.map(proxyEvents, function (name) {
+      return that.eventName(name);
+    });
+    $el.on(nsProxyEvents.join(' '), function (e){
+      var $t = $(this);
+      $zone.trigger(that.eventName(e.type), e);
+    });
+  };
+
 
   Magnificent.prototype.destroy = function() {
     var that = this;
