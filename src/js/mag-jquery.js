@@ -118,8 +118,11 @@
     if (left) transform += ' translateX(' + left + ')';
     if (top) transform += ' translateY(' + top + ')';
 
+    css['-webkit-transform'] = transform;
+    css['-moz-transform'] = transform;
+    css['-ms-transform'] = transform;
+    css['-o-transform'] = transform;
     css.transform = transform;
-    // TODO: vendor prefixes?
 
     return css;
   };
@@ -153,9 +156,12 @@
       (left !== undefined ? left : 0) + ',' +
       (top !== undefined ? top : 0) +
       ',0)';
-    css.transform = transform;
-    // TODO: more vendor prefixes?
+
     css['-webkit-transform'] = transform;
+    css['-moz-transform'] = transform;
+    css['-ms-transform'] = transform;
+    css['-o-transform'] = transform;
+    css.transform = transform;
 
     css.width = '100%';
     css.height = '100%';
