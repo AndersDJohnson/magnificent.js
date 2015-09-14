@@ -850,19 +850,32 @@
 
     // Unbind and replace elements with originals.
 
+    that.off();
+
     if (that.$originalZoomedContainer && that.$zoomedContainer) {
-      // Turn off all events.
-      that.$zoomedContainer.off(that.eventName());
       // Replace
       that.$zoomedContainer.after(that.$originalZoomedContainer);
       that.$zoomedContainer.remove();
     }
 
-    // Turn off all events.
-    that.$el.off(that.eventName());
     // Replace
     that.$el.after(that.$originalEl);
     that.$el.remove();
+  };
+
+
+  Magnificent.prototype.off = function () {
+    var that = this;
+
+    if (that.$originalZoomedContainer && that.$zoomedContainer) {
+      // Turn off all events.
+      that.$zoomedContainer.off(that.eventName());
+    }
+
+    // Turn off all events.
+    that.$el.off(that.eventName());
+
+    return this;
   };
 
 
