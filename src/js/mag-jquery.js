@@ -502,9 +502,20 @@
     /*
       Proxy events from container to zone for weird IE 9-10 behavior despite z-index.
      */
-    $zoomedContainer.on('mousemove mousewheel', function (e){
+    var proxyEvents = [
+      'mousemove',
+      'mousewheel',
+      'draginit',
+      'dragstart',
+      'drag',
+      'dragend'
+    ];
+    var nsProxyEvents = $.map(proxyEvents, function (name) {
+      return that.eventName(name);
+    });
+    $zoomedContainer.on(nsProxyEvents.join(' '), function (e){
       var $t = $(this);
-      $zone.trigger(e.type, e);
+      $zone.trigger(that.eventName(e.type), e);
     });
 
 
@@ -615,13 +626,10 @@
 
       var startFocus;
 
-      $el.on('dragstart', function () {
-        return false;
-      });
-
       if (options.mode === 'inner') {
 
-        $zone.drag('start', function () {
+        $zone.on('dragstart', function (e) {
+          e.preventDefault();
           dragging = true;
           $el.addClass('mag--dragging');
           startFocus = {
@@ -630,7 +638,7 @@
           };
         });
 
-        $zone.drag('end', function () {
+        $zone.on('dragend', function (e) {
           dragging = false;
           $el.removeClass('mag--dragging');
           startFocus = undefined;
