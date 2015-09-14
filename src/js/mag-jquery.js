@@ -599,6 +599,10 @@
 
       var startFocus;
 
+      $el.on('dragstart', function () {
+        return false;
+      });
+
       if (options.mode === 'inner') {
 
         $zone.drag('start', function () {
