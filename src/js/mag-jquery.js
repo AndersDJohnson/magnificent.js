@@ -459,20 +459,21 @@
 
     if (options.mode === 'inner') {
       $zoomedContainer = $noflow;
-      $noflow.addClass('mag-zoomed-bg');
     }
     else if (options.mode === 'outer') {
       if (! options.zoomedContainer) {
         throw new Error("Required 'zoomedContainer' option.");
       }
       $zoomedContainer = $(options.zoomedContainer);
-      $zoomedContainer.addClass('mag-zoomed-container');
-      $zoomedContainer.addClass('mag-zoomed-bg');
-      $zoomedContainer.attr('mag-theme', options.theme);
     }
     else {
       throw new Error("Invalid 'mode' option.");
     }
+
+    $zoomedContainer.attr('mag-theme', options.theme);
+    $zoomedContainer.addClass('mag-zoomed-container');
+    $zoomedContainer.addClass('mag-zoomed-bg');
+
 
     var $thumb = $('<div class="mag-thumb"></div>');
     $thumb.html($thumbChildren);
