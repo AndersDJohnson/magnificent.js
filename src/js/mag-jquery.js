@@ -499,6 +499,14 @@
     this.$zoomed = $zoomed;
     this.$zoomedContainer = $zoomedContainer;
 
+    /*
+      Proxy events from container to zone for weird IE 9-10 behavior despite z-index.
+     */
+    $zoomedContainer.on('mousemove mousewheel', function (e){
+      var $t = $(this);
+      $zone.trigger(e.type, e);
+    });
+
 
     if (options.toggle) {
       if (options.initialShow === 'thumb') {
@@ -574,8 +582,9 @@
       if (options.positionEvent === 'move') {
         lazyRate = 0.2;
 
-        $zone.on(that.eventName('mousemove'), function(e){
-          var ratios = ratioOffsets(e);
+        $zone.on(that.eventName('mousemove'), function(e, e2){
+          e = e2 || e;
+          var ratios = ratioOffsets(e, $zone);
           adjustForMirror(ratios);
         });
       }
@@ -705,7 +714,7 @@
         lazyRate = 0.5;
 
         $zone.on(that.eventName('mousemove'), function(e){
-          ratios = ratioOffsets(e);
+          ratios = ratioOffsets(e, $zone);
         });
       }
       else if (options.positionEvent === 'hold') {
@@ -752,7 +761,8 @@
 
 
     if (options.position) {
-      $zone.on(that.eventName('mousewheel'), function (e) {
+      $zone.on(that.eventName('mousewheel'), function (e, e2) {
+        e = e2 || e;
         // console.log('mousewheel', {
         //   deltaX: e.deltaX,
         //   deltaY: e.deltaY,
