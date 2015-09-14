@@ -583,7 +583,7 @@
         lazyRate = 0.2;
 
         $zone.on(that.eventName('mousemove'), function(e, e2){
-          e = e2 || e;
+          e = typeof e2 === 'object' ? e2 : e;
           var ratios = ratioOffsets(e, $zone);
           adjustForMirror(ratios);
         });
@@ -762,7 +762,7 @@
 
     if (options.position) {
       $zone.on(that.eventName('mousewheel'), function (e, e2) {
-        e = e2 || e;
+        e = typeof e2 === 'object' ? e2 : e;
         // console.log('mousewheel', {
         //   deltaX: e.deltaX,
         //   deltaY: e.deltaY,
