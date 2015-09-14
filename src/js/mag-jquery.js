@@ -38,17 +38,18 @@
   $(':root').addClass('mag-js');
 
 
-  var normalizeOffsets = function (e) {
-    var offset = $(e.target).offset();
+  var normalizeOffsets = function (e, $target) {
+    $target = $target || $(e.target);
+    var offset = $target.offset();
     return {
       x: e.pageX - offset.left,
       y: e.pageY - offset.top
     };
   };
 
-  var ratioOffsets = function (e) {
-    var normOff = normalizeOffsets(e);
-    var $target = $(e.target);
+  var ratioOffsets = function (e, $target) {
+    $target = $target || $(e.target);
+    var normOff = normalizeOffsets(e, $target);
     return {
       x: normOff.x / $target.width(),
       y: normOff.y / $target.height()
