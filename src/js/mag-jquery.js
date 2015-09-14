@@ -590,17 +590,21 @@
       else if (options.positionEvent === 'hold') {
         lazyRate = 0.2;
 
-        $zone.drag('start', function () {
+        $zone.on(that.eventName('dragstart'), function (e, dd, e2) {
+          e = typeof e2 === 'object' ? e2 : e;
           dragging = true;
           $el.addClass('mag--dragging');
         });
 
-        $zone.drag('end', function () {
+        $zone.on(that.eventName('dragend'), function (e, dd, e2) {
+          e = typeof e2 === 'object' ? e2 : e;
           dragging = false;
           $el.removeClass('mag--dragging');
         });
 
-        $zone.drag(function( e, dd ){
+        $zone.on(that.eventName('drag'), function (e, dd, e2) {
+          // console.log('drag', arguments, JSON.stringify(dd));
+          e = typeof e2 === 'object' ? e2 : e;
           var offset = $zone.offset();
           var ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
           adjustForMirror(ratios);
@@ -616,7 +620,8 @@
 
       if (options.mode === 'inner') {
 
-        $zone.on('dragstart', function (e) {
+        $zone.on(that.eventName('dragstart'), function (e, dd, e2) {
+          e = typeof e2 === 'object' ? e2 : e;
           e.preventDefault();
           dragging = true;
           $el.addClass('mag--dragging');
@@ -626,13 +631,16 @@
           };
         });
 
-        $zone.on('dragend', function (e) {
+        $zone.on(that.eventName('dragend'), function (e, dd, e2) {
+          e = typeof e2 === 'object' ? e2 : e;
           dragging = false;
           $el.removeClass('mag--dragging');
           startFocus = undefined;
         });
 
-        $zone.drag(function( e, dd ) {
+        $zone.on(that.eventName('drag'), function (e, dd, e2) {
+          // console.log('drag', arguments, JSON.stringify(dd));
+          e = typeof e2 === 'object' ? e2 : e;
           var offset = $zone.offset();
           ratios = ratioOffsetsFor($zone, dd.originalX - dd.offsetX, dd.originalY - dd.offsetY);
 
@@ -651,7 +659,8 @@
       }
       else {
 
-        $zone.drag('start', function () {
+        $zone.on(that.eventName('dragstart'), function (e, dd, e2) {
+          e = typeof e2 === 'object' ? e2 : e;
           dragging = true;
           $el.addClass('mag--dragging');
           startFocus = {
@@ -660,13 +669,15 @@
           };
         });
 
-        $zone.drag('end', function () {
+        $zone.on(that.eventName('dragend'), function (e, dd, e2) {
+          e = typeof e2 === 'object' ? e2 : e;
           dragging = false;
           $el.removeClass('mag--dragging');
           startFocus = undefined;
         });
 
-        $zone.drag(function( e, dd ) {
+        $zone.on(that.eventName('drag'), function (e, dd, e2) {
+          // console.log('drag', arguments, JSON.stringify(dd));
           var offset = $zone.offset();
           ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
 
@@ -848,6 +859,15 @@
      */
     var proxyEvents = [
       'mousemove',
+      // 'mouseenter',
+      // 'mouseleave',
+      // 'mouseover',
+      // 'mouseout',
+      'click',
+      'touchstart',
+      'touchend',
+      'touchmove',
+      'touchcancel',
       'mousewheel',
       'draginit',
       'dragstart',
@@ -857,9 +877,15 @@
     var nsProxyEvents = $.map(proxyEvents, function (name) {
       return that.eventName(name);
     });
-    $el.on(nsProxyEvents.join(' '), function (e){
+    $el.on(nsProxyEvents.join(' '), function (e) {
       var $t = $(this);
-      $zone.trigger(that.eventName(e.type), e);
+      var args = Array.prototype.slice.call(arguments);
+      // console.log(['a', args[0], args[1], args[2], args[3], args[4], args[5]]);
+      e.triggered = true;
+      args.push(e);
+      args.unshift(that.eventName(e.type));
+      // console.log(['b', args[0], args[1], args[2], args[3], args[4], args[5]]);
+      $zone.trigger.apply($zone, args);
     });
   };
 
