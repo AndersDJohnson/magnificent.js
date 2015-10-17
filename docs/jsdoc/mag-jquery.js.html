@@ -85,32 +85,39 @@
 (function (root, factory) {
   var name = 'Magnificent';
   if (typeof define === 'function' &amp;&amp; define.amd) {
-    define(['./mag', './mag-analytics', 'jquery', 'jquery-bridget'], function (mag, MagnificentAnalytics, $) {
-        return (root[name] = factory(mag, MagnificentAnalytics, $));
-    });
+    define(['./mag', './mag-analytics', 'jquery', 'hammerjs', 'prevent-ghost-click', 'jquery-bridget'],
+      function (mag, MagnificentAnalytics, $, Hammer) {
+        return (root[name] = factory(mag, MagnificentAnalytics, $, Hammer, PreventGhostClick));
+      }
+    );
   } else if (typeof exports === 'object') {
     module.exports = factory(require('./mag'), require('./mag-analytics'),
-      require('jquery'), require('jquery-bridget'));
+      require('jquery'), require('hammerjs'), require('prevent-ghost-click'),
+      require('jquery-bridget')
+    );
   } else {
-    root[name] = factory(root.Mag, root.MagnificentAnalytics, root.$);
+    root[name] = factory(root.Mag, root.MagnificentAnalytics,
+      root.$, root.Hammer, root.PreventGhostClick
+    );
   }
-}(this, function (Mag, MagnificentAnalytics, $) {
+}(this, function (Mag, MagnificentAnalytics, $, Hammer) {
 
 
   $(':root').addClass('mag-js');
 
 
-  var normalizeOffsets = function (e) {
-    var offset = $(e.target).offset();
+  var normalizeOffsets = function (e, $target) {
+    $target = $target || $(e.target);
+    var offset = $target.offset();
     return {
       x: e.pageX - offset.left,
       y: e.pageY - offset.top
     };
   };
 
-  var ratioOffsets = function (e) {
-    var normOff = normalizeOffsets(e);
-    var $target = $(e.target);
+  var ratioOffsets = function (e, $target) {
+    $target = $target || $(e.target);
+    var normOff = normalizeOffsets(e, $target);
     return {
       x: normOff.x / $target.width(),
       y: normOff.y / $target.height()
@@ -180,8 +187,11 @@
     if (left) transform += ' translateX(' + left + ')';
     if (top) transform += ' translateY(' + top + ')';
 
+    css['-webkit-transform'] = transform;
+    css['-moz-transform'] = transform;
+    css['-ms-transform'] = transform;
+    css['-o-transform'] = transform;
     css.transform = transform;
-    // TODO: vendor prefixes?
 
     return css;
   };
@@ -215,9 +225,12 @@
       (left !== undefined ? left : 0) + ',' +
       (top !== undefined ? top : 0) +
       ',0)';
-    css.transform = transform;
-    // TODO: more vendor prefixes?
+
     css['-webkit-transform'] = transform;
+    css['-moz-transform'] = transform;
+    css['-ms-transform'] = transform;
+    css['-o-transform'] = transform;
+    css.transform = transform;
 
     css.width = '100%';
     css.height = '100%';
@@ -300,7 +313,9 @@
     ratio: 1,
     toggle: true,
     smooth: true,
-    cssMode: '3d'
+    cssMode: '3d',
+    eventNamespace: 'magnificent',
+    dataNamespace: 'magnificent'
   };
 
 
@@ -352,11 +367,27 @@
   };
 
 
+  Magnificent.prototype.eventName = function (name) {
+    name = name || '';
+    var namespace = this.options.eventNamespace;
+    return name + (namespace ? ('.' + namespace) : '');
+  };
+
+
+  Magnificent.prototype.dataName = function (name) {
+    name = name || '';
+    var namespace = this.options.dataNamespace;
+    return (namespace ? (namespace + '.') : '') + name;
+  };
+
+
   Magnificent.prototype._init = function () {
 
     var that = this;
 
     var $el = this.$el = this.element;
+
+    this.$originalEl = $el.clone();
 
     var options = this.options;
 
@@ -443,7 +474,10 @@
 
     if (options.zoomedContainer) {
       $zoomedContainer = $(options.zoomedContainer);
-      $zoomedChildren = $zoomedContainer.children();
+
+      that.$originalZoomedContainer = $zoomedContainer.clone();
+
+      $zoomedChildren = $zoomedContainer.children(); 
       $zoomedContainer.empty();
 
       if (options.mode === 'inner') {
@@ -493,20 +527,21 @@
 
     if (options.mode === 'inner') {
       $zoomedContainer = $noflow;
-      $noflow.addClass('mag-zoomed-bg');
     }
     else if (options.mode === 'outer') {
       if (! options.zoomedContainer) {
         throw new Error("Required 'zoomedContainer' option.");
       }
       $zoomedContainer = $(options.zoomedContainer);
-      $zoomedContainer.addClass('mag-zoomed-container');
-      $zoomedContainer.addClass('mag-zoomed-bg');
-      $zoomedContainer.attr('mag-theme', options.theme);
     }
     else {
       throw new Error("Invalid 'mode' option.");
     }
+
+    $zoomedContainer.attr('mag-theme', options.theme);
+    $zoomedContainer.addClass('mag-zoomed-container');
+    $zoomedContainer.addClass('mag-zoomed-bg');
+
 
     var $thumb = $('&lt;div class="mag-thumb">&lt;/div>');
     $thumb.html($thumbChildren);
@@ -522,6 +557,7 @@
 
 
     var $zone = $('&lt;div class="mag-zone">&lt;/div>');
+    var zone = $zone.get(0);
     $el.append($zone);
 
 
@@ -531,6 +567,12 @@
     this.$thumb = $thumb;
     this.$zoomed = $zoomed;
     this.$zoomedContainer = $zoomedContainer;
+
+
+    that.proxyToZone($zoomedContainer)
+    if (options.mode === 'outer') {
+      that.proxyToZone($thumb);
+    }
 
 
     if (options.toggle) {
@@ -547,11 +589,11 @@
         throw new Error("Invalid 'initialShow' option.");
       }
 
-      $el.on('mouseenter', function () {
+      $el.on(that.eventName('mouseenter'), function () {
         that.toggle.call(that, true);
       });
 
-      $el.on('mouseleave', function () {
+      $el.on(that.eventName('mouseleave'), function () {
         that.toggle.call(that, false);
       });
     }
@@ -607,25 +649,30 @@
       if (options.positionEvent === 'move') {
         lazyRate = 0.2;
 
-        $zone.on('mousemove', function(e){
-          var ratios = ratioOffsets(e);
+        $zone.on(that.eventName('mousemove'), function(e, e2){
+          e = typeof e2 === 'object' ? e2 : e;
+          var ratios = ratioOffsets(e, $zone);
           adjustForMirror(ratios);
         });
       }
       else if (options.positionEvent === 'hold') {
         lazyRate = 0.2;
 
-        $zone.drag('start', function () {
+        $zone.on(that.eventName('dragstart'), function (e, dd, e2) {
+          e = typeof e2 === 'object' ? e2 : e;
           dragging = true;
           $el.addClass('mag--dragging');
         });
 
-        $zone.drag('end', function () {
+        $zone.on(that.eventName('dragend'), function (e, dd, e2) {
+          e = typeof e2 === 'object' ? e2 : e;
           dragging = false;
           $el.removeClass('mag--dragging');
         });
 
-        $zone.drag(function( e, dd ){
+        $zone.on(that.eventName('drag'), function (e, dd, e2) {
+          // console.log('drag', arguments, JSON.stringify(dd));
+          e = typeof e2 === 'object' ? e2 : e;
           var offset = $zone.offset();
           var ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
           adjustForMirror(ratios);
@@ -641,7 +688,9 @@
 
       if (options.mode === 'inner') {
 
-        $zone.drag('start', function () {
+        $zone.on(that.eventName('dragstart'), function (e, dd, e2) {
+          e = typeof e2 === 'object' ? e2 : e;
+          e.preventDefault();
           dragging = true;
           $el.addClass('mag--dragging');
           startFocus = {
@@ -650,13 +699,16 @@
           };
         });
 
-        $zone.drag('end', function () {
+        $zone.on(that.eventName('dragend'), function (e, dd, e2) {
+          e = typeof e2 === 'object' ? e2 : e;
           dragging = false;
           $el.removeClass('mag--dragging');
           startFocus = undefined;
         });
 
-        $zone.drag(function( e, dd ) {
+        $zone.on(that.eventName('drag'), function (e, dd, e2) {
+          // console.log('drag', arguments, JSON.stringify(dd));
+          e = typeof e2 === 'object' ? e2 : e;
           var offset = $zone.offset();
           ratios = ratioOffsetsFor($zone, dd.originalX - dd.offsetX, dd.originalY - dd.offsetY);
 
@@ -675,7 +727,8 @@
       }
       else {
 
-        $zone.drag('start', function () {
+        $zone.on(that.eventName('dragstart'), function (e, dd, e2) {
+          e = typeof e2 === 'object' ? e2 : e;
           dragging = true;
           $el.addClass('mag--dragging');
           startFocus = {
@@ -684,13 +737,15 @@
           };
         });
 
-        $zone.drag('end', function () {
+        $zone.on(that.eventName('dragend'), function (e, dd, e2) {
+          e = typeof e2 === 'object' ? e2 : e;
           dragging = false;
           $el.removeClass('mag--dragging');
           startFocus = undefined;
         });
 
-        $zone.drag(function( e, dd ) {
+        $zone.on(that.eventName('drag'), function (e, dd, e2) {
+          // console.log('drag', arguments, JSON.stringify(dd));
           var offset = $zone.offset();
           ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
 
@@ -702,7 +757,7 @@
           that.compute();
         });
 
-        $zone.on('click', function (e) {
+        $zone.on(that.eventName('click'), function (e) {
           var offset = $zone.offset();
           ratios = ratioOffsetsFor($zone, e.pageX - offset.left, e.pageY - offset.top);
 
@@ -733,8 +788,8 @@
         dragging = true;
         lazyRate = 0.5;
 
-        $zone.on('mousemove', function(e){
-          ratios = ratioOffsets(e);
+        $zone.on(that.eventName('mousemove'), function(e){
+          ratios = ratioOffsets(e, $zone);
         });
       }
       else if (options.positionEvent === 'hold') {
@@ -781,22 +836,161 @@
 
 
     if (options.position) {
-      $zone.on('mousewheel', function (e) {
+      $zone.on(that.eventName('mousewheel'), function (e, e2) {
+        e = typeof e2 === 'object' ? e2 : e;
+        // console.log('mousewheel', {
+        //   deltaX: e.deltaX,
+        //   deltaY: e.deltaY,
+        //   deltaFactor: e.deltaFactor
+        // });
         e.preventDefault();
 
+        var rate = 0.2;
         var zoom = model.zoom;
-        var delta = e.deltaY;
-        delta = delta > 0 ? delta + zoomRate : Math.abs(delta) - zoomRate;
+        var delta = (e.deltaY + e.deltaX) / 2;
+        // if (e.deltaFactor) {
+        //   delta *= e.deltaFactor;
+        // }
+        delta *= rate;
+        delta += 1;
         zoom *= delta;
         model.zoom = zoom;
         that.compute();
       });
+
+      if (PreventGhostClick) {
+        PreventGhostClick(zone);
+      }
+
+      if (Hammer) {
+        var hammerEl = zone;
+        var $hammerEl = $zone;
+        var hammerOptions = {};
+        var hammertime = new Hammer(hammerEl, hammerOptions);
+
+        // Register custom destroy event listener to queue Hammer destroy.
+        that.$el.on('destroy', function () {
+          hammertime.destroy();
+        });
+
+        $hammerEl.data(that.dataName('hammer'));
+
+        hammertime.get('pinch').set({ enable: true });
+
+        // console.log('options.pos', options.position);
+        // if (options.position === 'mirror') {
+        if (options.mode === 'inner') {
+          hammertime.on('pan', function (e) {
+            e.preventDefault();
+            // console.log('pan', e);
+
+            that.toggle.call(that, true);
+
+            var rate = -0.0005;
+
+            model.focus.x += rate * e.deltaX;
+            model.focus.y += rate * e.deltaY;
+          });
+        }
+
+        hammertime.on('pinch', function(e) {
+          e.preventDefault();
+          // console.log('pinch', e);
+
+          that.toggle.call(that, true);
+
+          var rate = -0.01;
+          var zoom = model.zoom;
+          var delta = (e.deltaY + e.deltaX) / 2;
+          // delta = delta > 0 ? delta : Math.abs(delta);
+          delta *= rate;
+          delta += 1;
+          zoom *= delta;
+          model.zoom = zoom;
+          that.compute();
+        });
+      }
     }
 
 
     var renderLoopInterval = setInterval(renderLoop, renderLoopIntervalTime);
 
 
+  };
+
+
+  Magnificent.prototype.proxyToZone = function ($el) {
+    var that = this;
+    var $zone = that.$zone;
+    /*
+      Proxy events from container to zone for weird IE 9-10 behavior despite z-index.
+     */
+    var proxyEvents = [
+      'mousemove',
+      // 'mouseenter',
+      // 'mouseleave',
+      // 'mouseover',
+      // 'mouseout',
+      'click',
+      'touchstart',
+      'touchend',
+      'touchmove',
+      'touchcancel',
+      'mousewheel',
+      'draginit',
+      'dragstart',
+      'drag',
+      'dragend'
+    ];
+    var nsProxyEvents = $.map(proxyEvents, function (name) {
+      return that.eventName(name);
+    });
+    $el.on(nsProxyEvents.join(' '), function (e) {
+      var $t = $(this);
+      var args = Array.prototype.slice.call(arguments);
+      // console.log(['a', args[0], args[1], args[2], args[3], args[4], args[5]]);
+      e.triggered = true;
+      args.push(e);
+      args.unshift(that.eventName(e.type));
+      // console.log(['b', args[0], args[1], args[2], args[3], args[4], args[5]]);
+      $zone.trigger.apply($zone, args);
+    });
+  };
+
+
+  Magnificent.prototype.destroy = function() {
+    var that = this;
+    // Trigger custom destroy event for any listeners.
+    that.$el.trigger(that.eventName('destroy'));
+
+    // Unbind and replace elements with originals.
+
+    that.off();
+
+    if (that.$originalZoomedContainer &amp;&amp; that.$zoomedContainer) {
+      // Replace
+      that.$zoomedContainer.after(that.$originalZoomedContainer);
+      that.$zoomedContainer.remove();
+    }
+
+    // Replace
+    that.$el.after(that.$originalEl);
+    that.$el.remove();
+  };
+
+
+  Magnificent.prototype.off = function () {
+    var that = this;
+
+    if (that.$originalZoomedContainer &amp;&amp; that.$zoomedContainer) {
+      // Turn off all events.
+      that.$zoomedContainer.off(that.eventName());
+    }
+
+    // Turn off all events.
+    that.$el.off(that.eventName());
+
+    return this;
   };
 
 
@@ -881,7 +1075,7 @@
 
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a>
-	on Sat Aug 15th 2015 using the <a
+	on Sat Oct 17th 2015 using the <a
 	href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 </span>
 </footer>
