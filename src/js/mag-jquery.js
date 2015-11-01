@@ -67,14 +67,15 @@
     return (frac * 100) + '%';
   };
 
-  var toCSS = function (pt, mode, id) {
+  // Modified plugin to add functionality to keep the image wthin the container without white space.
+  var toCSS = function (pt, mode, id, containerDimensions, imageDimensions) {
 
     if (mode === '3d') {
-      return toCSSTransform3d(pt, id);
+      return toCSSTransform3d(pt, id, containerDimensions, imageDimensions); // modified
     }
 
     if (mode === '2d') {
-      return toCSSTransform2d(pt, id);
+      return toCSSTransform2d(pt, id, containerDimensions, imageDimensions); //modified
     }
 
     // mode === 'position'
@@ -92,12 +93,16 @@
     return css;
   };
 
-  var toCSSTransform2d = function (pt, id) {
+  // Modified plugin to add functionality to keep the image wthin the container without white space.
+  var toCSSTransform2d = function (pt, id, containerDimensions, imageDimensions) {
     var css = {};
     var left;
     var top;
     var width;
     var height;
+    var newImageWidth, newImageHeight, xLimit = 0.5, yLimit = 0.5; //modified (added)
+    var allowTranslateX = true; //modified (added)
+    var allowTranslateY = true; //modified (added)
 
     var x = pt.x;
     var y = pt.y;
@@ -106,6 +111,51 @@
 
     x += (w - 1) * (0.5 - x) / w;
     y += (h - 1) * (0.5 - y) / h;
+
+    // Modified plugin to add functionality to keep the image wthin the container without white space.
+    if (containerDimensions !== undefined && imageDimensions !== undefined) {
+      newImageWidth = imageDimensions.width * w;
+      newImageHeight = imageDimensions.height * h;
+      //Do not allow translate unless the image is bigger than container space
+      if (containerDimensions.width > newImageWidth) {
+        allowTranslateX = false;
+      }
+      if (containerDimensions.height > newImageHeight) {
+        allowTranslateY = false;
+      }
+
+      xLimit = ((newImageWidth - containerDimensions.width) / newImageWidth) / 2;
+      yLimit = ((newImageHeight - containerDimensions.height) / newImageHeight) / 2;
+      if (xLimit < 0) {
+        xLimit = - xLimit;
+      }
+      if (yLimit < 0) {
+        yLimit = - yLimit;
+      }
+
+      if (xLimit > 0 && x >= xLimit) {
+        x = xLimit;
+      }
+
+      if (xLimit > 0 && x <= -xLimit) {
+        x = -xLimit;
+      }
+
+      if (yLimit > 0 && y >= yLimit) {
+        y = yLimit;
+      }
+
+      if (yLimit > 0 && y <= -yLimit) {
+        y = -yLimit;
+      }
+
+      css.left = ((containerDimensions.width - imageDimensions.width) / 2) + 'px';
+      css.top = ((containerDimensions.height - imageDimensions.height) / 2) + 'px';
+    } else {
+      css.left = '0';
+      css.top = '0';
+    }
+    // End of modification within this function
 
     if (x !== undefined) left = cssPerc(x);
     if (y !== undefined) top = cssPerc(y);
@@ -116,8 +166,18 @@
 
     if (width) transform += ' scaleX(' + width + ')';
     if (height) transform += ' scaleY(' + height + ')';
-    if (left) transform += ' translateX(' + left + ')';
-    if (top) transform += ' translateY(' + top + ')';
+    //Modification to improve plugin - no translate unless the image is bigger than container space
+    if (allowTranslateX) {
+      if (left) transform += ' translateX(' + left + ')';
+    } else {
+      transform += ' translateX(0)';
+    }
+    if (allowTranslateY) {
+      if (top) transform += ' translateY(' + top + ')';
+    } else {
+      transform += ' translateY(0)';
+    }
+    //End of modification here
 
     css['-webkit-transform'] = transform;
     css['-moz-transform'] = transform;
@@ -128,12 +188,16 @@
     return css;
   };
 
-  var toCSSTransform3d = function (pt, id) {
+  // Modified plugin to add functionality to keep the image wthin the container without white space.
+  var toCSSTransform3d = function (pt, id, containerDimensions, imageDimensions) {
     var css = {};
     var left;
     var top;
     var width;
     var height;
+    var newImageWidth, newImageHeight, xLimit = 0.5, yLimit = 0.5; //modified (added)
+    var allowTranslateX = true; // modified (added)
+    var allowTranslateY = true; // modified (added)
 
     var x = pt.x;
     var y = pt.y;
@@ -142,6 +206,50 @@
 
     x += (w - 1) * (0.5 - x) / w;
     y += (h - 1) * (0.5 - y) / h;
+
+    // Modified plugin to add functionality to keep the image wthin the container without white space.
+    if (containerDimensions !== undefined && imageDimensions !== undefined) {
+      newImageWidth = imageDimensions.width * w;
+      newImageHeight = imageDimensions.height * h;
+      //Do not allow translate unless the image is bigger than container space
+      if (containerDimensions.width > newImageWidth) {
+        allowTranslateX = false;
+      }
+      if (containerDimensions.height > newImageHeight) {
+        allowTranslateY = false;
+      }
+      xLimit = ((newImageWidth - containerDimensions.width) / newImageWidth) / 2;
+      yLimit = ((newImageHeight - containerDimensions.height) / newImageHeight) / 2;
+      if (xLimit < 0) {
+        xLimit = - xLimit;
+      }
+      if (yLimit < 0) {
+        yLimit = - yLimit;
+      }
+
+      if (xLimit > 0 && x >= xLimit) {
+        x = xLimit;
+      }
+
+      if (xLimit > 0 && x <= -xLimit) {
+        x = -xLimit;
+      }
+
+      if (yLimit > 0 && y >= yLimit) {
+        y = yLimit;
+      }
+
+      if (yLimit > 0 && y <= -yLimit) {
+        y = -yLimit;
+      }
+
+      css.left = ((containerDimensions.width - imageDimensions.width) / 2) + 'px';
+      css.top = ((containerDimensions.height - imageDimensions.height) / 2) + 'px';
+    } else {
+      css.left = '0';
+      css.top = '0';
+    }
+    // End of modification within this function
 
     if (x !== undefined) left = cssPerc(x);
     if (y !== undefined) top = cssPerc(y);
@@ -153,10 +261,13 @@
       (width !== undefined ? width : 0) + ',' +
       (height !== undefined ? height : 0) +
       ',1)';
+
+    //Modification to improve plugin - no translate unless the image is bigger than container space
     transform += ' translate3d(' +
-      (left !== undefined ? left : 0) + ',' +
-      (top !== undefined ? top : 0) +
+      ((left !== undefined && allowTranslateX) ? left : 0) + ',' +
+      ((top !== undefined && allowTranslateY) ? top : 0) +
       ',0)';
+    //End of modification
 
     css['-webkit-transform'] = transform;
     css['-moz-transform'] = transform;
@@ -164,20 +275,20 @@
     css['-o-transform'] = transform;
     css.transform = transform;
 
-    css.width = '100%';
-    css.height = '100%';
+    //Modification to improve plugin
+    css.width = 'auto';
+    css.height = 'auto';
     css.position = 'absolute';
-    css.top = '0';
-    css.left = '0';
+    //End of modification
 
     return css;
   };
 
   /**
    * Magnificent constructor.
-   * 
+   *
    * @alias module:mag-jquery
-   * 
+   *
    * @class
    * @param {external:HTMLElement|external:jQuery} element - DOM element to embellish.
    * @param {MagnificentOptions} options - Options to override defaults.
@@ -292,7 +403,9 @@
       $lens.css(lensCSS);
     }
     zoomed = this.modelLazy.zoomed;
-    var zoomedCSS = toCSS(zoomed, that.options.cssMode, that.id);
+    // Modified plugin to add functionality to keep the image wthin the container without white space.
+    var zoomedCSS = toCSS(zoomed, that.options.cssMode, that.id, this.zoomedContainerDimensions, this.imageDimensions);
+    //End of modification within this section
     $zoomed.css(zoomedCSS);
 
     this.$el.trigger('render', that);
@@ -409,7 +522,7 @@
 
       that.$originalZoomedContainer = $zoomedContainer.clone();
 
-      $zoomedChildren = $zoomedContainer.children(); 
+      $zoomedChildren = $zoomedContainer.children();
       $zoomedContainer.empty();
 
       if (options.mode === 'inner') {
@@ -499,6 +612,10 @@
     this.$thumb = $thumb;
     this.$zoomed = $zoomed;
     this.$zoomedContainer = $zoomedContainer;
+    // Modified plugin to add functionality to keep the image wthin the container without white space.
+    this.zoomedContainerDimensions = {width: $zoomedContainer.width(), height: $zoomedContainer.height()};
+    this.imageDimensions = {width: this.$zoomed.width(), height: this.$zoomed.height()};
+    // End of modification within this function
 
 
     that.proxyToZone($zoomedContainer)
