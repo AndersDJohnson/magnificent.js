@@ -223,6 +223,7 @@
    * @property {number} zoomRate - Rate at which to adjust zoom, from (0,∞). Default = 0.2.
    * @property {number} zoomMin - Minimum zoom level allowed, from (0,∞). Default = 2.
    * @property {number} zoomMax - Maximum zoom level allowed, from (0,∞). Default = 10.
+   * @property {number} dragRate - Rate at which to drag, from (0,∞). Default = 0.2.
    * @property {number} ratio - Ratio of outer (w/h) to inner (w/h) container ratios. Default = 1.
    * @property {boolean} constrainLens - Whether lens position is constrained. Default = true.
    * @property {boolean} constrainZoomed - Whether zoomed position is constrained. Default = false.
@@ -242,6 +243,7 @@
     zoomMin: 1,
     zoomMax: 10,
     zoomRate: 0.2,
+    dragRate: 0.2,
     ratio: 1,
     toggle: true,
     smooth: true,
@@ -536,7 +538,7 @@
 
     var lazyRate = 0.25;
     var renderLoopIntervalTime = 20;
-    var dragRate = 0.2;
+    var dragRate = options.dragRate;
     var zoomRate = options.zoomRate;
 
     var approach = function (enabled, thresh, rate, dest, src, props, srcProps) {
