@@ -823,27 +823,9 @@
 
           that.toggle.call(that, true);
 
-          // Modified plugin to improve touch functionality
-          var rate = -0.01;
           var zoom = model.zoom;
-          var delta = (e.deltaY + e.deltaX) / 2;
-          var scale = (e.originalEvent && e.originalEvent.scale) || e.scale;
-          // delta = delta > 0 ? delta : Math.abs(delta);
-
-          if (scale) {
-            rate = 0.01;
-            if (scale < 1) {
-              delta = - (1 - scale);
-            } else {
-              delta = scale - 1;
-            }
-          }
-          //End of modification
-
-          // delta = delta > 0 ? delta : Math.abs(delta);
-          delta *= rate;
-          delta += 1;
-          zoom *= delta;
+          var scale = e.scale || (e.originalEvent && e.originalEvent.scale);
+          zoom *= scale;
           model.zoom = zoom;
           that.compute();
         });
