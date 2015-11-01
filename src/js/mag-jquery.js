@@ -501,7 +501,7 @@
     this.$zoomedContainer = $zoomedContainer;
 
 
-    that.proxyToZone($zoomedContainer)
+    that.proxyToZone($zoomedContainer);
     if (options.mode === 'outer') {
       that.proxyToZone($thumb);
     }
