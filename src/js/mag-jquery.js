@@ -786,7 +786,7 @@
         // });
         e.preventDefault();
 
-        var rate = 0.2;
+        var rate = zoomRate;
         var zoom = model.zoom;
         var delta = (e.deltaY + e.deltaX) / 2;
         // if (e.deltaFactor) {
