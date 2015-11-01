@@ -25,7 +25,7 @@
         "navType"               : "vertical",
         "theme"                 : "cosmo",
         "linenums"              : true,
-        "collapseSymbols"       : true,
+        "collapseSymbols"       : false,
         "inverseNav"            : true,
         "highlightTutorialCode" : true,
         "protocol": "fred://",
