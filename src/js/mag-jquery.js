@@ -809,22 +809,6 @@
 
         hammertime.get('pinch').set({ enable: true });
 
-        // console.log('options.pos', options.position);
-        // if (options.position === 'mirror') {
-        if (options.mode === 'inner') {
-          hammertime.on('pan', function (e) {
-            e.preventDefault();
-            // console.log('pan', e);
-
-            that.toggle.call(that, true);
-
-            var rate = -0.0005;
-
-            model.focus.x += rate * e.deltaX;
-            model.focus.y += rate * e.deltaY;
-          });
-        }
-
         hammertime.on('pinch', function(e) {
           e.preventDefault();
           // console.log('pinch', e);
@@ -841,6 +825,27 @@
           model.zoom = zoom;
           that.compute();
         });
+
+        // if (options.position === 'mirror') {
+        if (options.mode === 'inner') {
+
+          var pinch = hammertime.get('pinch');
+          var pan = hammertime.get('pan');
+
+          pinch.recognizeWith(pan);
+
+          hammertime.on('pan', function (e) {
+            e.preventDefault();
+            // console.log('pan', e);
+
+            that.toggle.call(that, true);
+
+            var rate = -0.0005;
+
+            model.focus.x += rate * e.deltaX;
+            model.focus.y += rate * e.deltaY;
+          });
+        }
       }
     }
 
