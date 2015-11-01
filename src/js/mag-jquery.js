@@ -617,6 +617,7 @@
     else if (options.position === 'drag') {
 
       var startFocus;
+      var dragInitPosition; //modification for IE9 drag
 
       if (options.mode === 'inner') {
 
@@ -629,6 +630,12 @@
             x: model.focus.x,
             y: model.focus.y
           };
+          //modification for IE9 drag
+          dragInitPosition = {
+            x: dd.offsetX,
+            y: dd.offsetY
+          }
+          //End of modification
         });
 
         $zone.on(that.eventName('dragend'), function (e, dd, e2) {
@@ -651,7 +658,15 @@
           //End of modification
 
           var offset = $zone.offset();
-          ratios = ratioOffsetsFor($zone, dd.originalX - dd.offsetX, dd.originalY - dd.offsetY);
+          //modification for IE9 drag
+          var delta = {x: (dd.originalX - dd.offsetX), y: (dd.originalY - dd.offsetY)};
+
+          if (!dd.originalX) {
+            delta.x = dragInitPosition.x - dd.offsetX;
+            delta.y = dragInitPosition.y - dd.offsetY;
+          }
+          ratios = ratioOffsetsFor($zone, delta.x, delta.y);
+          //End of modification
 
           ratios = {
             x: ratios.x / model.zoom,
@@ -986,7 +1001,6 @@
     }
     this.compute();
   };
-
 
   $.bridget('mag', Magnificent);
 
