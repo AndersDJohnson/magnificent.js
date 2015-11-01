@@ -230,6 +230,7 @@
    * @property {boolean} toggle - Whether toggle display of zoomed vs. thumbnail upon interaction. Default = true.
    * @property {boolean} smooth - Whether the zoomed region should gradually approach target, rather than immediately. Default = true.
    * @property {string} cssMode - CSS mode to use for scaling and translating. Either '3d', '2d', or 'position'. Default = '3d'.
+   * @property {number} renderIntervalTime - Milliseconds for render loop interval. Adjust for performance vs. frame rate. Default = 20.
    * @property {MagModel} initial - Initial settings for model - focus, lens, zoom, etc.
    */
   Magnificent.prototype.options = {
@@ -247,6 +248,7 @@
     ratio: 1,
     toggle: true,
     smooth: true,
+    renderIntervalTime: 20,
     cssMode: '3d',
     eventNamespace: 'magnificent',
     dataNamespace: 'magnificent'
@@ -537,7 +539,7 @@
 
 
     var lazyRate = 0.25;
-    var renderLoopIntervalTime = 20;
+    var renderIntervalTime = options.renderIntervalTime;
     var dragRate = options.dragRate;
     var zoomRate = options.zoomRate;
 
@@ -856,7 +858,7 @@
     }
 
 
-    var renderLoopInterval = setInterval(renderLoop, renderLoopIntervalTime);
+    var renderLoopInterval = setInterval(renderLoop, renderIntervalTime);
 
 
   };
