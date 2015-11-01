@@ -641,6 +641,15 @@
         $zone.on(that.eventName('drag'), function (e, dd, e2) {
           // console.log('drag', arguments, JSON.stringify(dd));
           e = typeof e2 === 'object' ? e2 : e;
+
+          // Modified plugin to improve touch functionality
+          if (e.originalEvent) {
+            if (e.originalEvent.scale !== 1) {
+              return;
+            }
+          }
+          //End of modification
+
           var offset = $zone.offset();
           ratios = ratioOffsetsFor($zone, dd.originalX - dd.offsetX, dd.originalY - dd.offsetY);
 
@@ -811,13 +820,26 @@
 
         hammertime.on('pinch', function(e) {
           e.preventDefault();
-          // console.log('pinch', e);
 
           that.toggle.call(that, true);
 
+          // Modified plugin to improve touch functionality
           var rate = -0.01;
           var zoom = model.zoom;
           var delta = (e.deltaY + e.deltaX) / 2;
+          var scale = (e.originalEvent && e.originalEvent.scale) || e.scale;
+          // delta = delta > 0 ? delta : Math.abs(delta);
+
+          if (scale) {
+            rate = 0.01;
+            if (scale < 1) {
+              delta = - (1 - scale);
+            } else {
+              delta = scale - 1;
+            }
+          }
+          //End of modification
+
           // delta = delta > 0 ? delta : Math.abs(delta);
           delta *= rate;
           delta += 1;
