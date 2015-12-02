@@ -62,7 +62,7 @@ Check out the [demo][mag-demo]!
 
 * Touch interaction (pan, pinch)
 * [Analytics](#analytics)
-* Stablized scroll-to-zoom, better for touchpads
+* Stabilized scroll-to-zoom, better for touchpads
 
 ## Install
 
