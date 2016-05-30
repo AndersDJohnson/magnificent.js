@@ -18,7 +18,7 @@
   var name = 'Magnificent';
   if (typeof define === 'function' && define.amd) {
     define(['./mag', './mag-analytics', 'jquery', 'hammerjs', 'prevent-ghost-click', 'jquery-bridget'],
-      function (mag, MagnificentAnalytics, $, Hammer) {
+      function (mag, MagnificentAnalytics, jQuery, Hammer) {
         return (root[name] = factory(mag, MagnificentAnalytics, jQuery, Hammer, PreventGhostClick));
       }
     );
