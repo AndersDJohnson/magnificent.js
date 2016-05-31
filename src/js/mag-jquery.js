@@ -18,8 +18,8 @@
   var name = 'Magnificent';
   if (typeof define === 'function' && define.amd) {
     define(['./mag', './mag-analytics', 'jquery', 'hammerjs', 'prevent-ghost-click', 'jquery-bridget'],
-      function (mag, MagnificentAnalytics, $, Hammer) {
-        return (root[name] = factory(mag, MagnificentAnalytics, $, Hammer, PreventGhostClick));
+      function (mag, MagnificentAnalytics, jQuery, Hammer) {
+        return (root[name] = factory(mag, MagnificentAnalytics, jQuery, Hammer, PreventGhostClick));
       }
     );
   } else if (typeof exports === 'object') {
@@ -29,7 +29,7 @@
     );
   } else {
     root[name] = factory(root.Mag, root.MagnificentAnalytics,
-      root.$, root.Hammer, root.PreventGhostClick
+      root.jQuery, root.Hammer, root.PreventGhostClick
     );
   }
 }(this, function (Mag, MagnificentAnalytics, $, Hammer) {

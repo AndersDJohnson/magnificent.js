@@ -1,13 +1,13 @@
 (function (root, factory) {
   var name = 'MagnificentControl';
   if (typeof define === 'function' && define.amd) {
-    define(['jquery', './mag-analytics', 'jquery-bridget'], function ($, MagnificentAnalytics) {
-        return (root[name] = factory($, MagnificentAnalytics));
+    define(['jquery', './mag-analytics', 'jquery-bridget'], function (jQuery, MagnificentAnalytics) {
+        return (root[name] = factory(jQuery, MagnificentAnalytics));
     });
   } else if (typeof exports === 'object') {
     module.exports = factory(require('jquery'), require('./mag-analytics'), require('jquery-bridget'));
   } else {
-    root[name] = factory(root.$, root.MagnificentAnalytics);
+    root[name] = factory(root.jQuery, root.MagnificentAnalytics);
   }
 }(this, function ($, MagnificentAnalytics) {
 
