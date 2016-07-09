@@ -30,17 +30,22 @@
     var mag = this.mag;
     var magInst = this.magInst;
 
-    $el.find('[mag-ctrl-zoom-by]').on('click', function () {
-      var zoomBy = $.parseJSON($(this).attr('mag-ctrl-zoom-by'));
+    $el.find('[mag-ctrl-zoom-by], [data-mag-ctrl-zoom-by]')
+    .on('click', function () {
+      var attr = $(this).attr('mag-ctrl-zoom-by') || $(this).attr('data-mag-ctrl-zoom-by');
+      var zoomBy = $.parseJSON(attr);
       magInst.zoomBy(zoomBy);
     });
 
-    $el.find('[mag-ctrl-move-by-x], [mag-ctrl-move-by-y]').on('click', function () {
-      var x = $(this).attr('mag-ctrl-move-by-x');
+    $el.find('[mag-ctrl-move-by-x], [mag-ctrl-move-by-y], [data-mag-ctrl-move-by-x], [data-mag-ctrl-move-by-y]')
+    .on('click', function () {
+      var attr = $(this).attr('mag-ctrl-move-by-x') || $(this).attr('data-mag-ctrl-move-by-x');
+      var x = attr;
       if (x) {
         x = $.parseJSON(x);
       }
-      var y = $(this).attr('mag-ctrl-move-by-y');
+      attr = $(this).attr('mag-ctrl-move-by-y') || $(this).attr('data-mag-ctrl-move-by-y');
+      var y = attr;
       if (y) {
         y = $.parseJSON(y);
       }
@@ -51,7 +56,8 @@
       magInst.moveBy(moveBy);
     });
 
-    $el.find('[mag-ctrl-fullscreen]').on('click', function () {
+    $el.find('[mag-ctrl-fullscreen], [data-mag-ctrl-fullscreen]')
+    .on('click', function () {
       if (screenfull) {
         if (screenfull.enabled) {
           screenfull.request(mag);
@@ -59,7 +65,8 @@
       }
     });
 
-    $el.find('[mag-ctrl-destroy]').on('click', function () {
+    $el.find('[mag-ctrl-destroy], [data-mag-ctrl-destroy]')
+    .on('click', function () {
       magInst.destroy();
     });
   };

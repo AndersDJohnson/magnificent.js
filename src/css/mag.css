@@ -65,7 +65,7 @@
     top: 0;
 }
 
-[mag-thumb] {
+[mag-thumb], [data-mag-thumb] {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -73,7 +73,7 @@
     left: 0;
 }
 
-[mag-thumb] img {
+[mag-thumb] img, [data-mag-thumb] img {
     display: block;
     width: 100%;
     height: 100%;
@@ -84,20 +84,24 @@
     z-index: 2;
 }
 
-[mag-zoom] {
+[mag-zoom],
+[data-mag-zoom] {
     display: none;
 }
 
-.mag-js [mag-zoom][mag-toggle="false"] {
+.mag-js [mag-zoom][mag-toggle="false"],
+.mag-js [data-mag-zoom][data-mag-toggle="false"] {
     display: block;
 }
 
-[mag-flow="inline"] {
+[mag-flow="inline"],
+[data-mag-flow="inline"] {
     display: inline-block;
     position: relative;
     width: auto;
     height: auto;
 }
-[mag-flow="inline"] .mag-thumb {
+[mag-flow="inline"] .mag-thumb,
+[data-mag-flow="inline"] .mag-thumb {
     position: relative;
 }

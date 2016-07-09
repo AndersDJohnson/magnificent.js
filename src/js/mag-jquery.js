@@ -175,9 +175,9 @@
 
   /**
    * Magnificent constructor.
-   * 
+   *
    * @alias module:mag-jquery
-   * 
+   *
    * @class
    * @param {external:HTMLElement|external:jQuery} element - DOM element to embellish.
    * @param {MagnificentOptions} options - Options to override defaults.
@@ -327,7 +327,7 @@
 
     var options = this.options;
 
-    var id = $el.attr('mag-thumb');
+    var id = $el.attr('mag-thumb') || $el.attr('data-mag-thumb');
     this.id = id;
 
     if ($.isFunction(options.toggle)) {
@@ -405,7 +405,7 @@
 
 
     if (! options.zoomedContainer) {
-      options.zoomedContainer = $('[mag-zoom="' + that.id + '"]');
+      options.zoomedContainer = $('[mag-zoom="' + that.id + '"], [data-mag-zoom="' + that.id + '"]');
     }
 
     if (options.zoomedContainer) {
@@ -413,7 +413,7 @@
 
       that.$originalZoomedContainer = $zoomedContainer.clone();
 
-      $zoomedChildren = $zoomedContainer.children(); 
+      $zoomedChildren = $zoomedContainer.children();
       $zoomedContainer.empty();
 
       if (options.mode === 'inner') {
@@ -431,14 +431,17 @@
 
     if (options.mode) {
       $el.attr('mag-mode', options.mode);
+      $el.attr('data-mag-mode', options.mode);
     }
 
     if (options.theme) {
       $el.attr('mag-theme', 'default');
+      $el.attr('data-mag-theme', 'default');
     }
 
     if (options.position) {
       $el.attr('mag-position', options.position);
+      $el.attr('data-mag-position', options.position);
     }
     else if (options.position === false) {
       options.positionEvent = false;
@@ -446,10 +449,12 @@
 
     if (options.positionEvent) {
       $el.attr('mag-position-event', options.positionEvent);
+      $el.attr('data-mag-position-event', options.positionEvent);
     }
 
 
     $el.attr('mag-toggle', options.toggle);
+    $el.attr('data-mag-toggle', options.toggle);
 
 
     if (options.showLens) {
@@ -475,6 +480,7 @@
     }
 
     $zoomedContainer.attr('mag-theme', options.theme);
+    $zoomedContainer.attr('data-mag-theme', options.theme);
     $zoomedContainer.addClass('mag-zoomed-container');
     $zoomedContainer.addClass('mag-zoomed-bg');
 
@@ -490,6 +496,7 @@
 
 
     $zoomedContainer.attr('mag-toggle', options.toggle);
+    $zoomedContainer.attr('data-mag-toggle', options.toggle);
 
 
     var $zone = $('<div class="mag-zone"></div>');

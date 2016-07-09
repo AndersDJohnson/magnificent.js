@@ -1,9 +1,11 @@
 
-[mag-theme="default"].mag-zoomed-bg {
+[mag-theme="default"].mag-zoomed-bg,
+[data-mag-theme="default"].mag-zoomed-bg {
     background: black;
 }
 
-[mag-theme="default"] .mag-lens {
+[mag-theme="default"] .mag-lens,
+[data-mag-theme="default"] .mag-lens {
     box-shadow: 0 0 4px black;
     border: 1px solid white;
     background: rgba(255, 255, 255, 0.25);
@@ -12,12 +14,15 @@
     box-sizing: border-box;
 }
 
-[mag-theme="default"][mag-position-event="move"] {
+[mag-theme="default"][mag-position-event="move"],
+[data-mag-theme="default"][data-mag-position-event="move"] {
     cursor: crosshair;
 }
 
 [mag-theme="default"][mag-position="drag"],
-[mag-theme="default"][mag-position-event="hold"] {
+[mag-theme="default"][mag-position-event="hold"],
+[data-mag-theme="default"][data-mag-position="drag"],
+[data-mag-theme="default"][data-mag-position-event="hold"] {
     cursor: move;
     cursor: -webkit-grab;
     cursor: -moz-grab;
@@ -25,7 +30,9 @@
 }
 
 [mag-theme="default"][mag-position="drag"].mag--dragging,
-[mag-theme="default"][mag-position-event="hold"].mag--dragging {
+[mag-theme="default"][mag-position-event="hold"].mag--dragging,
+[data-mag-theme="default"][data-mag-position="drag"].mag--dragging,
+[data-mag-theme="default"][data-mag-position-event="hold"].mag--dragging {
     cursor: -webkit-grabbing;
     cursor: -moz-grabbing;
     cursor: grabbing;
