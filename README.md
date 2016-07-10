@@ -22,6 +22,7 @@
 - [Features](#features)
   * [2.0](#20)
   * [2.1](#21)
+  * [2.2](#22)
 - [Install](#install)
   * [Bower](#bower)
   * [npm](#npm)
@@ -63,6 +64,10 @@ Check out the [demo][mag-demo]! Or more the `data-*` attributes [demo][mag-demo-
 * Touch interaction (pan, pinch)
 * [Analytics](#analytics)
 * Stabilized scroll-to-zoom, better for touchpads
+
+### 2.2
+
+* Support `data-*` attributes for [#37](https://github.com/adjohnson916/magnificent.js/issues/37).
 
 ## Install
 
