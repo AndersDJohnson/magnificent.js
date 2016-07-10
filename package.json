@@ -1,6 +1,6 @@
 {
   "name": "magnificent",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Zoom responsively.",
   "main": "src/js/mag.js",
   "repository": {
