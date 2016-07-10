@@ -35,7 +35,8 @@
     float: left;
 }
 /*
-[mag-zoom="outer"] {
+[mag-zoom="outer"],
+[data-mag-zoom="outer"] {
     position: absolute;
     z-index: 10;
     left: 100%;
@@ -43,7 +44,8 @@
 */
 
 
-[mag-thumb="inner-inline"] {
+[mag-thumb="inner-inline"],
+[data-mag-thumb="inner-inline"] {
     float: left;
 }
 
