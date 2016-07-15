@@ -821,7 +821,7 @@
         var hammertime = new Hammer(hammerEl, hammerOptions);
 
         // Register custom destroy event listener to queue Hammer destroy.
-        that.$el.on('destroy', function () {
+        that.$el.on(that.eventName('destroy'), function () {
           hammertime.destroy();
         });
 
