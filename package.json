@@ -13,7 +13,7 @@
   "scripts": {
     "test": "npm-run-all test:*",
     "test:grunt": "grunt test",
-    "test:lint": "eslint src/**",
+    "test:lint": "eslint src/js",
     "sync-pkg": "sync-pkg --extend --empty -p version -p !dependencies -p !devDependencies -p !main",
     "verb": "verb",
     "ncu": "ncu"
