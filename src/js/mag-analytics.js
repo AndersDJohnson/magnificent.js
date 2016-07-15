@@ -1,4 +1,6 @@
 (function (root, factory) {
+  'use strict'; // eslint-disable-line semi
+
   var name = 'MagnificentAnalytics'
   if (typeof define === 'function' && define.amd) {
     define(['google-analytics-js'], function (gaTrack) {
@@ -10,6 +12,8 @@
     root[name] = factory(root, false, root.gaTrack)
   }
 }(this, function (root, detectNode, gaTrack) {
+  'use strict'; // eslint-disable-line semi
+
   var MagnificentAnalytics = function () {}
 
   var options = root.MAGNIFICENT_OPTIONS || {}
