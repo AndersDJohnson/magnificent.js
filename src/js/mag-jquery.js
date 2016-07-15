@@ -305,6 +305,8 @@
   Magnificent.prototype._init = function () {
     var that = this
 
+    that.intervals = {}
+
     var $el = this.$el = this.element
 
     this.$originalEl = $el.clone()
@@ -708,7 +710,7 @@
         throw new Error("Invalid 'positionEvent' option.")
       }
 
-      setInterval(function () {
+      that.intervals.joystick = setInterval(function () {
         if (!dragging) return
 
         var focus = model.focus
@@ -800,7 +802,7 @@
       }
     }
 
-    setInterval(renderLoop, renderIntervalTime)
+    that.intervals.renderLoop = setInterval(renderLoop, renderIntervalTime)
   }
 
   Magnificent.prototype.proxyToZone = function ($el) {
@@ -844,6 +846,10 @@
     var that = this
     // Trigger custom destroy event for any listeners.
     that.$el.trigger(that.eventName('destroy'))
+
+    $.each(that.intervals, function (key, interval) {
+      clearInterval(interval)
+    })
 
     // Unbind and replace elements with originals.
 
