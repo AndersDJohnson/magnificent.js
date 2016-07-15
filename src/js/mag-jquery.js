@@ -13,6 +13,8 @@
  */
 
 (function (root, factory) {
+  'use strict'; // eslint-disable-line semi
+
   var name = 'Magnificent'
   if (typeof define === 'function' && define.amd) {
     define(['./mag', './mag-analytics', 'jquery', 'hammerjs', 'prevent-ghost-click', 'jquery-bridget'],
@@ -31,6 +33,8 @@
     )
   }
 }(this, function (Mag, MagnificentAnalytics, $, Hammer, PreventGhostClick) {
+  'use strict'; // eslint-disable-line semi
+
   $(':root').addClass('mag-js')
 
   var normalizeOffsets = function (e, $target) {

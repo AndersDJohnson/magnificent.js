@@ -1,6 +1,12 @@
 {
   "extends": "standard",
+  "parserOptions": {
+    "sourceType": "script"
+  },
   "env": {
     "amd": true
+  },
+  "rules": {
+    "strict": [2, "function"]
   }
 }

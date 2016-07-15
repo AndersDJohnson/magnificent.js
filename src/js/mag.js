@@ -3,6 +3,8 @@
  */
 
 (function (root, factory) {
+  'use strict'; // eslint-disable-line semi
+
   var name = 'Mag'
   if (typeof define === 'function' && define.amd) {
     define(['./mag-analytics'], function (MagnificentAnalytics) {
@@ -14,6 +16,8 @@
     root[name] = factory(root.MagnificentAnalytics)
   }
 }(this, function (MagnificentAnalytics) {
+  'use strict'; // eslint-disable-line semi
+
   /**
    * @typedef {Object} MagModelFocus
    * @property {number} x - X position, from [0,1].

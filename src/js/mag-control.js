@@ -1,4 +1,6 @@
 (function (root, factory) {
+  'use strict'; // eslint-disable-line semi
+
   var name = 'MagnificentControl'
   if (typeof define === 'function' && define.amd) {
     define(['jquery', './mag-analytics', 'jquery-bridget'], function (jQuery, MagnificentAnalytics) {
@@ -10,6 +12,8 @@
     root[name] = factory(root.jQuery, root.MagnificentAnalytic, root.screenfull)
   }
 }(this, function ($, MagnificentAnalytics, screenfull) {
+  'use strict'; // eslint-disable-line semi
+
   var MagnificentControl = function (element, options) {
     this.element = $(element)
     this.options = $.extend(true, {}, this.options, options)
