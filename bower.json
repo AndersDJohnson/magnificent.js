@@ -1,6 +1,6 @@
 {
   "name": "magnificent",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "Zoom responsively.",
   "main": [
     "src/js/mag-analytics.js",
