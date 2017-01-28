@@ -52,8 +52,8 @@
     "load-grunt-tasks": "^3.1.0",
     "npm-run-all": "^2.3.0",
     "sync-pkg": "^0.6.2",
-    "verb": "^0.8.8",
-    "verb-cli": "^0.7.3",
+    "verb": "^0.8.10",
+    "verb-cli": "^0.7.4",
     "verb-helper-bower": "0.0.0"
   },
   "verb": {
