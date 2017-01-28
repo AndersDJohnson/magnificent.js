@@ -1,4 +1,4 @@
-# magnificent
+# Magnificent.js
 
 > Zoom responsively. A jQuery plugin for responsive zoom of images & more!
 
