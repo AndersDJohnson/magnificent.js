@@ -4,8 +4,7 @@
 
 [![NPM version](https://badge.fury.io/js/magnificent.svg)](http://badge.fury.io/js/magnificent)
 [![Bower](https://img.shields.io/bower/v/magnificent.svg)](https://github.com/adjohnson916/magnificent.js)
- [![Build Status](https://travis-ci.org/adjohnson916/magnificent.js.svg)](https://travis-ci.org/adjohnson916/magnificent.js) 
-[![Gratipay](https://img.shields.io/gratipay/adjohnson916.svg)](https://gratipay.com/adjohnson916/)
+ [![Build Status](https://travis-ci.org/adjohnson916/magnificent.js.svg)](https://travis-ci.org/adjohnson916/magnificent.js)
 
 [![NPM](https://nodei.co/npm/magnificent.png)](https://nodei.co/npm/magnificent/)
 
