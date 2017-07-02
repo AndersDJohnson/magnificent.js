@@ -5,10 +5,10 @@
   "main": "src/js/mag.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/adjohnson916/magnificent.js.git"
+    "url": "git://github.com/AndersDJohnson/magnificent.js.git"
   },
   "bugs": {
-    "url": "https://github.com/adjohnson916/magnificent.js/issues"
+    "url": "https://github.com/AndersDJohnson/magnificent.js/issues"
   },
   "scripts": {
     "test": "npm-run-all test:*",
@@ -20,7 +20,7 @@
   },
   "author": {
     "name": "Anders D. Johnson",
-    "url": "https://github.com/adjohnson916"
+    "url": "https://github.com/AndersDJohnson"
   },
   "license": "MIT",
   "dependencies": {

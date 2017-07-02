@@ -13,7 +13,7 @@
   "authors": [
     {
       "name": "Anders D. Johnson",
-      "homepage": "https://github.com/adjohnson916"
+      "homepage": "https://github.com/AndersDJohnson"
     }
   ],
   "license": "MIT",
@@ -45,6 +45,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/adjohnson916/magnificent.js.git"
+    "url": "git://github.com/AndersDJohnson/magnificent.js.git"
   }
 }
