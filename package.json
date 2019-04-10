@@ -1,6 +1,6 @@
 {
   "name": "magnificent",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "Zoom responsively.",
   "main": "src/js/mag.js",
   "repository": {
@@ -18,10 +18,7 @@
     "verb": "verb",
     "ncu": "ncu"
   },
-  "author": {
-    "name": "Anders D. Johnson",
-    "url": "https://github.com/AndersDJohnson"
-  },
+  "author": "Anders D. Johnson (https://andersdjohnson.com)",
   "license": "MIT",
   "dependencies": {
     "detect-node": "^2.0.3",
