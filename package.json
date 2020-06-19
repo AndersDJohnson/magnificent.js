@@ -20,6 +20,7 @@
   },
   "author": "Anders D. Johnson (https://andersdjohnson.com)",
   "license": "MIT",
+  "funding": "https://github.com/sponsors/AndersDJohnson",
   "dependencies": {
     "detect-node": "^2.0.3",
     "google-analytics-js": "^0.1.0",
