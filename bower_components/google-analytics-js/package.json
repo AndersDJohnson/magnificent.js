@@ -1,0 +1,31 @@
+{
+  "name": "google-analytics-js",
+  "version": "0.1.2",
+  "description": "JavaScript mini library to track usage of injected script via Google Analytics.",
+  "main": "gajs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "uglifyjs gajs.js -o gajs.min.js",
+    "sync-pkg": "sync-pkg --extend --empty -p version -p !dependencies -p !devDependencies -p !main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndersDJohnson/google-analytics-js.git"
+  },
+  "keywords": [
+    "google",
+    "analytics",
+    "tracking",
+    "js"
+  ],
+  "author": "Anders D. Johnson (https://andersdjohnson.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AndersDJohnson/google-analytics-js/issues"
+  },
+  "homepage": "https://github.com/AndersDJohnson/google-analytics-js",
+  "devDependencies": {
+    "sync-pkg": "^0.6.2",
+    "uglify-js": "^2.4.24"
+  }
+}

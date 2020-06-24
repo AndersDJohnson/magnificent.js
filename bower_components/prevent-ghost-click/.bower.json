@@ -1,0 +1,37 @@
+{
+  "name": "prevent-ghost-click",
+  "version": "0.0.1",
+  "homepage": "https://github.com/AndersDJohnson/prevent-ghost-click.js",
+  "description": "Prevent click events after a touchend.",
+  "main": "PreventGhostClick.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "click",
+    "touch",
+    "touchend",
+    "ghost",
+    "mobile"
+  ],
+  "authors": [
+    "Anders D. Johnson (https://github.com/AndersDJohnson)"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "0.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.1",
+    "commit": "9f1741054c2fe69281c3c2018782ffaecb8aa94b"
+  },
+  "_source": "https://github.com/adjohnson916/prevent-ghost-click.js.git",
+  "_target": "~0.0.0",
+  "_originalSource": "prevent-ghost-click"
+}

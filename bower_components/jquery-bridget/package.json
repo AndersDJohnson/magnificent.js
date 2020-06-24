@@ -1,0 +1,29 @@
+{
+  "name": "jquery-bridget",
+  "version": "1.1.0",
+  "description": "Bridget makes jQuery widgets",
+  "main": "jquery.bridget.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/desandro/jquery-bridget.git"
+  },
+  "keywords": [
+    "jquery",
+    "jquery-plugin"
+  ],
+  "author": "David DeSandro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/desandro/jquery-bridget/issues"
+  },
+  "homepage": "https://github.com/desandro/jquery-bridget",
+  "dependencies": {
+    "jquery": ">=1.4.2 <3"
+  }
+}

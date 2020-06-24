@@ -1,0 +1,13 @@
+{
+  "name": "jquery.threedubmedia",
+  "homepage": "https://github.com/threedubmedia/jquery.threedubmedia",
+  "_release": "de7ad443f0",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "de7ad443f09b56cda9a505592cedb9bd69b99d82"
+  },
+  "_source": "https://github.com/threedubmedia/jquery.threedubmedia.git",
+  "_target": "*",
+  "_originalSource": "threedubmedia/jquery.threedubmedia"
+}
